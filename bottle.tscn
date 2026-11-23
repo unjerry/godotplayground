@@ -1,16 +1,18 @@
-[gd_scene format=3 uid="uid://cgfqsur6rf8di"]
+[gd_scene load_steps=4 format=3 uid="uid://cgfqsur6rf8di"]
 
-[ext_resource type="PackedScene" uid="uid://dvjovtu8xkfj3" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_008_purple.glb" id="1_6k8ux"]
+[ext_resource type="Script" path="res://bottle.gd" id="1_bottle"]
+[ext_resource type="PackedScene" uid="uid://dvjovtu8xkfj3" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_008_purple.glb" id="2_preview"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_toam6"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_preview"]
 size = Vector3(0.2, 0.4, 0.2)
 
 [node name="Bottle" type="RigidBody3D" unique_id=1726784657]
+script = ExtResource("1_bottle")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1757251123]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9802322e-08, 0.2, 2.9802322e-08)
-shape = SubResource("BoxShape3D_toam6")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("BoxShape3D_preview")
 
 [node name="Visual" type="Node3D" parent="." unique_id=947949647]
 
-[node name="potion_008_purple3" parent="Visual" unique_id=1929330957 instance=ExtResource("1_6k8ux")]
+[node name="potion_008_purple3" parent="Visual" unique_id=1929330957 instance=ExtResource("2_preview")]
