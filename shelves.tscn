@@ -1,33 +1,32 @@
-[gd_scene format=3 uid="uid://cjbmsw1afcfkw"]
+[gd_scene load_steps=5 format=3 uid="uid://cjbmsw1afcfkw"]
 
-[ext_resource type="PackedScene" uid="uid://bpvx3ksqitwp6" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseOpenLow.glb" id="1_jxxrx"]
-[ext_resource type="PackedScene" uid="uid://ch2cu6kx53d6s" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseOpen.glb" id="2_4hy13"]
-[ext_resource type="PackedScene" uid="uid://dsjx1k4l7eydg" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseClosedWide.glb" id="3_dwjbr"]
-[ext_resource type="PackedScene" uid="uid://oaxwmnppc1n3" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseClosed.glb" id="4_var5p"]
-[ext_resource type="PackedScene" uid="uid://bhtbx4l48k80x" path="res://shelf_01.tscn" id="5_4hy13"]
+[ext_resource type="PackedScene" path="res://shelf_02.tscn" id="1_02pref"]
+[ext_resource type="PackedScene" path="res://shelf_03.tscn" id="2_03pref"]
+[ext_resource type="PackedScene" path="res://shelf_04.tscn" id="3_04pref"]
+[ext_resource type="PackedScene" uid="uid://bhtbx4l48k80x" path="res://shelf_01.tscn" id="4_01pref"]
 
 [node name="Node3D" type="Node3D" unique_id=2074932246]
 
-[node name="bookcaseOpenLow" parent="." unique_id=154745603 instance=ExtResource("1_jxxrx")]
+[node name="shelf02" parent="." unique_id=154745603 instance=ExtResource("1_02pref")]
 visible = false
 
-[node name="bookcaseOpen" parent="." unique_id=1338639139 instance=ExtResource("2_4hy13")]
+[node name="shelf03" parent="." unique_id=1338639139 instance=ExtResource("2_03pref")]
 visible = false
 
-[node name="bookcaseClosed" parent="." unique_id=58267228 instance=ExtResource("4_var5p")]
+[node name="shelf04" parent="." unique_id=58267228 instance=ExtResource("3_04pref")]
 visible = false
 
-[node name="bookcaseClosed2" parent="." unique_id=2145562790 instance=ExtResource("4_var5p")]
+[node name="shelf04_2" parent="." unique_id=2145562790 instance=ExtResource("3_04pref")]
 visible = false
 
-[node name="bookcaseClosedWide2" parent="." unique_id=648749613 instance=ExtResource("3_dwjbr")]
+[node name="shelf01_2" parent="." unique_id=648749613 instance=ExtResource("4_01pref")]
 visible = false
 
-[node name="bookcaseOpen2" parent="." unique_id=353531834 instance=ExtResource("2_4hy13")]
+[node name="shelf03_2" parent="." unique_id=353531834 instance=ExtResource("2_03pref")]
 visible = false
 
-[node name="bookcaseOpenLow2" parent="." unique_id=849127970 instance=ExtResource("1_jxxrx")]
+[node name="shelf02_2" parent="." unique_id=849127970 instance=ExtResource("1_02pref")]
 visible = false
 
-[node name="shelf01" parent="." unique_id=768742045 instance=ExtResource("5_4hy13")]
+[node name="shelf01" parent="." unique_id=768742045 instance=ExtResource("4_01pref")]
 visible = false
