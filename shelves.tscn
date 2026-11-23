@@ -9,9 +9,11 @@
 
 [node name="shelf01" parent="." unique_id=768742045 instance=ExtResource("4_01pref")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
+max_cell = Vector3i(6, 3, -1)
 
 [node name="shelf02" parent="." unique_id=154745603 instance=ExtResource("1_02pref")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8000001, 0, 0)
+max_cell = Vector3i(2, 1, -1)
 
 [node name="shelf03" parent="." unique_id=1338639139 instance=ExtResource("2_03pref")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90000004, 0, 0)
