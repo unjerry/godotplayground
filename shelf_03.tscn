@@ -1,25 +1,28 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://bp6ssiq27i265"]
 
-[ext_resource type="PackedScene" path="res://grid_map.tscn" id="1_02fkn"]
-[ext_resource type="PackedScene" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseOpen.glb" id="2_02fkn"]
+[ext_resource type="PackedScene" uid="uid://cuxgx2n2x3u8i" path="res://grid_map.tscn" id="1_02fkn"]
+[ext_resource type="PackedScene" uid="uid://ch2cu6kx53d6s" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseOpen.glb" id="2_02fkn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_02fkn"]
-size = Vector3(0.8, 0.8, 0.25)
+size = Vector3(0.4, 0.8805908, 0.25)
 
-[node name="shelf03" type="Node3D"]
+[node name="shelf03" type="Node3D" unique_id=476105734]
 
-[node name="GridMap" parent="." instance=ExtResource("1_02fkn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.142, 0)
+[node name="GridMap" parent="." unique_id=1375642506 instance=ExtResource("1_02fkn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102, 0.258, -0.048)
 cell_size = Vector3(0.2, 0.477, 0.2)
-cell_center_y = false
+data = {
+"cells": PackedInt32Array(0, 65535, 5, 0, 65534, 0, 1, 65534, 0, 1, 65535, 0, 2, 65534, 0, 2, 65535, 0, 65536, 65535, 0, 65538, 65534, 0, 131072, 65535, 0, 196610, 65534, 0)
+}
+metadata/_editor_floor_ = Vector3(-1, 3, 0)
 
-[node name="Furniture" type="Node3D" parent="."]
+[node name="Furniture" type="Node3D" parent="." unique_id=1713036947]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Furniture"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Furniture" unique_id=717369408]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Furniture/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.4, -0.125)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Furniture/StaticBody3D" unique_id=245537534]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.4402954, -0.125)
 shape = SubResource("BoxShape3D_02fkn")
 
-[node name="bookcaseOpen" parent="Furniture" instance=ExtResource("2_02fkn")]
+[node name="bookcaseOpen" parent="Furniture" unique_id=1899483439 instance=ExtResource("2_02fkn")]

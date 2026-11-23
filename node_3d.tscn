@@ -40,6 +40,7 @@
 [ext_resource type="PackedScene" uid="uid://cuxgx2n2x3u8i" path="res://grid_map.tscn" id="38_qpkl4"]
 [ext_resource type="PackedScene" uid="uid://cgfqsur6rf8di" path="res://bottle.tscn" id="40_g4s1x"]
 [ext_resource type="PackedScene" uid="uid://bhtbx4l48k80x" path="res://shelf_01.tscn" id="40_pf4ct"]
+[ext_resource type="PackedScene" uid="uid://cjbmsw1afcfkw" path="res://shelves.tscn" id="41_pf4ct"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_37voa"]
 size = Vector3(11.302017, 0.32128906, 16.183159)
@@ -77,6 +78,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2760086, 0, 3.0407982)
 shape = SubResource("BoxShape3D_37voa")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=480921631]
+visible = false
 
 [node name="bathroomCabinet" parent="Node3D" unique_id=1838356533 instance=ExtResource("7_dhlwf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07075536, 0, -1.0736043)
@@ -229,3 +231,6 @@ transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0,
 transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0, 1, -1.2061313, 0.58933973, -0.9347163)
 
 [node name="shelf01" parent="." unique_id=768742045 instance=ExtResource("40_pf4ct")]
+visible = false
+
+[node name="Node3D4" parent="." unique_id=2074932246 instance=ExtResource("41_pf4ct")]

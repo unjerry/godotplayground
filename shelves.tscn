@@ -1,20 +1,22 @@
-[gd_scene load_steps=5 format=3 uid="uid://cjbmsw1afcfkw"]
+[gd_scene format=3 uid="uid://cjbmsw1afcfkw"]
 
-[ext_resource type="PackedScene" path="res://shelf_02.tscn" id="1_02pref"]
-[ext_resource type="PackedScene" path="res://shelf_03.tscn" id="2_03pref"]
-[ext_resource type="PackedScene" path="res://shelf_04.tscn" id="3_04pref"]
+[ext_resource type="PackedScene" uid="uid://c1fnyxdp8pocd" path="res://shelf_02.tscn" id="1_02pref"]
+[ext_resource type="PackedScene" uid="uid://bp6ssiq27i265" path="res://shelf_03.tscn" id="2_03pref"]
+[ext_resource type="PackedScene" uid="uid://b11gue3o4sxio" path="res://shelf_04.tscn" id="3_04pref"]
 [ext_resource type="PackedScene" uid="uid://bhtbx4l48k80x" path="res://shelf_01.tscn" id="4_01pref"]
 
 [node name="Node3D" type="Node3D" unique_id=2074932246]
 
+[node name="shelf01" parent="." unique_id=768742045 instance=ExtResource("4_01pref")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 0)
+
 [node name="shelf02" parent="." unique_id=154745603 instance=ExtResource("1_02pref")]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8000001, 0, 0)
 
 [node name="shelf03" parent="." unique_id=1338639139 instance=ExtResource("2_03pref")]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90000004, 0, 0)
 
 [node name="shelf04" parent="." unique_id=58267228 instance=ExtResource("3_04pref")]
-visible = false
 
 [node name="shelf04_2" parent="." unique_id=2145562790 instance=ExtResource("3_04pref")]
 visible = false
@@ -26,7 +28,4 @@ visible = false
 visible = false
 
 [node name="shelf02_2" parent="." unique_id=849127970 instance=ExtResource("1_02pref")]
-visible = false
-
-[node name="shelf01" parent="." unique_id=768742045 instance=ExtResource("4_01pref")]
 visible = false

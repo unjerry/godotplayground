@@ -1,25 +1,27 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://c1fnyxdp8pocd"]
 
-[ext_resource type="PackedScene" path="res://grid_map.tscn" id="1_01fkn"]
-[ext_resource type="PackedScene" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseOpenLow.glb" id="2_01fkn"]
+[ext_resource type="PackedScene" uid="uid://cuxgx2n2x3u8i" path="res://grid_map.tscn" id="1_01fkn"]
+[ext_resource type="PackedScene" uid="uid://bpvx3ksqitwp6" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseOpenLow.glb" id="2_01fkn"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_01fkn"]
-size = Vector3(0.8, 0.4, 0.25)
+size = Vector3(0.4, 0.4, 0.25)
 
-[node name="shelf02" type="Node3D"]
+[node name="shelf02" type="Node3D" unique_id=525398310]
 
-[node name="GridMap" parent="." instance=ExtResource("1_01fkn")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.142, 0)
+[node name="GridMap" parent="." unique_id=1977504328 instance=ExtResource("1_01fkn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.099, 0.263, -0.045)
 cell_size = Vector3(0.2, 0.477, 0.2)
-cell_center_y = false
+data = {
+"cells": PackedInt32Array(0, 65535, 0, 0, 65534, 0, 2, 65535, 0, 2, 65534, 0, 1, 65534, 1, 1, 65535, 5)
+}
 
-[node name="Furniture" type="Node3D" parent="."]
+[node name="Furniture" type="Node3D" parent="." unique_id=1846212666]
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Furniture"]
+[node name="StaticBody3D" type="StaticBody3D" parent="Furniture" unique_id=1663535111]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Furniture/StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0.2, -0.125)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Furniture/StaticBody3D" unique_id=1773871766]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0.2, -0.125)
 shape = SubResource("BoxShape3D_01fkn")
 
-[node name="bookcaseOpenLow" parent="Furniture" instance=ExtResource("2_01fkn")]
+[node name="bookcaseOpenLow" parent="Furniture" unique_id=1304825949 instance=ExtResource("2_01fkn")]
