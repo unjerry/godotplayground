@@ -176,6 +176,9 @@ func _refresh_target() -> void:
 	if not nearest.is_empty():
 		target = nearest
 		target["kind"] = "shelf"
+	elif ray.is_colliding() and _find_shelf_root(ray.get_collider() as Node) != null:
+		# Do not throw into a shelf when its selected cell is out of range.
+		target = {"kind": "shelf_miss"}
 
 
 func _find_shelf_root(from_node: Node) -> ShelfStorage:
@@ -230,6 +233,8 @@ func _place_selected() -> void:
 		if grid.mesh_library == null or not grid.mesh_library.get_item_list().has(item_id):
 			return
 		grid.set_cell_item(cell, item_id)
+	elif kind == "shelf_miss":
+		return
 	else:
 		_throw_bottle(item_id)
 
@@ -307,7 +312,9 @@ func _refresh_hint() -> void:
 		hint_text.text = "  |  ".join(messages)
 		return
 
-	if inventory.is_empty():
+	if kind == "shelf_miss":
+		hint_text.text = "AIM AT A SHELF SLOT"
+	elif inventory.is_empty():
 		hint_text.text = "E  PICK UP A BOTTLE"
 	else:
 		hint_text.text = "LMB  THROW BOTTLE"

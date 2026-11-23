@@ -23,12 +23,18 @@ endpoints. The initial values match the existing authored bottle coordinates.
 To expand or shrink any shelf, select that shelf's root node and edit the
 X/Y/Z values. The numbers are local GridMap cell indices, not meter offsets.
 
-Shelf aiming first calculates Y from the camera ray at the middle depth of
-the shelf, using the BOTTOM of each GridMap layer as its origin. It then
-intersects only the selected layer's base plane for X/Z. No Y half-cell or
-bottle-midpoint offset is added. This avoids accidentally selecting a lower
-board while looking at an upper bottle. `cell_center_y` must remain false;
-the four prefab scenes set it explicitly.
+Shelf aiming now finds the camera ray's nearest approach to a vertical
+bottle-sized axis at EACH permitted GridMap cell. The best on-screen match
+wins, across X/Y/Z. Previously, the code chose a Y layer then projected
+to its base plane a second time, shifting X/Z toward the far row when the
+camera looked down. This second projection is gone. Bottle placement is
+still bottom-aligned with `cell_center_y = false`.
+
+Each shelf additionally exports `Aim Radius` (default 0.14m) and
+`Aim Height` (default 0.40m). They change only the selection region,
+not the stored bottle's position or physical collision. When looking at
+shelf furniture but outside any valid slot, LMB will not throw the carried
+bottle accidentally.
 
 The highlight is now a flat outline on the selected bottle's base plane.
 The highlighted grid cell is the exact cell used by both E and LMB.
