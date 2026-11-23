@@ -1,0 +1,51 @@
+[gd_scene format=3 uid="uid://bijrvs4qhbbx3"]
+
+[ext_resource type="PackedScene" uid="uid://bxwcfsjjrmnnp" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_003_green.glb" id="1_70xib"]
+[ext_resource type="PackedScene" uid="uid://c5mn12l3dys7w" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_006_yellow.glb" id="2_jb4qr"]
+[ext_resource type="PackedScene" uid="uid://dvjovtu8xkfj3" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_008_purple.glb" id="3_4yxlu"]
+[ext_resource type="PackedScene" uid="uid://d2qe217s7lwxm" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_009_red.glb" id="4_30d3d"]
+[ext_resource type="PackedScene" uid="uid://c840sygx5d6pc" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_014_blue.glb" id="5_ntmmv"]
+[ext_resource type="PackedScene" uid="uid://cv2amgsbg7s0y" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_015_yellow.glb" id="6_ktj7t"]
+[ext_resource type="PackedScene" uid="uid://cpryxbbl1f6xd" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_017_red.glb" id="7_jvoqp"]
+[ext_resource type="PackedScene" uid="uid://kv4rr2delsvs" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_018_blue.glb" id="8_sgwng"]
+[ext_resource type="PackedScene" uid="uid://bheeigx25wq6a" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_021_purple.glb" id="9_v1w7d"]
+[ext_resource type="PackedScene" uid="uid://4oo58juenasn" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_025_green.glb" id="10_77x2c"]
+[ext_resource type="PackedScene" uid="uid://cxg2ebtdhgt2u" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_026_purple.glb" id="11_d5wle"]
+[ext_resource type="PackedScene" uid="uid://dprqj57msvf16" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_038_yellow.glb" id="12_85ws5"]
+
+[node name="Node3D" type="Node3D" unique_id=794316537]
+
+[node name="potion_003_green2" parent="." unique_id=177686528 instance=ExtResource("1_70xib")]
+visible = false
+
+[node name="potion_006_yellow2" parent="." unique_id=1220822072 instance=ExtResource("2_jb4qr")]
+visible = false
+
+[node name="potion_008_purple2" parent="." unique_id=1929330957 instance=ExtResource("3_4yxlu")]
+visible = false
+
+[node name="potion_009_red2" parent="." unique_id=1620664862 instance=ExtResource("4_30d3d")]
+visible = false
+
+[node name="potion_014_blue2" parent="." unique_id=300031182 instance=ExtResource("5_ntmmv")]
+visible = false
+
+[node name="potion_015_yellow2" parent="." unique_id=1603938030 instance=ExtResource("6_ktj7t")]
+visible = false
+
+[node name="potion_017_red2" parent="." unique_id=50505009 instance=ExtResource("7_jvoqp")]
+visible = false
+
+[node name="potion_018_blue2" parent="." unique_id=1936100757 instance=ExtResource("8_sgwng")]
+visible = false
+
+[node name="potion_021_purple2" parent="." unique_id=1980045962 instance=ExtResource("9_v1w7d")]
+visible = false
+
+[node name="potion_025_green2" parent="." unique_id=270014515 instance=ExtResource("10_77x2c")]
+visible = false
+
+[node name="potion_026_purple2" parent="." unique_id=915788873 instance=ExtResource("11_d5wle")]
+visible = false
+
+[node name="potion_038_yellow2" parent="." unique_id=1985861041 instance=ExtResource("12_85ws5")]
