@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://oaxwmnppc1n3" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseClosed.glb" id="24_pf4ct"]
 [ext_resource type="PackedScene" uid="uid://unwgl8qvwsyy" path="res://assets/nashas_cozy_3d_haunted_library_v1.0/Nashas_Cozy_3D_Haunted_Library/Blender/Nashas_Cozy_Haunted_Library.blend" id="25_5t8nk"]
 [ext_resource type="PackedScene" uid="uid://bxwcfsjjrmnnp" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_003_green.glb" id="26_4i7mf"]
+[ext_resource type="PackedScene" uid="uid://cy1aw0d7ulutl" path="res://assets/nashas_cozy_3d_haunted_library_v1.0/Nashas_Cozy_3D_Haunted_Library/Blender/nashas_cozy_haunted_library.tscn" id="26_pf4ct"]
 [ext_resource type="PackedScene" uid="uid://c5mn12l3dys7w" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_006_yellow.glb" id="27_3s0n5"]
 [ext_resource type="PackedScene" uid="uid://dvjovtu8xkfj3" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_008_purple.glb" id="28_qpkl4"]
 [ext_resource type="PackedScene" uid="uid://d2qe217s7lwxm" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_009_red.glb" id="29_g4s1x"]
@@ -42,7 +43,7 @@
 [ext_resource type="PackedScene" uid="uid://cjbmsw1afcfkw" path="res://shelves.tscn" id="41_pf4ct"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_37voa"]
-size = Vector3(11.302017, 0.32128906, 16.183159)
+size = Vector3(10, 0.32128906, 8)
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_37voa"]
 
@@ -55,25 +56,29 @@ albedo_texture = ExtResource("4_r3fl7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=597077109]
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+visible = false
 shadow_enabled = true
 
 [node name="SoftBody3D" type="SoftBody3D" parent="." unique_id=1778692935]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00016923249, 0.8974567, -2.0649264)
+visible = false
 mesh = ExtResource("5_jka67")
 pressure_coefficient = 5.0
 damping_coefficient = 0.1
 
 [node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=606375475]
 transform = Transform3D(1, 0, 0, 0, 0.45404512, 0.8909787, 0, -0.8909787, 0.45404512, 0, 1.2549816, -1.0109314)
+visible = false
 
 [node name="AreaLight3D2" type="AreaLight3D" parent="." unique_id=1481937518]
 transform = Transform3D(1, 0, 0, 0, 0.9455488, -0.3254805, 0, 0.3254805, 0.9455488, 0, -1.5692097, 0.12279433)
+visible = false
 
 [node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1573928883]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1834172, -2.0871987)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=57585739]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2760086, 0, 3.0407982)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4729834, 0, 4.1323776)
 shape = SubResource("BoxShape3D_37voa")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=480921631]
@@ -171,6 +176,8 @@ fov = 52.983696
 [node name="Nashas_Cozy_Haunted_Library" parent="." unique_id=931376252 instance=ExtResource("25_5t8nk")]
 visible = false
 
+[node name="Nashas_Cozy_Haunted_Library2" parent="." unique_id=1859575156 instance=ExtResource("26_pf4ct")]
+
 [node name="Node3D2" type="Node3D" parent="." unique_id=763013555]
 visible = false
 
@@ -211,6 +218,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20640862, 0, -0.8576635)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2773747, 5.9604645e-08, -1.0101526)
 
 [node name="Node3D3" type="Node3D" parent="." unique_id=995167067]
+visible = false
 
 [node name="Bottle" parent="Node3D3" unique_id=1726784657 instance=ExtResource("40_g4s1x")]
 transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0, 1, -1.5492967, 0.58933973, -1.115756)
@@ -231,3 +239,4 @@ transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0,
 visible = false
 
 [node name="Node3D4" parent="." unique_id=2074932246 instance=ExtResource("41_pf4ct")]
+transform = Transform3D(-0.70710677, -6.1817246e-08, -0.70710677, -4.3711392e-08, 1, -4.3711392e-08, 0.70710677, -1.8515213e-15, -0.70710677, 2.1999998, 0, 3.1)
