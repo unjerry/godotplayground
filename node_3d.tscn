@@ -39,6 +39,7 @@
 [ext_resource type="PackedScene" uid="uid://dprqj57msvf16" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_038_yellow.glb" id="37_4hyfj"]
 [ext_resource type="PackedScene" uid="uid://cuxgx2n2x3u8i" path="res://grid_map.tscn" id="38_qpkl4"]
 [ext_resource type="PackedScene" uid="uid://cgfqsur6rf8di" path="res://bottle.tscn" id="40_g4s1x"]
+[ext_resource type="PackedScene" uid="uid://bhtbx4l48k80x" path="res://shelf_01.tscn" id="40_pf4ct"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_37voa"]
 size = Vector3(11.302017, 0.32128906, 16.183159)
@@ -226,3 +227,5 @@ transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0,
 
 [node name="Bottle5" parent="Node3D3" unique_id=57202992 instance=ExtResource("40_g4s1x")]
 transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0, 1, -1.2061313, 0.58933973, -0.9347163)
+
+[node name="shelf01" parent="." unique_id=768742045 instance=ExtResource("40_pf4ct")]
