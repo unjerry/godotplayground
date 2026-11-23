@@ -1,16 +1,10 @@
 class_name ShelfStorage
 extends Node3D
 
-# Inclusive GridMap cell bounds. Each shelf exports its own X/Y/Z range.
+# Inclusive GridMap cell indices. Adjust each shelf's XYZ limits in Inspector.
 @export_category("Placement Bounds (GridMap Cells)")
 @export var min_cell: Vector3i = Vector3i(0, 0, -2)
 @export var max_cell: Vector3i = Vector3i(2, 3, -1)
-
-@export_category("Shelf Aiming")
-# Maximum distance from the camera ray to a slot's vertical bottle axis.
-@export_range(0.04, 0.30, 0.005) var aim_radius: float = 0.14
-# The selectable height extends UP from the bottle's base, not centered in Y.
-@export_range(0.10, 0.55, 0.01) var aim_height: float = 0.40
 
 @onready var grid_map: GridMap = $GridMap
 
@@ -20,10 +14,13 @@ func _enter_tree() -> void:
 
 
 func raycast_cell(world_start: Vector3, world_end: Vector3) -> Dictionary:
-	# Test a bottle-sized VERTICAL segment at every permitted cell against
-	# the camera ray. This selects front/back and upper/lower in ONE pass.
-	# Never project downward to a shelf board after determining a Y layer:
-	# that made X/Z drift to the far row when the camera looked down.
+	# Ray-plane targeting: each permitted Y layer is a horizontal shelf board.
+	# 1. Find where the camera ray FIRST reaches a shelf-board plane.
+	# 2. Convert that SAME intersection point to its X/Z GridMap cell.
+	#
+	# Never pick the closest bottle axis or extrapolate a second time to
+	# another height. A nearer board blocks targets on boards behind it.
+	# Loose bottles are still physics bodies (handled by gameplay_player.gd).
 	if grid_map.mesh_library == null:
 		return {}
 
@@ -37,46 +34,57 @@ func raycast_cell(world_start: Vector3, world_end: Vector3) -> Dictionary:
 		maxi(min_cell.y, max_cell.y),
 		maxi(min_cell.z, max_cell.z)
 	)
-	var count: int = (high.x - low.x + 1) * (high.y - low.y + 1) * (high.z - low.z + 1)
-	if count > 4096:
-		return {}
 
-	var column_height: float = minf(aim_height, grid_map.cell_size.y * 0.95)
-	var vertical_axis: Vector3 = grid_map.global_transform.basis.y.normalized()
-	var best_score: float = INF
-	var best_distance: float = INF
-	var best_cell := Vector3i.ZERO
-	var found: bool = false
+	# Working in GridMap-local space also handles rotated/moved shelves.
+	var origin: Vector3 = grid_map.to_local(world_start)
+	var finish: Vector3 = grid_map.to_local(world_end)
+	var direction: Vector3 = finish - origin
+	if absf(direction.y) < 0.00001:
+		return {}  # A horizontal ray does not hit a horizontal board.
+
+	# X and Z have centered cells; their limits are half a cell beyond
+	# the first/last cell centers. Y does NOT get a half-cell offset.
+	var half_x: float = grid_map.cell_size.x * 0.5
+	var half_z: float = grid_map.cell_size.z * 0.5
+	var first_center: Vector3 = grid_map.map_to_local(Vector3i(low.x, 0, low.z))
+	var last_center: Vector3 = grid_map.map_to_local(Vector3i(high.x, 0, high.z))
+	var x_min: float = minf(first_center.x, last_center.x) - half_x
+	var x_max: float = maxf(first_center.x, last_center.x) + half_x
+	var z_min: float = minf(first_center.z, last_center.z) - half_z
+	var z_max: float = maxf(first_center.z, last_center.z) + half_z
+
+	var first_t: float = INF
+	var first_cell := Vector3i.ZERO
+	var first_hit := Vector3.ZERO
+	var found := false
 
 	for y in range(low.y, high.y + 1):
-		for x in range(low.x, high.x + 1):
-			for z in range(low.z, high.z + 1):
-				var cell := Vector3i(x, y, z)
-				var base: Vector3 = grid_map.to_global(grid_map.map_to_local(cell))
-				# cell_center_y is false. All bottle meshes are bottom-origin.
-				var bottom: Vector3 = base + vertical_axis * 0.02
-				var top: Vector3 = base + vertical_axis * column_height
-				var closest: PackedVector3Array = Geometry3D.get_closest_points_between_segments(
-					world_start, world_end, bottom, top
-				)
-				if closest.size() != 2:
-					continue
+		# With cell_center_y=false, map_to_local is the bottle-bottom plane.
+		var board_y: float = grid_map.map_to_local(Vector3i(0, y, 0)).y
+		var t: float = (board_y - origin.y) / direction.y
+		if t < 0.0 or t > 1.0 or t >= first_t:
+			continue
 
-				var miss: float = closest[0].distance_to(closest[1])
-				if miss > aim_radius:
-					continue
-				var distance: float = world_start.distance_to(closest[0])
-				if distance <= 0.10:
-					continue
+		var hit: Vector3 = origin + direction * t
+		# Only intersect permitted shelf-board area. Never clamp an
+		# out-of-range hit onto the nearest shelf cell.
+		if hit.x < x_min or hit.x >= x_max:
+			continue
+		if hit.z < z_min or hit.z >= z_max:
+			continue
 
-				# Closest to the screen center, not the first large GridMap
-				# cell volume encountered. Prefer nearer cells on ties.
-				var score: float = miss / distance + distance * 0.0005
-				if score < best_score:
-					best_score = score
-					best_distance = distance
-					best_cell = cell
-					found = true
+		# X/Z are read at EXACTLY this board intersection, not projected
+		# farther along the ray. Y is the selected board's discrete layer.
+		var mapped: Vector3i = grid_map.local_to_map(hit)
+		if mapped.x < low.x or mapped.x > high.x:
+			continue
+		if mapped.z < low.z or mapped.z > high.z:
+			continue
+
+		first_t = t
+		first_cell = Vector3i(mapped.x, y, mapped.z)
+		first_hit = hit
+		found = true
 
 	if not found:
 		return {}
@@ -84,6 +92,6 @@ func raycast_cell(world_start: Vector3, world_end: Vector3) -> Dictionary:
 	return {
 		"shelf": self,
 		"grid": grid_map,
-		"cell": best_cell,
-		"distance": best_distance
+		"cell": first_cell,
+		"distance": world_start.distance_to(grid_map.to_global(first_hit))
 	}

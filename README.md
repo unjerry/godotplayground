@@ -23,18 +23,22 @@ endpoints. The initial values match the existing authored bottle coordinates.
 To expand or shrink any shelf, select that shelf's root node and edit the
 X/Y/Z values. The numbers are local GridMap cell indices, not meter offsets.
 
-Shelf aiming now finds the camera ray's nearest approach to a vertical
-bottle-sized axis at EACH permitted GridMap cell. The best on-screen match
-wins, across X/Y/Z. Previously, the code chose a Y layer then projected
-to its base plane a second time, shifting X/Z toward the far row when the
-camera looked down. This second projection is gone. Bottle placement is
-still bottom-aligned with `cell_center_y = false`.
+Shelf aiming now uses virtual HORIZONTAL shelf-board planes, one per
+permitted Y layer. Along the camera ray we choose the NEAREST board-plane
+intersection whose X/Z lies within the shelf's exported cell bounds. Only
+then do we convert the same intersection into X/Z cell indices. Unlike
+per-bottle vertical targeting, the camera cannot aim through an upper shelf
+board and select a lower shelf cell beneath it.
 
-Each shelf additionally exports `Aim Radius` (default 0.14m) and
-`Aim Height` (default 0.40m). They change only the selection region,
-not the stored bottle's position or physical collision. When looking at
-shelf furniture but outside any valid slot, LMB will not throw the carried
-bottle accidentally.
+`cell_center_y = false` means each board-plane Y is the exact bottom
+position of its bottles; no half-cell centering is added. Selection only
+occurs when the ray intersects a board within the allowed X/Z area. When
+looking horizontally, or toward shelf furniture outside those areas, no
+slot is selected. No separate plank collider is needed for virtual board
+targeting, though physical collisions remain a separate future task.
+
+If the physics ray hits shelf furniture but no selectable slot, LMB does
+not accidentally throw the carried bottle.
 
 The highlight is now a flat outline on the selected bottle's base plane.
 The highlighted grid cell is the exact cell used by both E and LMB.
