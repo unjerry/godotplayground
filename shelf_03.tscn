@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bp6ssiq27i265"]
 
+[ext_resource type="Script" path="res://shelf_storage.gd" id="99_storage"]
 [ext_resource type="PackedScene" uid="uid://cuxgx2n2x3u8i" path="res://grid_map.tscn" id="1_02fkn"]
 [ext_resource type="PackedScene" uid="uid://ch2cu6kx53d6s" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseOpen.glb" id="2_02fkn"]
 
@@ -7,6 +8,9 @@
 size = Vector3(0.4, 0.8805908, 0.25)
 
 [node name="shelf03" type="Node3D" unique_id=476105734]
+script = ExtResource("99_storage")
+min_cell = Vector3i(0, 0, -2)
+max_cell = Vector3i(2, 3, -1)
 
 [node name="GridMap" parent="." unique_id=1375642506 instance=ExtResource("1_02fkn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102, 0.258, -0.048)

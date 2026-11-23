@@ -20,7 +20,6 @@ const BOTTLE_SCENE = preload("res://bottle.tscn")
 var inventory: Array[int] = []
 var selected_index: int = 0
 var target: Dictionary = {}
-var shelf_bounds: Dictionary = {}  # GridMap instance ID -> initial used-cell limits.
 
 var ghost: MeshInstance3D
 var ghost_item_id: int = -1
@@ -46,23 +45,29 @@ func _ready() -> void:
 	slot_marker.visible = false
 	slot_marker.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
-	# Draw a four-sided thin outline around the hovered GridMap cell.
+	# 3D wireframe cage for the exact selected GridMap cell. Use a
+	# normalized box here; the transform scales it by that shelf's cell_size.
 	var lines := ImmediateMesh.new()
 	slot_material = StandardMaterial3D.new()
 	slot_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	slot_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	slot_material.no_depth_test = true
 	slot_material.albedo_color = Color(0.2, 0.9, 1.0, 0.95)
-	lines.surface_begin(Mesh.PRIMITIVE_LINES, slot_material)
-	var hx := 0.095
-	var hz := 0.095
-	var points := [
-		Vector3(-hx, 0.025, -hz), Vector3(hx, 0.025, -hz),
-		Vector3(hx, 0.025, hz), Vector3(-hx, 0.025, hz)
+	var corners := [
+		Vector3(-0.49, 0.02, -0.49), Vector3(0.49, 0.02, -0.49),
+		Vector3(0.49, 0.02, 0.49), Vector3(-0.49, 0.02, 0.49),
+		Vector3(-0.49, 0.98, -0.49), Vector3(0.49, 0.98, -0.49),
+		Vector3(0.49, 0.98, 0.49), Vector3(-0.49, 0.98, 0.49)
 	]
-	for i in range(4):
-		lines.surface_add_vertex(points[i])
-		lines.surface_add_vertex(points[(i + 1) % 4])
+	var edges := [
+		[0, 1], [1, 2], [2, 3], [3, 0],
+		[4, 5], [5, 6], [6, 7], [7, 4],
+		[0, 4], [1, 5], [2, 6], [3, 7]
+	]
+	lines.surface_begin(Mesh.PRIMITIVE_LINES, slot_material)
+	for edge in edges:
+		lines.surface_add_vertex(corners[edge[0]])
+		lines.surface_add_vertex(corners[edge[1]])
 	lines.surface_end()
 	slot_marker.mesh = lines
 
@@ -138,104 +143,54 @@ func _physics_process(delta: float) -> void:
 
 func _refresh_target() -> void:
 	target.clear()
-	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED or not ray.is_colliding():
+	if Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
 
-	var hit_node: Node = ray.get_collider() as Node
-	if hit_node is BottleItem:
-		target = {"kind": "loose", "bottle": hit_node}
-		return
-
-	var shelf: Node3D = _find_shelf_root(hit_node)
-	if shelf != null:
-		var grid: GridMap = shelf.get_node("GridMap") as GridMap
-		var aimed: Variant = _aimed_shelf_cell(grid)
-		if aimed != null:
-			target = {"kind": "shelf", "grid": grid, "cell": aimed}
-		return
-
-	# The physical world is not a GridMap. Only a shelf can be a grid target.
-
-
-func _find_shelf_root(from_node: Node) -> Node3D:
-	var node: Node = from_node
-	while node != null:
-		if String(node.name).begins_with("shelf") and node.get_node_or_null("GridMap") is GridMap:
-			return node as Node3D
-		node = node.get_parent()
-	return null
-
-
-func _get_bounds(grid: GridMap) -> Dictionary:
-	var key: int = grid.get_instance_id()
-	if shelf_bounds.has(key):
-		return shelf_bounds[key]
-
-	# Each authored shelf already has bottles marking the intended usable area.
-	# Snapshot its bounds once: picking every bottle does not shrink the slots.
-	var used: Array[Vector3i] = grid.get_used_cells()
-	if used.is_empty():
-		return {}
-	var low: Vector3i = used[0]
-	var high: Vector3i = used[0]
-	for cell in used:
-		low = Vector3i(
-			mini(low.x, cell.x), mini(low.y, cell.y), mini(low.z, cell.z)
-		)
-		high = Vector3i(
-			maxi(high.x, cell.x), maxi(high.y, cell.y), maxi(high.z, cell.z)
-		)
-	var bounds := {"min": low, "max": high}
-	shelf_bounds[key] = bounds
-	return bounds
-
-
-func _aimed_shelf_cell(grid: GridMap) -> Variant:
-	var bounds: Dictionary = _get_bounds(grid)
-	if bounds.is_empty():
-		return null
-
-	var low: Vector3i = bounds["min"]
-	var high: Vector3i = bounds["max"]
-
-	# Project the central aim ray onto the front row of the shelf. This
-	# deliberately does not depend on per-bottle collision shapes, and works
-	# around the current shelf's single solid-box collision prototype.
 	var origin: Vector3 = camera.global_position
 	var direction: Vector3 = -camera.global_transform.basis.z.normalized()
-	var plane_point: Vector3 = grid.to_global(
-		grid.map_to_local(Vector3i(0, 0, low.z))
-	)
-	var normal: Vector3 = grid.global_transform.basis.z.normalized()
-	var denominator: float = direction.dot(normal)
-	if absf(denominator) < 0.0001:
-		return null
-	var distance: float = (plane_point - origin).dot(normal) / denominator
-	if distance < 0.0 or distance > reach:
-		return null
+	var end_point: Vector3 = origin + direction * reach
 
-	var cell: Vector3i = grid.local_to_map(
-		grid.to_local(origin + direction * distance)
-	)
-	cell.z = low.z  # Front row first; use the next row when appropriate.
-	# We already hit the shelf collider; clamp near-edge aim to the nearest
-	# usable authored column/row instead of losing the hover completely.
-	cell.x = clampi(cell.x, low.x, high.x)
-	cell.y = clampi(cell.y, low.y, high.y)
-	return cell
+	# Find the nearest actual 3D cell struck by the camera ray across
+	# every shelf. No plane projection, coordinate clamping or auto search.
+	var nearest: Dictionary = {}
+	var nearest_distance: float = INF
+	for node in get_tree().get_nodes_in_group("shelf_storage"):
+		var shelf: ShelfStorage = node as ShelfStorage
+		if shelf == null:
+			continue
+		var hit: Dictionary = shelf.raycast_cell(origin, end_point)
+		if hit.is_empty():
+			continue
+		var distance: float = hit["distance"]
+		if distance < nearest_distance:
+			nearest_distance = distance
+			nearest = hit
+
+	# Loose bottles remain physics objects. Their collider takes priority
+	# only when it lies in front of the selected shelf cell.
+	if ray.is_colliding():
+		var hit_node: Node = ray.get_collider() as Node
+		var physics_distance: float = origin.distance_to(ray.get_collision_point())
+
+		if hit_node is BottleItem:
+			if physics_distance <= nearest_distance + 0.015:
+				target = {"kind": "loose", "bottle": hit_node}
+				return
+		elif hit_node != null and _find_shelf_root(hit_node) == null:
+			if physics_distance + 0.015 < nearest_distance:
+				return
+
+	if not nearest.is_empty():
+		target = nearest
+		target["kind"] = "shelf"
 
 
-func _find_shelf_slot(grid: GridMap, aimed: Vector3i, want_empty: bool) -> Variant:
-	var bounds: Dictionary = _get_bounds(grid)
-	if bounds.is_empty():
-		return null
-	var low: Vector3i = bounds["min"]
-	var high: Vector3i = bounds["max"]
-	for z in range(low.z, high.z + 1):
-		var cell := Vector3i(aimed.x, aimed.y, z)
-		var occupied: bool = grid.get_cell_item(cell) != GridMap.INVALID_CELL_ITEM
-		if occupied != want_empty:
-			return cell
+func _find_shelf_root(from_node: Node) -> ShelfStorage:
+	var node: Node = from_node
+	while node != null:
+		if node is ShelfStorage:
+			return node as ShelfStorage
+		node = node.get_parent()
 	return null
 
 
@@ -253,13 +208,9 @@ func _pick_up() -> void:
 		bottle.queue_free()
 	elif kind == "shelf":
 		var grid: GridMap = target["grid"]
-		var aimed: Vector3i = target["cell"]
-		var picked: Variant = _find_shelf_slot(grid, aimed, false)
-		if picked == null:
-			return
-		var cell: Vector3i = picked
+		var cell: Vector3i = target["cell"]
 		var item_id: int = grid.get_cell_item(cell)
-		if not POTIONS.get_item_list().has(item_id):
+		if item_id == GridMap.INVALID_CELL_ITEM or not POTIONS.get_item_list().has(item_id):
 			return
 		inventory.append(item_id)
 		grid.set_cell_item(cell, GridMap.INVALID_CELL_ITEM)
@@ -277,16 +228,16 @@ func _place_selected() -> void:
 	var kind: String = target.get("kind", "")
 
 	if kind == "shelf":
-		# Only a shelf stores a GridMap item.
 		var grid: GridMap = target["grid"]
-		var aimed: Vector3i = target["cell"]
-		var empty_slot: Variant = _find_shelf_slot(grid, aimed, true)
-		if empty_slot == null or not grid.mesh_library.get_item_list().has(item_id):
+		var cell: Vector3i = target["cell"]
+		# Only the EXACT highlighted cell can be filled. If occupied,
+		# do not silently move the bottle to another depth or height.
+		if grid.get_cell_item(cell) != GridMap.INVALID_CELL_ITEM:
 			return
-		var cell: Vector3i = empty_slot
+		if grid.mesh_library == null or not grid.mesh_library.get_item_list().has(item_id):
+			return
 		grid.set_cell_item(cell, item_id)
 	else:
-		# Otherwise throw an actual physics bottle, even while aiming at the floor.
 		_throw_bottle(item_id)
 
 	inventory.remove_at(selected_index)
@@ -348,18 +299,21 @@ func _refresh_hint() -> void:
 			else:
 				hint_text.text = "INVENTORY FULL"
 			return
+
 	if kind == "shelf":
 		var grid: GridMap = target["grid"]
-		var aimed: Vector3i = target["cell"]
-		var pickable: Variant = _find_shelf_slot(grid, aimed, false)
-		var placeable: Variant = _find_shelf_slot(grid, aimed, true)
-		var prompts := PackedStringArray()
-		if pickable != null and inventory.size() < inventory_capacity:
-			prompts.append("E  TAKE FROM SHELF")
-		if placeable != null and not inventory.is_empty():
-			prompts.append("LMB  STORE IN SHELF")
-		hint_text.text = "   |   ".join(prompts)
+		var cell: Vector3i = target["cell"]
+		var occupied: bool = grid.get_cell_item(cell) != GridMap.INVALID_CELL_ITEM
+		var messages := PackedStringArray()
+		if occupied and inventory.size() < inventory_capacity:
+			messages.append("E  TAKE FROM SHELF")
+		if not occupied and not inventory.is_empty():
+			messages.append("LMB  STORE IN SHELF")
+		if messages.is_empty():
+			messages.append("SHELF SLOT: " + ("OCCUPIED" if occupied else "EMPTY"))
+		hint_text.text = "  |  ".join(messages)
 		return
+
 	if inventory.is_empty():
 		hint_text.text = "E  PICK UP A BOTTLE"
 	else:
@@ -410,26 +364,21 @@ func _refresh_slot_marker() -> void:
 		return
 
 	var grid: GridMap = target["grid"]
-	var aimed: Vector3i = target["cell"]
-	var cell: Vector3i = aimed
-
+	var cell: Vector3i = target["cell"]
+	var occupied: bool = grid.get_cell_item(cell) != GridMap.INVALID_CELL_ITEM
 	if inventory.is_empty():
-		# Empty-handed: cyan marks a bottle that can be picked up.
-		var occupied: Variant = _find_shelf_slot(grid, aimed, false)
-		if occupied != null:
-			cell = occupied
-		slot_material.albedo_color = Color(0.15, 0.8, 1.0, 0.95)
+		slot_material.albedo_color = (
+			Color(0.15, 0.8, 1.0, 0.95)
+			if occupied else Color(0.55, 0.6, 0.65, 0.5)
+		)
 	else:
-		# Carrying: green means an available slot, red means full.
-		var free_slot: Variant = _find_shelf_slot(grid, aimed, true)
-		if free_slot != null:
-			cell = free_slot
-			slot_material.albedo_color = Color(0.2, 1.0, 0.45, 0.95)
-		else:
-			slot_material.albedo_color = Color(1.0, 0.3, 0.3, 0.95)
+		slot_material.albedo_color = (
+			Color(1.0, 0.3, 0.3, 0.95)
+			if occupied else Color(0.2, 1.0, 0.45, 0.95)
+		)
 
 	slot_marker.global_transform = Transform3D(
-		grid.global_transform.basis,
+		grid.global_transform.basis.scaled(grid.cell_size),
 		grid.to_global(grid.map_to_local(cell))
 	)
 	slot_marker.visible = true
@@ -441,7 +390,6 @@ func _refresh_ghost() -> void:
 		return
 	if inventory.is_empty() or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
-	# A ghost is for storing on a shelf only. Ground bottles are physics bodies.
 	if target.get("kind", "") != "shelf":
 		return
 
@@ -452,12 +400,8 @@ func _refresh_ghost() -> void:
 		return
 
 	var grid: GridMap = target["grid"]
-	var aimed: Vector3i = target["cell"]
-	var candidate: Variant = _find_shelf_slot(grid, aimed, true)
-	var can_place: bool = candidate != null
-	var cell: Vector3i = aimed
-	if can_place:
-		cell = candidate
+	var cell: Vector3i = target["cell"]
+	var can_place: bool = grid.get_cell_item(cell) == GridMap.INVALID_CELL_ITEM
 
 	var local_transform := Transform3D(
 		Basis.IDENTITY.scaled(Vector3.ONE * grid.cell_scale),

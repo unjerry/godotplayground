@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://bhtbx4l48k80x"]
 
+[ext_resource type="Script" path="res://shelf_storage.gd" id="99_storage"]
 [ext_resource type="PackedScene" uid="uid://cuxgx2n2x3u8i" path="res://grid_map.tscn" id="1_41tik"]
 [ext_resource type="Texture2D" uid="uid://h3hh787xkrsx" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_003_green_Atlas.png" id="2_2oh1i"]
 [ext_resource type="Texture2D" uid="uid://s265isxqmde7" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_006_yellow_Atlas.png" id="3_07j00"]
@@ -726,6 +727,9 @@ metadata/_editor_source_scene = "res://potions.tscn"
 size = Vector3(0.8, 0.8, 0.25019532)
 
 [node name="shelf01" type="Node3D" unique_id=768742045]
+script = ExtResource("99_storage")
+min_cell = Vector3i(1, 0, -2)
+max_cell = Vector3i(5, 3, -1)
 
 [node name="GridMap" parent="." unique_id=1148400618 instance=ExtResource("1_41tik")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.142, -0.054)
