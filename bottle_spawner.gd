@@ -21,7 +21,7 @@ func _ready() -> void:
 		add_child(bottle)
 
 		# A few staggered rows fall into an untidy pile on the floor.
-		var row: int = i / 5
+		var row: int = floori(float(i) / 5.0)
 		var column: int = i % 5
 		bottle.position = Vector3(
 			(float(column) - 2.0) * 0.22 + rng.randf_range(-0.04, 0.04),

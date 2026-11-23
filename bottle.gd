@@ -12,7 +12,7 @@ const POTIONS = preload("res://new_mesh_library.tres")
 
 func _ready() -> void:
 	mass = 0.2
-	if not POTIONS.has_item(item_id):
+	if not POTIONS.get_item_list().has(item_id):
 		push_warning("Unknown potion item ID: %d" % item_id)
 		return
 	var item_mesh: Mesh = POTIONS.get_item_mesh(item_id)

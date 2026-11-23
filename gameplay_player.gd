@@ -227,7 +227,7 @@ func _pick_up() -> void:
 			return
 		var cell: Vector3i = picked
 		var item_id: int = grid.get_cell_item(cell)
-		if not POTIONS.has_item(item_id):
+		if not POTIONS.get_item_list().has(item_id):
 			return
 		inventory.append(item_id)
 		grid.set_cell_item(cell, GridMap.INVALID_CELL_ITEM)
@@ -248,7 +248,7 @@ func _place_selected() -> void:
 		var grid: GridMap = target["grid"]
 		var aimed: Vector3i = target["cell"]
 		var empty_slot: Variant = _find_shelf_slot(grid, aimed, true)
-		if empty_slot == null or not grid.mesh_library.has_item(item_id):
+		if empty_slot == null or not grid.mesh_library.get_item_list().has(item_id):
 			return
 		var cell: Vector3i = empty_slot
 		grid.set_cell_item(cell, item_id)
@@ -278,7 +278,7 @@ func _select_inventory(step: int) -> void:
 
 
 func _potion_name(item_id: int) -> String:
-	if not POTIONS.has_item(item_id):
+	if not POTIONS.get_item_list().has(item_id):
 		return "unknown"
 	return POTIONS.get_item_name(item_id).trim_prefix("potion_").replace("_", " ")
 
@@ -332,7 +332,7 @@ func _make_ghost_mesh(item_id: int) -> void:
 	ghost.mesh = null
 	ghost_materials.clear()
 	ghost_item_id = -1
-	if not POTIONS.has_item(item_id):
+	if not POTIONS.get_item_list().has(item_id):
 		return
 	var mesh: Mesh = POTIONS.get_item_mesh(item_id)
 	if mesh == null:
@@ -379,8 +379,8 @@ func _refresh_ghost() -> void:
 		return
 
 	if kind == "floor":
-		var position: Vector3 = target["point"]
-		ghost.global_transform = Transform3D(Basis.IDENTITY, position + Vector3.UP * 0.012)
+		var drop_point: Vector3 = target["point"]
+		ghost.global_transform = Transform3D(Basis.IDENTITY, drop_point + Vector3.UP * 0.012)
 		_tint_ghost(true)
 	else:
 		var grid: GridMap = target["grid"]
