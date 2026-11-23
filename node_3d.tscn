@@ -1,0 +1,209 @@
+[gd_scene format=3 uid="uid://ffy80e61e80q"]
+
+[ext_resource type="Environment" uid="uid://ctwx75g5xuj4f" path="res://new_environment.tres" id="1_a0tk4"]
+[ext_resource type="CameraAttributesPractical" uid="uid://dykluuiy1r0r2" path="res://new_camera_attributes_practical.tres" id="2_r3fl7"]
+[ext_resource type="Compositor" uid="uid://cwd0v2oxlmwu5" path="res://new_compositor.tres" id="3_jka67"]
+[ext_resource type="Texture2D" uid="uid://cxds7m6hluu2c" path="res://icon.svg" id="4_r3fl7"]
+[ext_resource type="SphereMesh" uid="uid://ugkl0akrfo6x" path="res://new_sphere_mesh.tres" id="5_jka67"]
+[ext_resource type="PackedScene" uid="uid://b0s5ffi1oev6c" path="res://assets/kenney_furniture-kit/Models/GLTF format/bathroomCabinet.glb" id="7_dhlwf"]
+[ext_resource type="PackedScene" uid="uid://qnckhfh1740c" path="res://assets/kenney_furniture-kit/Models/GLTF format/bathroomCabinetDrawer.glb" id="8_5t8nk"]
+[ext_resource type="PackedScene" uid="uid://dgd7tbwavmhoy" path="res://assets/kenney_furniture-kit/Models/GLTF format/bathroomMirror.glb" id="9_j3e5s"]
+[ext_resource type="PackedScene" uid="uid://dd4osaksttp4p" path="res://assets/kenney_furniture-kit/Models/GLTF format/bathroomSink.glb" id="10_nu31w"]
+[ext_resource type="PackedScene" uid="uid://u0olbg3lrn4o" path="res://assets/kenney_furniture-kit/Models/GLTF format/bathroomSinkSquare.glb" id="11_obt1j"]
+[ext_resource type="PackedScene" uid="uid://cytdk1jwpcp7n" path="res://assets/kenney_furniture-kit/Models/GLTF format/bathtub.glb" id="12_2yde8"]
+[ext_resource type="PackedScene" uid="uid://cra0x6b2sb74y" path="res://assets/kenney_furniture-kit/Models/GLTF format/bear.glb" id="13_id0nj"]
+[ext_resource type="PackedScene" uid="uid://cuxw6122u7pit" path="res://assets/kenney_furniture-kit/Models/GLTF format/bedBunk.glb" id="14_1q667"]
+[ext_resource type="PackedScene" uid="uid://ddhv4vanror1m" path="res://assets/kenney_furniture-kit/Models/GLTF format/bedDouble.glb" id="15_ype4i"]
+[ext_resource type="PackedScene" uid="uid://cpgbxi2f0wllw" path="res://assets/kenney_furniture-kit/Models/GLTF format/bedSingle.glb" id="16_riyl1"]
+[ext_resource type="PackedScene" uid="uid://bvmi7aj1vgul6" path="res://assets/kenney_furniture-kit/Models/GLTF format/bench.glb" id="17_pb8dk"]
+[ext_resource type="PackedScene" uid="uid://5qc2lo84wjss" path="res://assets/kenney_furniture-kit/Models/GLTF format/benchCushion.glb" id="18_2mu51"]
+[ext_resource type="PackedScene" uid="uid://w5wjrcdu5xr1" path="res://assets/kenney_furniture-kit/Models/GLTF format/benchCushionLow.glb" id="19_vmvb8"]
+[ext_resource type="PackedScene" uid="uid://bpvx3ksqitwp6" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseOpenLow.glb" id="20_4i7mf"]
+[ext_resource type="PackedScene" uid="uid://ch2cu6kx53d6s" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseOpen.glb" id="21_3s0n5"]
+[ext_resource type="PackedScene" uid="uid://dsjx1k4l7eydg" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseClosedWide.glb" id="22_qpkl4"]
+[ext_resource type="Script" uid="uid://bafao1tpwyu2h" path="res://character_body_3d.gd" id="23_dhlwf"]
+[ext_resource type="PackedScene" uid="uid://be1hw11j5jan" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseClosedDoors.glb" id="23_g4s1x"]
+[ext_resource type="PackedScene" uid="uid://oaxwmnppc1n3" path="res://assets/kenney_furniture-kit/Models/GLTF format/bookcaseClosed.glb" id="24_pf4ct"]
+[ext_resource type="PackedScene" uid="uid://unwgl8qvwsyy" path="res://assets/nashas_cozy_3d_haunted_library_v1.0/Nashas_Cozy_3D_Haunted_Library/Blender/Nashas_Cozy_Haunted_Library.blend" id="25_5t8nk"]
+[ext_resource type="PackedScene" uid="uid://bxwcfsjjrmnnp" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_003_green.glb" id="26_4i7mf"]
+[ext_resource type="PackedScene" uid="uid://c5mn12l3dys7w" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_006_yellow.glb" id="27_3s0n5"]
+[ext_resource type="PackedScene" uid="uid://dvjovtu8xkfj3" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_008_purple.glb" id="28_qpkl4"]
+[ext_resource type="PackedScene" uid="uid://d2qe217s7lwxm" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_009_red.glb" id="29_g4s1x"]
+[ext_resource type="PackedScene" uid="uid://c840sygx5d6pc" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_014_blue.glb" id="30_pf4ct"]
+[ext_resource type="PackedScene" uid="uid://cv2amgsbg7s0y" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_015_yellow.glb" id="31_5w2ad"]
+[ext_resource type="PackedScene" uid="uid://cpryxbbl1f6xd" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_017_red.glb" id="32_8p5mg"]
+[ext_resource type="PackedScene" uid="uid://kv4rr2delsvs" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_018_blue.glb" id="33_dsgk7"]
+[ext_resource type="PackedScene" uid="uid://bheeigx25wq6a" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_021_purple.glb" id="34_72tv7"]
+[ext_resource type="PackedScene" uid="uid://4oo58juenasn" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_025_green.glb" id="35_x6a8j"]
+[ext_resource type="PackedScene" uid="uid://cxg2ebtdhgt2u" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_026_purple.glb" id="36_s7uix"]
+[ext_resource type="PackedScene" uid="uid://dprqj57msvf16" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_038_yellow.glb" id="37_4hyfj"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_37voa"]
+size = Vector3(11.302017, 0.32128906, 16.183159)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_37voa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_toam6"]
+albedo_texture = ExtResource("4_r3fl7")
+
+[sub_resource type="BoxMesh" id="BoxMesh_37voa"]
+
+[node name="Node3D" type="Node3D" unique_id=283715028]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=597077109]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="SoftBody3D" type="SoftBody3D" parent="." unique_id=1778692935]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00016923249, 0.8974567, -2.0649264)
+mesh = ExtResource("5_jka67")
+pressure_coefficient = 5.0
+damping_coefficient = 0.1
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=606375475]
+transform = Transform3D(1, 0, 0, 0, 0.45404512, 0.8909787, 0, -0.8909787, 0.45404512, 0, 1.2549816, -1.0109314)
+
+[node name="AreaLight3D2" type="AreaLight3D" parent="." unique_id=1481937518]
+transform = Transform3D(1, 0, 0, 0, 0.9455488, -0.3254805, 0, 0.3254805, 0.9455488, 0, -1.5692097, 0.12279433)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1573928883]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1834172, -2.0871987)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=57585739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2760086, 0, 3.0407982)
+shape = SubResource("BoxShape3D_37voa")
+
+[node name="Node3D" type="Node3D" parent="." unique_id=480921631]
+visible = false
+
+[node name="bathroomCabinet" parent="Node3D" unique_id=1838356533 instance=ExtResource("7_dhlwf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07075536, 0, -1.0736043)
+
+[node name="bathroomCabinetDrawer" parent="Node3D" unique_id=2020231336 instance=ExtResource("8_5t8nk")]
+
+[node name="bathroomMirror" parent="Node3D" unique_id=1073052986 instance=ExtResource("9_j3e5s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7723256, 0, -1.0075538)
+
+[node name="bathroomSink" parent="Node3D" unique_id=434106979 instance=ExtResource("10_nu31w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3164918, 0, -0.7401392)
+
+[node name="bathroomSinkSquare" parent="Node3D" unique_id=861809643 instance=ExtResource("11_obt1j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7322055, 0, -0.8731187)
+
+[node name="bathtub" parent="Node3D" unique_id=1958225772 instance=ExtResource("12_2yde8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3816028, 0, 0.41685724)
+
+[node name="bear" parent="Node3D" unique_id=1836461743 instance=ExtResource("13_id0nj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5282614, 0, 1.3087941)
+
+[node name="bedBunk" parent="Node3D" unique_id=480859113 instance=ExtResource("14_1q667")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7204447, 0, -3.29479)
+
+[node name="bedDouble" parent="Node3D" unique_id=2035657756 instance=ExtResource("15_ype4i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6108022, 0, 0.12280989)
+
+[node name="bedSingle" parent="Node3D" unique_id=1318933301 instance=ExtResource("16_riyl1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.327945, 0, -1.4339092)
+
+[node name="bench" parent="Node3D" unique_id=949140524 instance=ExtResource("17_pb8dk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8411424, 0, -0.28897738)
+
+[node name="benchCushion" parent="Node3D" unique_id=298862489 instance=ExtResource("18_2mu51")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8768405, 0, -0.90026903)
+
+[node name="benchCushionLow" parent="Node3D" unique_id=436725730 instance=ExtResource("19_vmvb8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8058002, 0, -1.0548772)
+
+[node name="bookcaseOpenLow" parent="Node3D" unique_id=154745603 instance=ExtResource("20_4i7mf")]
+
+[node name="bookcaseOpen" parent="Node3D" unique_id=1338639139 instance=ExtResource("21_3s0n5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17013812, 0, 0.85666424)
+
+[node name="bookcaseClosedWide" parent="Node3D" unique_id=1986847485 instance=ExtResource("22_qpkl4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7673197, -2.3841858e-07, 0.80737257)
+
+[node name="bookcaseClosedDoors" parent="Node3D" unique_id=1431396364 instance=ExtResource("23_g4s1x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2728386, 0, -0.9855407)
+
+[node name="bookcaseClosed" parent="Node3D" unique_id=58267228 instance=ExtResource("24_pf4ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.708837, 0, -2.0577922)
+
+[node name="bookcaseClosed2" parent="Node3D" unique_id=80860586 instance=ExtResource("24_pf4ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6179644, -2.3841858e-07, 0.7009101)
+
+[node name="bookcaseClosedDoors2" parent="Node3D" unique_id=550341512 instance=ExtResource("23_g4s1x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9349171, 0, 0.8466141)
+
+[node name="bookcaseClosedWide2" parent="Node3D" unique_id=157192101 instance=ExtResource("22_qpkl4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56782126, 2.3841858e-07, 1.3475969)
+
+[node name="bookcaseOpen2" parent="Node3D" unique_id=313797195 instance=ExtResource("21_3s0n5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4703414, 0, 1.3759197)
+
+[node name="bookcaseOpenLow2" parent="Node3D" unique_id=1256934869 instance=ExtResource("20_4i7mf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5843315, -1.1920929e-07, 0.64936525)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1850370951]
+visible = false
+script = ExtResource("23_dhlwf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D" unique_id=1426742506]
+shape = SubResource("CapsuleShape3D_37voa")
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D" unique_id=561785411]
+transform = Transform3D(1.2191956, 0, 0, 0, -5.5588075e-08, -1, 0, 1.2717069, -4.371139e-08, 0, 0.5241601, 0)
+texture = ExtResource("4_r3fl7")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D" unique_id=1640428503]
+material_override = SubResource("StandardMaterial3D_toam6")
+mesh = SubResource("BoxMesh_37voa")
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D" unique_id=168607943]
+environment = ExtResource("1_a0tk4")
+attributes = ExtResource("2_r3fl7")
+compositor = ExtResource("3_jka67")
+fov = 52.983696
+
+[node name="Nashas_Cozy_Haunted_Library" parent="." unique_id=931376252 instance=ExtResource("25_5t8nk")]
+visible = false
+
+[node name="Node3D2" type="Node3D" parent="." unique_id=763013555]
+
+[node name="potion_003_green2" parent="Node3D2" unique_id=177686528 instance=ExtResource("26_4i7mf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5240366, 5.9604645e-08, -1.0740952)
+
+[node name="potion_006_yellow2" parent="Node3D2" unique_id=1220822072 instance=ExtResource("27_3s0n5")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1712081, 0, -1.3383003)
+
+[node name="potion_008_purple2" parent="Node3D2" unique_id=1929330957 instance=ExtResource("28_qpkl4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.67449564, 1.1920929e-07, -1.4443622)
+
+[node name="potion_009_red2" parent="Node3D2" unique_id=1620664862 instance=ExtResource("29_g4s1x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4061031, 5.9604645e-08, -0.45283598)
+
+[node name="potion_014_blue2" parent="Node3D2" unique_id=300031182 instance=ExtResource("30_pf4ct")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7665283, 0, -0.5542231)
+
+[node name="potion_015_yellow2" parent="Node3D2" unique_id=1603938030 instance=ExtResource("31_5w2ad")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.41281724, 0, -0.5854176)
+
+[node name="potion_017_red2" parent="Node3D2" unique_id=50505009 instance=ExtResource("32_8p5mg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.27758408, 0, -0.6138878)
+
+[node name="potion_018_blue2" parent="Node3D2" unique_id=1936100757 instance=ExtResource("33_dsgk7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02669084, 0, -0.55872685)
+
+[node name="potion_021_purple2" parent="Node3D2" unique_id=1980045962 instance=ExtResource("34_72tv7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5658444, 0, -0.587197)
+
+[node name="potion_025_green2" parent="Node3D2" unique_id=270014515 instance=ExtResource("35_x6a8j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1477032, 0, -0.56940323)
+
+[node name="potion_026_purple2" parent="Node3D2" unique_id=915788873 instance=ExtResource("36_s7uix")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20640862, 0, -0.8576635)
+
+[node name="potion_038_yellow2" parent="Node3D2" unique_id=1985861041 instance=ExtResource("37_4hyfj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2773747, 5.9604645e-08, -1.0101526)
+
+[node name="GridMap" type="GridMap" parent="." unique_id=800662198]
+visible = false
