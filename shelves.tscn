@@ -17,15 +17,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.8000001, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90000004, 0, 0)
 
 [node name="shelf04" parent="." unique_id=58267228 instance=ExtResource("3_04pref")]
-
-[node name="shelf04_2" parent="." unique_id=2145562790 instance=ExtResource("3_04pref")]
-visible = false
-
-[node name="shelf01_2" parent="." unique_id=648749613 instance=ExtResource("4_01pref")]
-visible = false
-
-[node name="shelf03_2" parent="." unique_id=353531834 instance=ExtResource("2_03pref")]
-visible = false
-
-[node name="shelf02_2" parent="." unique_id=849127970 instance=ExtResource("1_02pref")]
-visible = false

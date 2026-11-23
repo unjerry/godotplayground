@@ -7,7 +7,7 @@ const MOUSE_SENSITIVITY = 0.002
 @export_range(1.0, 30.0, 0.5) var placement_reach: float = 6.0
 
 @onready var camera: Camera3D = $Camera3D
-@onready var grid_map: GridMap = $"../GridMap"
+@onready var grid_map: GridMap = get_node_or_null("../GridMap") as GridMap
 
 var selected_index: int = 0
 var placement_layer: int = 0
@@ -21,6 +21,8 @@ var preview_occupied: bool = false
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if grid_map == null:
+		return
 	placement_preview = MeshInstance3D.new()
 	placement_preview.name = "PlacementGhost"
 	placement_preview.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
@@ -30,7 +32,8 @@ func _ready() -> void:
 
 
 func _process(_delta: float) -> void:
-	_update_placement_preview()
+	if grid_map != null:
+		_update_placement_preview()
 
 
 func _input(event: InputEvent) -> void:
@@ -121,7 +124,7 @@ func select_item(step: int) -> void:
 
 
 func _get_target_cell() -> Variant:
-	if grid_map.mesh_library == null:
+	if grid_map == null or grid_map.mesh_library == null:
 		return null
 
 	# Shoot the camera's central ray onto the chosen horizontal grid layer.

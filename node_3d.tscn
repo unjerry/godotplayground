@@ -37,7 +37,6 @@
 [ext_resource type="PackedScene" uid="uid://4oo58juenasn" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_025_green.glb" id="35_x6a8j"]
 [ext_resource type="PackedScene" uid="uid://cxg2ebtdhgt2u" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_026_purple.glb" id="36_s7uix"]
 [ext_resource type="PackedScene" uid="uid://dprqj57msvf16" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_038_yellow.glb" id="37_4hyfj"]
-[ext_resource type="PackedScene" uid="uid://cuxgx2n2x3u8i" path="res://grid_map.tscn" id="38_qpkl4"]
 [ext_resource type="PackedScene" uid="uid://cgfqsur6rf8di" path="res://bottle.tscn" id="40_g4s1x"]
 [ext_resource type="PackedScene" uid="uid://bhtbx4l48k80x" path="res://shelf_01.tscn" id="40_pf4ct"]
 [ext_resource type="PackedScene" uid="uid://cjbmsw1afcfkw" path="res://shelves.tscn" id="41_pf4ct"]
@@ -210,8 +209,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20640862, 0, -0.8576635)
 
 [node name="potion_038_yellow2" parent="Node3D2" unique_id=1985861041 instance=ExtResource("37_4hyfj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2773747, 5.9604645e-08, -1.0101526)
-
-[node name="GridMap" parent="." unique_id=1148400618 instance=ExtResource("38_qpkl4")]
 
 [node name="Node3D3" type="Node3D" parent="." unique_id=995167067]
 

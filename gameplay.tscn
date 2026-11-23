@@ -94,7 +94,7 @@ offset_right = 230.0
 offset_bottom = -62.0
 theme_override_font_sizes/font_size = 17
 horizontal_alignment = 1
-text = "E: pick up | LMB: place"
+text = "E: pick up | LMB: shelf / throw"
 
 [node name="Crosshair" type="Label" parent="HUD"]
 anchor_left = 0.5

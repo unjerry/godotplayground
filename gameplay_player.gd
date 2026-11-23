@@ -9,6 +9,7 @@ const BOTTLE_SCENE = preload("res://bottle.tscn")
 @export var mouse_sensitivity: float = 0.002
 @export_range(1, 20, 1) var inventory_capacity: int = 8
 @export var reach: float = 4.5
+@export var throw_speed: float = 4.0
 
 @onready var camera: Camera3D = $Camera3D
 @onready var ray: RayCast3D = $Camera3D/InteractionRay
@@ -118,13 +119,7 @@ func _refresh_target() -> void:
 			target = {"kind": "shelf", "grid": grid, "cell": aimed}
 		return
 
-	var normal: Vector3 = ray.get_collision_normal()
-	if normal.dot(Vector3.UP) > 0.7:
-		target = {
-			"kind": "floor",
-			"point": ray.get_collision_point(),
-			"normal": normal
-		}
+	# The physical world is not a GridMap. Only a shelf can be a grid target.
 
 
 func _find_shelf_root(from_node: Node) -> Node3D:
@@ -245,6 +240,7 @@ func _place_selected() -> void:
 	var kind: String = target.get("kind", "")
 
 	if kind == "shelf":
+		# Only a shelf stores a GridMap item.
 		var grid: GridMap = target["grid"]
 		var aimed: Vector3i = target["cell"]
 		var empty_slot: Variant = _find_shelf_slot(grid, aimed, true)
@@ -252,15 +248,9 @@ func _place_selected() -> void:
 			return
 		var cell: Vector3i = empty_slot
 		grid.set_cell_item(cell, item_id)
-	elif kind == "floor":
-		var bottle: BottleItem = BOTTLE_SCENE.instantiate() as BottleItem
-		bottle.item_id = item_id
-		loose_items.add_child(bottle)
-		var point: Vector3 = target["point"]
-		var normal: Vector3 = target["normal"]
-		bottle.global_position = point + normal * 0.025
 	else:
-		return
+		# Otherwise throw an actual physics bottle, even while aiming at the floor.
+		_throw_bottle(item_id)
 
 	inventory.remove_at(selected_index)
 	if inventory.is_empty():
@@ -268,6 +258,17 @@ func _place_selected() -> void:
 	else:
 		selected_index = mini(selected_index, inventory.size() - 1)
 	_refresh_inventory_text()
+
+
+func _throw_bottle(item_id: int) -> void:
+	var bottle: BottleItem = BOTTLE_SCENE.instantiate() as BottleItem
+	bottle.item_id = item_id
+	loose_items.add_child(bottle)
+
+	var forward: Vector3 = -camera.global_transform.basis.z.normalized()
+	bottle.global_position = camera.global_position + forward * 0.85 - Vector3.UP * 0.12
+	bottle.linear_velocity = forward * throw_speed + Vector3.UP * 0.7 + velocity * 0.35
+	bottle.angular_velocity = camera.global_transform.basis.x * 2.0
 
 
 func _select_inventory(step: int) -> void:
@@ -295,7 +296,7 @@ func _refresh_inventory_text() -> void:
 			lines.append("%s%d. %s" % [pointer, i + 1, _potion_name(inventory[i])])
 	lines.append("")
 	lines.append("E  pick up")
-	lines.append("LMB  place / drop")
+	lines.append("LMB  shelf / throw")
 	lines.append("Wheel / 1-8  select")
 	inventory_text.text = "\n".join(lines)
 
@@ -322,10 +323,10 @@ func _refresh_hint() -> void:
 			prompts.append("LMB  STORE IN SHELF")
 		hint_text.text = "   |   ".join(prompts)
 		return
-	if kind == "floor" and not inventory.is_empty():
-		hint_text.text = "LMB  DROP ON FLOOR"
+	if inventory.is_empty():
+		hint_text.text = "E  PICK UP A BOTTLE"
 	else:
-		hint_text.text = "Aim at a bottle, shelf slot, or floor"
+		hint_text.text = "LMB  THROW BOTTLE"
 
 
 func _make_ghost_mesh(item_id: int) -> void:
@@ -368,8 +369,8 @@ func _refresh_ghost() -> void:
 	ghost.visible = false
 	if inventory.is_empty() or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
-	var kind: String = target.get("kind", "")
-	if kind != "floor" and kind != "shelf":
+	# A ghost is for storing on a shelf only. Ground bottles are physics bodies.
+	if target.get("kind", "") != "shelf":
 		return
 
 	var item_id: int = inventory[selected_index]
@@ -378,27 +379,22 @@ func _refresh_ghost() -> void:
 	if ghost.mesh == null:
 		return
 
-	if kind == "floor":
-		var drop_point: Vector3 = target["point"]
-		ghost.global_transform = Transform3D(Basis.IDENTITY, drop_point + Vector3.UP * 0.012)
-		_tint_ghost(true)
-	else:
-		var grid: GridMap = target["grid"]
-		var aimed: Vector3i = target["cell"]
-		var candidate: Variant = _find_shelf_slot(grid, aimed, true)
-		var can_place: bool = candidate != null
-		var cell: Vector3i = aimed
-		if can_place:
-			cell = candidate
-		var local_transform := Transform3D(
-			Basis.IDENTITY.scaled(Vector3.ONE * grid.cell_scale),
-			grid.map_to_local(cell)
-		)
-		ghost.global_transform = (
-			grid.global_transform
-			* local_transform
-			* grid.mesh_library.get_item_mesh_transform(item_id)
-		)
-		_tint_ghost(can_place)
+	var grid: GridMap = target["grid"]
+	var aimed: Vector3i = target["cell"]
+	var candidate: Variant = _find_shelf_slot(grid, aimed, true)
+	var can_place: bool = candidate != null
+	var cell: Vector3i = aimed
+	if can_place:
+		cell = candidate
 
+	var local_transform := Transform3D(
+		Basis.IDENTITY.scaled(Vector3.ONE * grid.cell_scale),
+		grid.map_to_local(cell)
+	)
+	ghost.global_transform = (
+		grid.global_transform
+		* local_transform
+		* grid.mesh_library.get_item_mesh_transform(item_id)
+	)
+	_tint_ghost(can_place)
 	ghost.visible = true
