@@ -4,7 +4,7 @@ extends Node3D
 const BOTTLE_SCENE = preload("res://bottle.tscn")
 const POTIONS = preload("res://new_mesh_library.tres")
 
-@export_range(0, 60, 1) var bottle_count: int = 20
+@export_range(0, 600, 1) var bottle_count: int = 20
 @export var random_seed: int = 20261123
 
 
