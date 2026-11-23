@@ -728,7 +728,7 @@ size = Vector3(0.8, 0.8, 0.25019532)
 [node name="shelf01" type="Node3D" unique_id=768742045]
 
 [node name="GridMap" parent="." unique_id=1148400618 instance=ExtResource("1_41tik")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.142, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.142, -0.054)
 mesh_library = SubResource("MeshLibrary_7fw1r")
 physics_material = SubResource("PhysicsMaterial_28fln")
 cell_size = Vector3(0.2, 0.477, 0.2)
