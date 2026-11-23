@@ -23,15 +23,15 @@ endpoints. The initial values match the existing authored bottle coordinates.
 To expand or shrink any shelf, select that shelf's root node and edit the
 X/Y/Z values. The numbers are local GridMap cell indices, not meter offsets.
 
-Shelf aiming uses one virtual horizontal interaction plane per Y layer,
-not the front-facing volume of every cell. The ray intersects each layer's
-plane, and its X/Z hit determines the column and depth in that layer. The
-nearest valid board hit wins, so the front row no longer masks the back row.
-By default these planes are 0.20m above their board (about bottle mid-height).
-Each shelf exports `Board Height Offset`; use 0.0 to aim at its actual board
-level instead. No additional plank physics colliders are needed for aiming.
+Shelf aiming first calculates Y from the camera ray at the middle depth of
+the shelf, using the BOTTOM of each GridMap layer as its origin. It then
+intersects only the selected layer's base plane for X/Z. No Y half-cell or
+bottle-midpoint offset is added. This avoids accidentally selecting a lower
+board while looking at an upper bottle. `cell_center_y` must remain false;
+the four prefab scenes set it explicitly.
 
-The highlighted 3D wireframe cell is the exact cell used by both E and LMB.
+The highlight is now a flat outline on the selected bottle's base plane.
+The highlighted grid cell is the exact cell used by both E and LMB.
 Occupied: E picks up that item; empty: LMB stores the carried item. No
 automatic search through other rows or Y levels is performed.
 

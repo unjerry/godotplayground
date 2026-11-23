@@ -15,6 +15,7 @@ max_cell = Vector3i(2, 3, -1)
 [node name="GridMap" parent="." unique_id=1375642506 instance=ExtResource("1_02fkn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.102, 0.258, -0.048)
 cell_size = Vector3(0.2, 0.477, 0.2)
+cell_center_y = false
 data = {
 "cells": PackedInt32Array(0, 65535, 5, 0, 65534, 0, 1, 65534, 0, 1, 65535, 0, 2, 65534, 0, 2, 65535, 0, 65536, 65535, 0, 65538, 65534, 0, 131072, 65535, 0, 196610, 65534, 0)
 }

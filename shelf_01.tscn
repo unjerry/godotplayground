@@ -736,6 +736,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.142, -0.054)
 mesh_library = SubResource("MeshLibrary_7fw1r")
 physics_material = SubResource("PhysicsMaterial_28fln")
 cell_size = Vector3(0.2, 0.477, 0.2)
+cell_center_y = false
 data = {
 "cells": PackedInt32Array(1, 65535, 0, 65537, 65535, 0, 131073, 65535, 0, 196609, 65535, 0, 1, 65534, 0, 2, 65534, 0, 3, 65534, 1, 4, 65534, 1, 65537, 65534, 1, 65540, 65534, 4, 131075, 65534, 4, 196610, 65534, 4, 196610, 65535, 4, 196611, 65535, 4, 196613, 65535, 4)
 }

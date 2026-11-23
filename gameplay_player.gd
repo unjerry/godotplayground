@@ -45,29 +45,22 @@ func _ready() -> void:
 	slot_marker.visible = false
 	slot_marker.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
-	# 3D wireframe cage for the exact selected GridMap cell. Use a
-	# normalized box here; the transform scales it by that shelf's cell_size.
+	# Flat XZ footprint. No vertical centering and no tall box extending
+	# below/above the selected shelf board.
 	var lines := ImmediateMesh.new()
 	slot_material = StandardMaterial3D.new()
 	slot_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	slot_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
 	slot_material.no_depth_test = true
 	slot_material.albedo_color = Color(0.2, 0.9, 1.0, 0.95)
-	var corners := [
-		Vector3(-0.49, 0.02, -0.49), Vector3(0.49, 0.02, -0.49),
-		Vector3(0.49, 0.02, 0.49), Vector3(-0.49, 0.02, 0.49),
-		Vector3(-0.49, 0.98, -0.49), Vector3(0.49, 0.98, -0.49),
-		Vector3(0.49, 0.98, 0.49), Vector3(-0.49, 0.98, 0.49)
-	]
-	var edges := [
-		[0, 1], [1, 2], [2, 3], [3, 0],
-		[4, 5], [5, 6], [6, 7], [7, 4],
-		[0, 4], [1, 5], [2, 6], [3, 7]
+	var points := [
+		Vector3(-0.49, 0.012, -0.49), Vector3(0.49, 0.012, -0.49),
+		Vector3(0.49, 0.012, 0.49), Vector3(-0.49, 0.012, 0.49)
 	]
 	lines.surface_begin(Mesh.PRIMITIVE_LINES, slot_material)
-	for edge in edges:
-		lines.surface_add_vertex(corners[edge[0]])
-		lines.surface_add_vertex(corners[edge[1]])
+	for i in range(4):
+		lines.surface_add_vertex(points[i])
+		lines.surface_add_vertex(points[(i + 1) % 4])
 	lines.surface_end()
 	slot_marker.mesh = lines
 

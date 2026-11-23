@@ -1,17 +1,10 @@
 class_name ShelfStorage
 extends Node3D
 
-# Bounds are inclusive, in local GridMap cell coordinates (not meters).
+# Inclusive placement limits in GridMap cell indices.
 @export_category("Placement Bounds (GridMap Cells)")
 @export var min_cell: Vector3i = Vector3i(0, 0, -2)
 @export var max_cell: Vector3i = Vector3i(2, 3, -1)
-
-# Virtual shelf-board height relative to each GridMap layer's base, in meters.
-# By default the plane is 0.2m above the board (roughly bottle mid-height),
-# so looking at the bottle itself also selects the corresponding X/Z slot.
-# Set this to 0 in the Inspector if you prefer aiming at the board surface.
-@export_category("Shelf Aiming")
-@export_range(-0.25, 0.25, 0.005) var board_height_offset: float = 0.20
 
 @onready var grid_map: GridMap = $GridMap
 
@@ -21,12 +14,10 @@ func _enter_tree() -> void:
 
 
 func raycast_cell(world_start: Vector3, world_end: Vector3) -> Dictionary:
-	# Hit a horizontal "virtual shelf board" for each Y layer, then use the
-	# intersection's X/Z coordinates to select a cell in that layer.
-	#
-	# Unlike raycasting 3D cell boxes, the front row CANNOT swallow a ray
-	# aimed at the back row. No physics collider is needed for this selection.
-	if grid_map.mesh_library == null:
+	# Determine Y from the ray at the center of the shelf's depth.
+	# Then intersect only that Y layer's BASE plane to obtain X and Z.
+	# Never search for a lower layer if this layer misses.
+	if grid_map.mesh_library == null or grid_map.cell_center_y:
 		return {}
 
 	var low := Vector3i(
@@ -39,51 +30,48 @@ func raycast_cell(world_start: Vector3, world_end: Vector3) -> Dictionary:
 		maxi(min_cell.y, max_cell.y),
 		maxi(min_cell.z, max_cell.z)
 	)
-
-	# All intersections happen in GridMap coordinates, so rotating/moving
-	# a shelf instance does not change which X/Z cell is selected.
 	var from_local: Vector3 = grid_map.to_local(world_start)
-	var end_local: Vector3 = grid_map.to_local(world_end)
-	var ray_delta: Vector3 = end_local - from_local
-	if absf(ray_delta.y) < 0.00001:
+	var to_local_point: Vector3 = grid_map.to_local(world_end)
+	var delta: Vector3 = to_local_point - from_local
+	var size: Vector3 = grid_map.cell_size
+
+	if size.y <= 0.0 or absf(delta.z) < 0.00001:
 		return {}
 
-	var best_distance: float = INF
-	var best_cell := Vector3i.ZERO
-	var found := false
+	# A vertical reference plane at shelf mid-depth tells us which
+	# Y layer the crosshair is pointing into (not the closest board plane).
+	var first_z: float = grid_map.map_to_local(Vector3i(0, 0, low.z)).z
+	var last_z: float = grid_map.map_to_local(Vector3i(0, 0, high.z)).z
+	var mid_depth: float = (first_z + last_z) * 0.5
+	var t_depth: float = (mid_depth - from_local.z) / delta.z
+	if t_depth < 0.0 or t_depth > 1.0:
+		return {}
 
-	for y in range(low.y, high.y + 1):
-		# map_to_local includes Godot's cell_center_y offset. We need the
-		# bottom/support plane of the item, not the center of its cell.
-		var board_y: float = grid_map.map_to_local(Vector3i(0, y, 0)).y
-		if grid_map.cell_center_y:
-			board_y -= grid_map.cell_size.y * 0.5
-		board_y += board_height_offset
+	# cell_center_y is false, so grid zero Y is the BOTTOM plane.
+	var zero_y: float = grid_map.map_to_local(Vector3i.ZERO).y
+	var y_at_depth: float = from_local.y + t_depth * delta.y
+	var layer: int = floori((y_at_depth - zero_y) / size.y)
+	if layer < low.y or layer > high.y:
+		return {}
 
-		var t: float = (board_y - from_local.y) / ray_delta.y
-		if t < 0.0 or t > 1.0:
-			continue
+	# The same ray now intersects only this layer's actual bottle base.
+	if absf(delta.y) < 0.00001:
+		return {}
+	var base_y: float = grid_map.map_to_local(Vector3i(0, layer, 0)).y
+	var t_board: float = (base_y - from_local.y) / delta.y
+	if t_board < 0.0 or t_board > 1.0:
+		return {}
 
-		var local_hit: Vector3 = from_local + ray_delta * t
-		# Only X and Z come from the ray hit. Y is exactly the board's layer.
-		var mapped: Vector3i = grid_map.local_to_map(local_hit)
-		if mapped.x < low.x or mapped.x > high.x:
-			continue
-		if mapped.z < low.z or mapped.z > high.z:
-			continue
-
-		var hit_distance: float = world_start.distance_to(grid_map.to_global(local_hit))
-		if hit_distance < best_distance:
-			best_distance = hit_distance
-			best_cell = Vector3i(mapped.x, y, mapped.z)
-			found = true
-
-	if not found:
+	var hit_local: Vector3 = from_local + delta * t_board
+	var hit_cell: Vector3i = grid_map.local_to_map(hit_local)
+	if hit_cell.x < low.x or hit_cell.x > high.x:
+		return {}
+	if hit_cell.z < low.z or hit_cell.z > high.z:
 		return {}
 
 	return {
 		"shelf": self,
 		"grid": grid_map,
-		"cell": best_cell,
-		"distance": best_distance
+		"cell": Vector3i(hit_cell.x, layer, hit_cell.z),
+		"distance": world_start.distance_to(grid_map.to_global(hit_local))
 	}
