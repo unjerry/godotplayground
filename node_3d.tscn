@@ -37,8 +37,8 @@
 [ext_resource type="PackedScene" uid="uid://4oo58juenasn" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_025_green.glb" id="35_x6a8j"]
 [ext_resource type="PackedScene" uid="uid://cxg2ebtdhgt2u" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_026_purple.glb" id="36_s7uix"]
 [ext_resource type="PackedScene" uid="uid://dprqj57msvf16" path="res://assets/AmiPolyGon_Potions_Free_Pack/AmiPolyGon_Potions_Free_Pack/GLB/potion_038_yellow.glb" id="37_4hyfj"]
-[ext_resource type="MeshLibrary" uid="uid://n14wy4yxjq4a" path="res://new_mesh_library.tres" id="38_3s0n5"]
-[ext_resource type="PhysicsMaterial" uid="uid://csv8ddclkgemm" path="res://new_physics_material.tres" id="39_qpkl4"]
+[ext_resource type="PackedScene" uid="uid://cuxgx2n2x3u8i" path="res://grid_map.tscn" id="38_qpkl4"]
+[ext_resource type="PackedScene" uid="uid://cgfqsur6rf8di" path="res://bottle.tscn" id="40_g4s1x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_37voa"]
 size = Vector3(11.302017, 0.32128906, 16.183159)
@@ -76,7 +76,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.2760086, 0, 3.0407982)
 shape = SubResource("BoxShape3D_37voa")
 
 [node name="Node3D" type="Node3D" parent="." unique_id=480921631]
-visible = false
 
 [node name="bathroomCabinet" parent="Node3D" unique_id=1838356533 instance=ExtResource("7_dhlwf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.07075536, 0, -1.0736043)
@@ -117,33 +116,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8768405, 0, -0.90026903)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8058002, 0, -1.0548772)
 
 [node name="bookcaseOpenLow" parent="Node3D" unique_id=154745603 instance=ExtResource("20_4i7mf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 0, -2)
 
 [node name="bookcaseOpen" parent="Node3D" unique_id=1338639139 instance=ExtResource("21_3s0n5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.17013812, 0, 0.85666424)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3, 0, -2)
 
 [node name="bookcaseClosedWide" parent="Node3D" unique_id=1986847485 instance=ExtResource("22_qpkl4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7673197, -2.3841858e-07, 0.80737257)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3, 0, -2)
 
 [node name="bookcaseClosedDoors" parent="Node3D" unique_id=1431396364 instance=ExtResource("23_g4s1x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2728386, 0, -0.9855407)
 
 [node name="bookcaseClosed" parent="Node3D" unique_id=58267228 instance=ExtResource("24_pf4ct")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.708837, 0, -2.0577922)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, -2)
 
 [node name="bookcaseClosed2" parent="Node3D" unique_id=80860586 instance=ExtResource("24_pf4ct")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6179644, -2.3841858e-07, 0.7009101)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.70000005, 0, -2)
 
 [node name="bookcaseClosedDoors2" parent="Node3D" unique_id=550341512 instance=ExtResource("23_g4s1x")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9349171, 0, 0.8466141)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.3, 0, -0.6)
 
 [node name="bookcaseClosedWide2" parent="Node3D" unique_id=157192101 instance=ExtResource("22_qpkl4")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.56782126, 2.3841858e-07, 1.3475969)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, -2)
 
 [node name="bookcaseOpen2" parent="Node3D" unique_id=313797195 instance=ExtResource("21_3s0n5")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4703414, 0, 1.3759197)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8, 0, -2)
 
 [node name="bookcaseOpenLow2" parent="Node3D" unique_id=1256934869 instance=ExtResource("20_4i7mf")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5843315, -1.1920929e-07, 0.64936525)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.8, 0, -2)
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1850370951]
 visible = false
@@ -170,6 +170,7 @@ fov = 52.983696
 visible = false
 
 [node name="Node3D2" type="Node3D" parent="." unique_id=763013555]
+visible = false
 
 [node name="potion_003_green2" parent="Node3D2" unique_id=177686528 instance=ExtResource("26_4i7mf")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5240366, 5.9604645e-08, -1.0740952)
@@ -207,11 +208,21 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.20640862, 0, -0.8576635)
 [node name="potion_038_yellow2" parent="Node3D2" unique_id=1985861041 instance=ExtResource("37_4hyfj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2773747, 5.9604645e-08, -1.0101526)
 
-[node name="GridMap" type="GridMap" parent="." unique_id=800662198]
-mesh_library = ExtResource("38_3s0n5")
-physics_material = ExtResource("39_qpkl4")
-cell_size = Vector3(0.2, 0.4, 0.2)
-cell_center_y = false
-data = {
-"cells": PackedInt32Array(65531, 0, 1, 65531, 1, 65, 65531, 2, 65, 65532, 0, 65, 65532, 1, 65, 65532, 2, 65, 65533, 0, 65, 65533, 1, 65, 65533, 2, 65, 65534, 0, 65, 65534, 1, 65, 65534, 2, 65, 65535, 0, 65, 65535, 1, 65, 65535, 2, 65, 65529, 0, 66, 65529, 1, 66, 65529, 2, 66, 65530, 0, 0, 65530, 1, 66, 65530, 2, 66, 65531, 5, 66, 65531, 6, 66, 65531, 7, 66, 65532, 5, 66, 65532, 6, 66, 65532, 7, 66, 65533, 5, 66, 65533, 6, 66, 65533, 7, 66, 65534, 3, 0, 1, 3, 1, 2, 3, 4, 2, 4, 4, 65534, 4, 4, 65535, 3, 4, 65535, 4, 4, 0, 4, 4, 0, 6, 4, 1, 5, 4, 458751, 0, 1, 524292, 0, 1, 589824, 65535, 1, 720896, 3, 1, 786432, 2, 1, 786432, 1, 1, 851968, 0, 1, 851968, 65535, 1, 917504, 65535, 1, 327679, 9, 1, 393215, 9, 1, 393215, 10, 1, 458751, 10, 1, 458751, 11, 1, 524287, 11, 1, 524287, 12, 1, 589823, 12, 1, 589823, 13, 1, 655359, 13, 1, 655359, 14, 1, 720895, 8, 1, 720895, 9, 1, 65528, 0, 0, 65530, 65532, 0, 65529, 65532, 0, 65529, 65531, 0, 65528, 65531, 0)
-}
+[node name="GridMap" parent="." unique_id=1148400618 instance=ExtResource("38_qpkl4")]
+
+[node name="Node3D3" type="Node3D" parent="." unique_id=995167067]
+
+[node name="Bottle" parent="Node3D3" unique_id=1726784657 instance=ExtResource("40_g4s1x")]
+transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0, 1, -1.5492967, 0.58933973, -1.115756)
+
+[node name="Bottle2" parent="Node3D3" unique_id=1739094456 instance=ExtResource("40_g4s1x")]
+transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0, 1, -1.5861086, 0.58933973, -0.8318705)
+
+[node name="Bottle3" parent="Node3D3" unique_id=141131079 instance=ExtResource("40_g4s1x")]
+transform = Transform3D(0.7678152, -0.64067143, 0, 0.64067143, 0.7678152, 0, 0, 0, 1, -1.2615417, 0.8493866, -0.58590084)
+
+[node name="Bottle4" parent="Node3D3" unique_id=786678041 instance=ExtResource("40_g4s1x")]
+transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0, 1, -1.1358775, 0.58933973, -0.7023368)
+
+[node name="Bottle5" parent="Node3D3" unique_id=57202992 instance=ExtResource("40_g4s1x")]
+transform = Transform3D(0.6880354, 0.7256771, 0, -0.7256771, 0.6880354, 0, 0, 0, 1, -1.2061313, 0.58933973, -0.9347163)
