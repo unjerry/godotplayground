@@ -26,6 +26,10 @@ var ghost: MeshInstance3D
 var ghost_item_id: int = -1
 var ghost_materials: Array[StandardMaterial3D] = []
 
+# A slot marker is visible even with an empty inventory. It is not a ground grid.
+var slot_marker: MeshInstance3D
+var slot_material: StandardMaterial3D
+
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -36,7 +40,37 @@ func _ready() -> void:
 	ghost.name = "BottlePlacementGhost"
 	ghost.visible = false
 	ghost.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	get_tree().current_scene.add_child(ghost)
+
+	slot_marker = MeshInstance3D.new()
+	slot_marker.name = "ShelfSlotMarker"
+	slot_marker.visible = false
+	slot_marker.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+
+	# Draw a four-sided thin outline around the hovered GridMap cell.
+	var lines := ImmediateMesh.new()
+	slot_material = StandardMaterial3D.new()
+	slot_material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	slot_material.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	slot_material.no_depth_test = true
+	slot_material.albedo_color = Color(0.2, 0.9, 1.0, 0.95)
+	lines.surface_begin(Mesh.PRIMITIVE_LINES, slot_material)
+	var hx := 0.095
+	var hz := 0.095
+	var points := [
+		Vector3(-hx, 0.025, -hz), Vector3(hx, 0.025, -hz),
+		Vector3(hx, 0.025, hz), Vector3(-hx, 0.025, hz)
+	]
+	for i in range(4):
+		lines.surface_add_vertex(points[i])
+		lines.surface_add_vertex(points[(i + 1) % 4])
+	lines.surface_end()
+	slot_marker.mesh = lines
+
+	# In _ready(), the scene root may still be constructing its children.
+	# Defer both additions to avoid "Parent node is busy setting up children".
+	var root: Node = get_tree().current_scene
+	root.add_child.call_deferred(ghost)
+	root.add_child.call_deferred(slot_marker)
 	_refresh_inventory_text()
 
 
@@ -97,6 +131,7 @@ func _physics_process(delta: float) -> void:
 	# _physics_process, so they work with threaded physics as well.
 	ray.force_raycast_update()
 	_refresh_target()
+	_refresh_slot_marker()
 	_refresh_ghost()
 	_refresh_hint()
 
@@ -183,8 +218,10 @@ func _aimed_shelf_cell(grid: GridMap) -> Variant:
 		grid.to_local(origin + direction * distance)
 	)
 	cell.z = low.z  # Front row first; use the next row when appropriate.
-	if cell.x < low.x or cell.x > high.x or cell.y < low.y or cell.y > high.y:
-		return null
+	# We already hit the shelf collider; clamp near-edge aim to the nearest
+	# usable authored column/row instead of losing the hover completely.
+	cell.x = clampi(cell.x, low.x, high.x)
+	cell.y = clampi(cell.y, low.y, high.y)
 	return cell
 
 
@@ -365,8 +402,43 @@ func _tint_ghost(allowed: bool) -> void:
 		)
 
 
+func _refresh_slot_marker() -> void:
+	slot_marker.visible = false
+	if not slot_marker.is_inside_tree() or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
+		return
+	if target.get("kind", "") != "shelf":
+		return
+
+	var grid: GridMap = target["grid"]
+	var aimed: Vector3i = target["cell"]
+	var cell: Vector3i = aimed
+
+	if inventory.is_empty():
+		# Empty-handed: cyan marks a bottle that can be picked up.
+		var occupied: Variant = _find_shelf_slot(grid, aimed, false)
+		if occupied != null:
+			cell = occupied
+		slot_material.albedo_color = Color(0.15, 0.8, 1.0, 0.95)
+	else:
+		# Carrying: green means an available slot, red means full.
+		var free_slot: Variant = _find_shelf_slot(grid, aimed, true)
+		if free_slot != null:
+			cell = free_slot
+			slot_material.albedo_color = Color(0.2, 1.0, 0.45, 0.95)
+		else:
+			slot_material.albedo_color = Color(1.0, 0.3, 0.3, 0.95)
+
+	slot_marker.global_transform = Transform3D(
+		grid.global_transform.basis,
+		grid.to_global(grid.map_to_local(cell))
+	)
+	slot_marker.visible = true
+
+
 func _refresh_ghost() -> void:
 	ghost.visible = false
+	if not ghost.is_inside_tree():
+		return
 	if inventory.is_empty() or Input.mouse_mode != Input.MOUSE_MODE_CAPTURED:
 		return
 	# A ghost is for storing on a shelf only. Ground bottles are physics bodies.
