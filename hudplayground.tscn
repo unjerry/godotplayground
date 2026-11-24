@@ -58,7 +58,7 @@ visible = false
 [node name="InventoryText" parent="InventoryPanel" index="0" unique_id=245572238]
 visible = false
 
-[node name="Hint" parent="." index="2"]
+[node name="Hint" parent="." index="2" unique_id=1676342293]
 visible = false
 
 [node name="Control" type="Control" parent="." index="4" unique_id=839250092]
@@ -146,6 +146,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Panel" type="Panel" parent="Control" index="6" unique_id=963695359]
+visible = false
 custom_minimum_size = Vector2(200, 125)
 layout_mode = 1
 anchors_preset = 1
@@ -170,10 +171,14 @@ layout_mode = 1
 [node name="BottomLeftSkills" parent="Control" index="9" unique_id=1398050476 instance=ExtResource("9_skills")]
 layout_mode = 1
 
-[node name="TopRightTutorial" parent="Control" index="10" instance=ExtResource("10_tutorial")]
+[node name="TopRightTutorial" parent="Control" index="10" unique_id=1810793567 instance=ExtResource("10_tutorial")]
 layout_mode = 1
+offset_left = -346.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 191.0
 
-[node name="InteractionHint" parent="Control" index="11" instance=ExtResource("11_interaction")]
+[node name="InteractionHint" parent="Control" index="11" unique_id=592518950 instance=ExtResource("11_interaction")]
 layout_mode = 1
 
 [connection signal="close_requested" from="CanvasLayer/Window" to="CanvasLayer/Window" method="_on_close_requested"]

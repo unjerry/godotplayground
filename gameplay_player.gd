@@ -291,37 +291,37 @@ func _refresh_inventory_text() -> void:
 
 
 func _refresh_hint() -> void:
-    var kind: String = target.get("kind", "")
-    if kind == "loose":
-        var bottle: BottleItem = target["bottle"] as BottleItem
-        if is_instance_valid(bottle):
-            if inventory.size() < inventory_capacity:
-                interaction_hint.call("show_action", "E", "拾取药瓶")
-            else:
-                interaction_hint.call("show_notice", "背包已满")
-            return
+	var kind: String = target.get("kind", "")
+	if kind == "loose":
+		var bottle: BottleItem = target["bottle"] as BottleItem
+		if is_instance_valid(bottle):
+			if inventory.size() < inventory_capacity:
+				interaction_hint.call("show_action", "E", "拾取药瓶")
+			else:
+				interaction_hint.call("show_notice", "背包已满")
+			return
 
-    if kind == "shelf":
-        var grid: GridMap = target["grid"]
-        var cell: Vector3i = target["cell"]
-        var occupied: bool = grid.get_cell_item(cell) != GridMap.INVALID_CELL_ITEM
-        if occupied:
-            if inventory.size() < inventory_capacity:
-                interaction_hint.call("show_action", "E", "从货架取回药瓶")
-            else:
-                interaction_hint.call("show_notice", "背包已满")
-        elif not inventory.is_empty():
-            interaction_hint.call("show_action", "左键", "将药瓶放入货架")
-        else:
-            interaction_hint.call("show_notice", "货架空位")
-        return
+	if kind == "shelf":
+		var grid: GridMap = target["grid"]
+		var cell: Vector3i = target["cell"]
+		var occupied: bool = grid.get_cell_item(cell) != GridMap.INVALID_CELL_ITEM
+		if occupied:
+			if inventory.size() < inventory_capacity:
+				interaction_hint.call("show_action", "E", "从货架取回药瓶")
+			else:
+				interaction_hint.call("show_notice", "背包已满")
+		elif not inventory.is_empty():
+			interaction_hint.call("show_action", "左键", "将药瓶放入货架")
+		else:
+			interaction_hint.call("show_notice", "货架空位")
+		return
 
-    if kind == "shelf_miss":
-        interaction_hint.call("show_notice", "请对准货架位置")
-    elif not inventory.is_empty():
-        interaction_hint.call("show_action", "左键", "投掷药瓶")
-    else:
-        interaction_hint.call("hide_prompt")
+	if kind == "shelf_miss":
+		interaction_hint.call("show_notice", "请对准货架位置")
+	elif not inventory.is_empty():
+		interaction_hint.call("show_action", "左键", "投掷药瓶")
+	else:
+		interaction_hint.call("hide_prompt")
 
 func _make_ghost_mesh(item_id: int) -> void:
 	ghost.mesh = null
