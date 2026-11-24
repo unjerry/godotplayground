@@ -1,0 +1,143 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://hud_top_right.gd" id="1_tutorial"]
+
+[sub_resource type="StyleBoxFlat" id="TutorialPanel"]
+bg_color = Color(0.09, 0.063, 0.044, 0.76)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.82, 0.73, 0.59, 0.32)
+shadow_color = Color(0, 0, 0, 0.25)
+shadow_size = 4
+
+[node name="TopRightTutorial" type="Control"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -376.0
+offset_top = 64.0
+offset_right = -30.0
+offset_bottom = 255.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("1_tutorial")
+
+[node name="Backdrop" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("TutorialPanel")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+offset_left = 22.0
+offset_top = 17.0
+offset_right = 326.0
+offset_bottom = 43.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.9, 0.76, 1)
+theme_override_colors/font_outline_color = Color(0.1, 0.06, 0.04, 0.8)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 18
+text = "药剂整理指南"
+
+[node name="TitleRule" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 22.0
+offset_top = 46.0
+offset_right = 324.0
+offset_bottom = 47.0
+mouse_filter = 2
+color = Color(0.83, 0.74, 0.59, 0.48)
+
+[node name="Body" type="Label" parent="."]
+layout_mode = 1
+offset_left = 23.0
+offset_top = 57.0
+offset_right = 322.0
+offset_bottom = 177.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.98, 0.95, 0.87, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.05, 0.035, 0.8)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 14
+text = "捡起散落的魔法药瓶，将它们摆进货架空位。\n\nE  拾取 / 取回\n左键  放置 / 投掷\n滚轮  切换药瓶"
+autowrap_mode = 3
+
+[node name="TopLeftHorizontal" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 22.0
+offset_bottom = 6.0
+mouse_filter = 2
+color = Color(0.91, 0.82, 0.64, 0.96)
+
+[node name="TopLeftVertical" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 6.0
+offset_bottom = 22.0
+mouse_filter = 2
+color = Color(0.91, 0.82, 0.64, 0.96)
+
+[node name="TopRightHorizontal" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 324.0
+offset_top = 4.0
+offset_right = 342.0
+offset_bottom = 6.0
+mouse_filter = 2
+color = Color(0.91, 0.82, 0.64, 0.96)
+
+[node name="TopRightVertical" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 340.0
+offset_top = 4.0
+offset_right = 342.0
+offset_bottom = 22.0
+mouse_filter = 2
+color = Color(0.91, 0.82, 0.64, 0.96)
+
+[node name="BottomLeftHorizontal" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 185.0
+offset_right = 22.0
+offset_bottom = 187.0
+mouse_filter = 2
+color = Color(0.91, 0.82, 0.64, 0.96)
+
+[node name="BottomLeftVertical" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 169.0
+offset_right = 6.0
+offset_bottom = 187.0
+mouse_filter = 2
+color = Color(0.91, 0.82, 0.64, 0.96)
+
+[node name="BottomRightHorizontal" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 324.0
+offset_top = 185.0
+offset_right = 342.0
+offset_bottom = 187.0
+mouse_filter = 2
+color = Color(0.91, 0.82, 0.64, 0.96)
+
+[node name="BottomRightVertical" type="ColorRect" parent="."]
+layout_mode = 1
+offset_left = 340.0
+offset_top = 169.0
+offset_right = 342.0
+offset_bottom = 187.0
+mouse_filter = 2
+color = Color(0.91, 0.82, 0.64, 0.96)
+

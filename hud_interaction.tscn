@@ -1,0 +1,89 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://hud_interaction.gd" id="1_interaction"]
+
+[sub_resource type="StyleBoxFlat" id="PromptPanel"]
+bg_color = Color(0.085, 0.063, 0.05, 0.78)
+content_margin_left = 13.0
+content_margin_top = 6.0
+content_margin_right = 13.0
+content_margin_bottom = 6.0
+
+[sub_resource type="StyleBoxFlat" id="Keycap"]
+bg_color = Color(0.91, 0.89, 0.81, 0.98)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.48, 0.41, 0.3, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+content_margin_left = 5.0
+content_margin_top = 1.0
+content_margin_right = 5.0
+content_margin_bottom = 1.0
+
+[node name="InteractionHint" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -270.0
+offset_top = -21.0
+offset_right = 270.0
+offset_bottom = 21.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_interaction")
+
+[node name="Center" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="PromptPanel" type="PanelContainer" parent="Center"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("PromptPanel")
+
+[node name="Content" type="HBoxContainer" parent="Center/PromptPanel"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Lead" type="Label" parent="Center/PromptPanel/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.98, 0.94, 0.87, 1)
+theme_override_font_sizes/font_size = 16
+text = "按下"
+vertical_alignment = 1
+
+[node name="KeyFrame" type="PanelContainer" parent="Center/PromptPanel/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Keycap")
+
+[node name="Key" type="Label" parent="Center/PromptPanel/Content/KeyFrame"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.16, 0.12, 0.08, 1)
+theme_override_font_sizes/font_size = 14
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Action" type="Label" parent="Center/PromptPanel/Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.98, 0.94, 0.87, 1)
+theme_override_font_sizes/font_size = 16
+text = "拾取药瓶"
+vertical_alignment = 1

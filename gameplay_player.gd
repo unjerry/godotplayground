@@ -14,7 +14,8 @@ const BOTTLE_SCENE = preload("res://bottle.tscn")
 @onready var camera: Camera3D = $Camera3D
 @onready var ray: RayCast3D = $Camera3D/InteractionRay
 @onready var inventory_text: Label = $"../HUD/InventoryPanel/InventoryText"
-@onready var hint_text: Label = $"../HUD/Hint"
+@onready var interaction_hint: Node = $"../HUD2/Control/InteractionHint"
+@onready var carry_hud: Node = $"../HUD2/Control/BottomRightCarry"
 @onready var loose_items: Node3D = $"../LooseItems"
 
 var inventory: Array[int] = []
@@ -285,40 +286,42 @@ func _refresh_inventory_text() -> void:
 	lines.append("LMB  shelf / throw")
 	lines.append("Wheel / 1-8  select")
 	inventory_text.text = "\n".join(lines)
+	# The visible HUD2 counter reflects the actual inventory, not preview numbers.
+	carry_hud.call("set_carry_state", inventory.size(), inventory_capacity)
 
 
 func _refresh_hint() -> void:
-	var kind: String = target.get("kind", "")
-	if kind == "loose":
-		var bottle: BottleItem = target["bottle"] as BottleItem
-		if is_instance_valid(bottle):
-			if inventory.size() < inventory_capacity:
-				hint_text.text = "E  PICK UP  " + _potion_name(bottle.item_id)
-			else:
-				hint_text.text = "INVENTORY FULL"
-			return
+    var kind: String = target.get("kind", "")
+    if kind == "loose":
+        var bottle: BottleItem = target["bottle"] as BottleItem
+        if is_instance_valid(bottle):
+            if inventory.size() < inventory_capacity:
+                interaction_hint.call("show_action", "E", "拾取药瓶")
+            else:
+                interaction_hint.call("show_notice", "背包已满")
+            return
 
-	if kind == "shelf":
-		var grid: GridMap = target["grid"]
-		var cell: Vector3i = target["cell"]
-		var occupied: bool = grid.get_cell_item(cell) != GridMap.INVALID_CELL_ITEM
-		var messages := PackedStringArray()
-		if occupied and inventory.size() < inventory_capacity:
-			messages.append("E  TAKE FROM SHELF")
-		if not occupied and not inventory.is_empty():
-			messages.append("LMB  STORE IN SHELF")
-		if messages.is_empty():
-			messages.append("SHELF SLOT: " + ("OCCUPIED" if occupied else "EMPTY"))
-		hint_text.text = "  |  ".join(messages)
-		return
+    if kind == "shelf":
+        var grid: GridMap = target["grid"]
+        var cell: Vector3i = target["cell"]
+        var occupied: bool = grid.get_cell_item(cell) != GridMap.INVALID_CELL_ITEM
+        if occupied:
+            if inventory.size() < inventory_capacity:
+                interaction_hint.call("show_action", "E", "从货架取回药瓶")
+            else:
+                interaction_hint.call("show_notice", "背包已满")
+        elif not inventory.is_empty():
+            interaction_hint.call("show_action", "左键", "将药瓶放入货架")
+        else:
+            interaction_hint.call("show_notice", "货架空位")
+        return
 
-	if kind == "shelf_miss":
-		hint_text.text = "AIM AT A SHELF SLOT"
-	elif inventory.is_empty():
-		hint_text.text = "E  PICK UP A BOTTLE"
-	else:
-		hint_text.text = "LMB  THROW BOTTLE"
-
+    if kind == "shelf_miss":
+        interaction_hint.call("show_notice", "请对准货架位置")
+    elif not inventory.is_empty():
+        interaction_hint.call("show_action", "左键", "投掷药瓶")
+    else:
+        interaction_hint.call("hide_prompt")
 
 func _make_ghost_mesh(item_id: int) -> void:
 	ghost.mesh = null

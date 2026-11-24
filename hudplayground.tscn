@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://bm3a3wd8ir55p" path="res://hud_top_left.tscn" id="7_top_left"]
 [ext_resource type="PackedScene" path="res://hud_bottom_right.tscn" id="8_carry"]
 [ext_resource type="PackedScene" path="res://hud_bottom_left.tscn" id="9_skills"]
+[ext_resource type="PackedScene" path="res://hud_top_right.tscn" id="10_tutorial"]
+[ext_resource type="PackedScene" path="res://hud_interaction.tscn" id="11_interaction"]
 
 [node name="HUD" unique_id=971297985 instance=ExtResource("1_b52fu")]
 
@@ -54,6 +56,9 @@ title = "sdfsdf"
 visible = false
 
 [node name="InventoryText" parent="InventoryPanel" index="0" unique_id=245572238]
+visible = false
+
+[node name="Hint" parent="." index="2"]
 visible = false
 
 [node name="Control" type="Control" parent="." index="4" unique_id=839250092]
@@ -163,6 +168,12 @@ offset_bottom = 136.0
 layout_mode = 1
 
 [node name="BottomLeftSkills" parent="Control" index="9" unique_id=1398050476 instance=ExtResource("9_skills")]
+layout_mode = 1
+
+[node name="TopRightTutorial" parent="Control" index="10" instance=ExtResource("10_tutorial")]
+layout_mode = 1
+
+[node name="InteractionHint" parent="Control" index="11" instance=ExtResource("11_interaction")]
 layout_mode = 1
 
 [connection signal="close_requested" from="CanvasLayer/Window" to="CanvasLayer/Window" method="_on_close_requested"]
