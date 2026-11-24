@@ -5,7 +5,6 @@
 [ext_resource type="Texture2D" uid="uid://bwr6op3oceo7c" path="res://assets/kenney_furniture-kit/Side/bathtub.png" id="3_6255u"]
 [ext_resource type="Texture2D" uid="uid://cxds7m6hluu2c" path="res://icon.svg" id="5_6255u"]
 [ext_resource type="Texture2D" uid="uid://rfo5n1l0v0ji" path="res://assets/kenney_furniture-kit/Side/dryer.png" id="5_qvxhn"]
-
 [ext_resource type="PackedScene" path="res://hud_top_left.tscn" id="7_top_left"]
 
 [node name="HUD" unique_id=971297985 instance=ExtResource("1_b52fu")]
@@ -65,9 +64,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scroll_offset = Vector2(-40, -40)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="Control" index="1" unique_id=343208185]
+visible = false
 layout_mode = 1
 offset_right = 177.0
 offset_bottom = 70.0
@@ -79,6 +78,7 @@ tint_over = Color(0, 1, 1, 1)
 tint_progress = Color(1, 1, 0, 1)
 
 [node name="ProgressBar" type="ProgressBar" parent="Control" index="2" unique_id=1199792303]
+visible = false
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 1
 offset_right = 4.0
@@ -142,6 +142,6 @@ offset_right = -51.0
 offset_bottom = 171.0
 grow_horizontal = 0
 
-[node name="TopLeftStatus" parent="Control" index="7" instance=ExtResource("7_top_left")]
+[node name="TopLeftStatus" parent="Control" index="7" unique_id=1193780575 instance=ExtResource("7_top_left")]
 
 [connection signal="close_requested" from="CanvasLayer/Window" to="CanvasLayer/Window" method="_on_close_requested"]
