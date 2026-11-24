@@ -1,0 +1,167 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://hud_bottom_right.gd" id="1_carry"]
+
+[node name="BottomRightCarry" type="Control"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -126.0
+offset_top = -108.0
+offset_right = -24.0
+offset_bottom = -18.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_carry")
+
+[node name="BookStack" type="Control" parent="."]
+layout_mode = 1
+offset_left = 33.0
+offset_top = 2.0
+offset_right = 77.0
+offset_bottom = 56.0
+mouse_filter = 2
+
+[node name="Book01Shadow" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 4.0
+offset_right = 37.0
+offset_bottom = 10.0
+mouse_filter = 2
+color = Color(0.1, 0.075, 0.055, 0.78)
+
+[node name="Book01" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 2.0
+offset_right = 35.0
+offset_bottom = 8.0
+mouse_filter = 2
+color = Color(0.95, 0.94, 0.87, 1)
+
+[node name="Book02Shadow" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 37.0
+offset_bottom = 17.0
+mouse_filter = 2
+color = Color(0.1, 0.075, 0.055, 0.78)
+
+[node name="Book02" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 9.0
+offset_right = 35.0
+offset_bottom = 15.0
+mouse_filter = 2
+color = Color(0.95, 0.94, 0.87, 1)
+
+[node name="Book03Shadow" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 18.0
+offset_right = 38.0
+offset_bottom = 24.0
+mouse_filter = 2
+color = Color(0.1, 0.075, 0.055, 0.78)
+
+[node name="Book03" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 16.0
+offset_right = 36.0
+offset_bottom = 22.0
+mouse_filter = 2
+color = Color(0.95, 0.94, 0.87, 1)
+
+[node name="Book04Shadow" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 25.0
+offset_right = 37.0
+offset_bottom = 31.0
+mouse_filter = 2
+color = Color(0.1, 0.075, 0.055, 0.78)
+
+[node name="Book04" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 23.0
+offset_right = 35.0
+offset_bottom = 29.0
+mouse_filter = 2
+color = Color(0.95, 0.94, 0.87, 1)
+
+[node name="Book05Shadow" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 32.0
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+color = Color(0.1, 0.075, 0.055, 0.78)
+
+[node name="Book05" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 30.0
+offset_right = 36.0
+offset_bottom = 36.0
+mouse_filter = 2
+color = Color(0.95, 0.94, 0.87, 1)
+
+[node name="Book06Shadow" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 6.0
+offset_top = 39.0
+offset_right = 37.0
+offset_bottom = 45.0
+mouse_filter = 2
+color = Color(0.1, 0.075, 0.055, 0.78)
+
+[node name="Book06" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 4.0
+offset_top = 37.0
+offset_right = 35.0
+offset_bottom = 43.0
+mouse_filter = 2
+color = Color(0.95, 0.94, 0.87, 1)
+
+[node name="Book07Shadow" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 5.0
+offset_top = 46.0
+offset_right = 38.0
+offset_bottom = 52.0
+mouse_filter = 2
+color = Color(0.1, 0.075, 0.055, 0.78)
+
+[node name="Book07" type="ColorRect" parent="BookStack"]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 44.0
+offset_right = 36.0
+offset_bottom = 50.0
+mouse_filter = 2
+color = Color(0.95, 0.94, 0.87, 1)
+
+[node name="CarryCount" type="Label" parent="."]
+layout_mode = 1
+offset_top = 59.0
+offset_right = 102.0
+offset_bottom = 88.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.97, 0.96, 0.93, 1)
+theme_override_colors/font_outline_color = Color(0.08, 0.045, 0.03, 0.96)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 21
+text = "10/15"
+horizontal_alignment = 1
+vertical_alignment = 1

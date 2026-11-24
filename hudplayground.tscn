@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cxds7m6hluu2c" path="res://icon.svg" id="5_6255u"]
 [ext_resource type="Texture2D" uid="uid://rfo5n1l0v0ji" path="res://assets/kenney_furniture-kit/Side/dryer.png" id="5_qvxhn"]
 [ext_resource type="PackedScene" path="res://hud_top_left.tscn" id="7_top_left"]
+[ext_resource type="PackedScene" path="res://hud_bottom_right.tscn" id="8_carry"]
 
 [node name="HUD" unique_id=971297985 instance=ExtResource("1_b52fu")]
 
@@ -98,6 +99,7 @@ offset_bottom = -339.0
 grow_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="Control" index="4" unique_id=930687321]
+visible = false
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -113,6 +115,7 @@ grow_vertical = 0
 texture = ExtResource("5_6255u")
 
 [node name="Label" type="Label" parent="Control" index="5" unique_id=841937333]
+visible = false
 custom_minimum_size = Vector2(100, 50)
 layout_mode = 1
 anchors_preset = 3
@@ -143,5 +146,7 @@ offset_bottom = 171.0
 grow_horizontal = 0
 
 [node name="TopLeftStatus" parent="Control" index="7" unique_id=1193780575 instance=ExtResource("7_top_left")]
+
+[node name="BottomRightCarry" parent="Control" index="8" instance=ExtResource("8_carry")]
 
 [connection signal="close_requested" from="CanvasLayer/Window" to="CanvasLayer/Window" method="_on_close_requested"]
