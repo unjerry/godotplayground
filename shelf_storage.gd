@@ -7,19 +7,39 @@ extends Node3D
 @export var max_cell: Vector3i = Vector3i(2, 3, -1)
 
 @export_category("Sorting Rules")
+## XZ cell dimensions of one sorting group on each Y layer.
+## Wide shelf = (6, 1); small shelf = (3, 2).
+@export var group_size: Vector2i = Vector2i(6, 1)
 @export var clear_demo_items_on_start: bool = true
-@export_range(1, 12, 1) var bottles_per_row: int = 6
 
-signal row_completed(row_y: int, row_z: int, item_id: int)
+signal group_completed(group_origin: Vector3i, item_id: int)
+
+const INVALID_SLOT := Vector3i(-9999, -9999, -9999)
+const MIXED_GROUP_ITEM := -2
 
 @onready var grid_map: GridMap = $GridMap
-var _awarded_rows: Dictionary = {}
+var _awarded_groups: Dictionary = {}
+
+
+func _enter_tree() -> void:
+	add_to_group("shelf_storage")
 
 
 func _ready() -> void:
-	# Keep editor-designed GridMap decorations; begin gameplay with empty shelves.
+	if not _valid_group_size():
+		push_error("ShelfStorage group_size must have positive X and Z dimensions.")
+		return
+	var bounds: Array[Vector3i] = _ordered_bounds()
+	var low: Vector3i = bounds[0]
+	var high: Vector3i = bounds[1]
+	if (high.x - low.x + 1) % group_size.x != 0 or (high.z - low.z + 1) % group_size.y != 0:
+		push_warning("Shelf bounds do not fit complete groups; leftover cells are not usable.")
 	if clear_demo_items_on_start:
 		grid_map.clear()
+
+
+func _valid_group_size() -> bool:
+	return group_size.x > 0 and group_size.y > 0
 
 
 func _ordered_bounds() -> Array[Vector3i]:
@@ -36,18 +56,35 @@ func contains_cell(cell: Vector3i) -> bool:
 	return cell.x >= low.x and cell.x <= high.x and cell.y >= low.y and cell.y <= high.y and cell.z >= low.z and cell.z <= high.z
 
 
-func row_item_id(row_y: int, row_z: int) -> int:
-	var bounds: Array[Vector3i] = _ordered_bounds()
-	var low: Vector3i = bounds[0]
-	var high: Vector3i = bounds[1]
+func _valid_group_origin(origin: Vector3i) -> bool:
+	if not _valid_group_size() or not contains_cell(origin):
+		return false
+	var high: Vector3i = _ordered_bounds()[1]
+	return origin.x + group_size.x - 1 <= high.x and origin.z + group_size.y - 1 <= high.z
+
+
+func get_group_origin(cell: Vector3i) -> Vector3i:
+	if not contains_cell(cell) or not _valid_group_size():
+		return INVALID_SLOT
+	var low: Vector3i = _ordered_bounds()[0]
+	var group_x: int = floori(float(cell.x - low.x) / float(group_size.x))
+	var group_z: int = floori(float(cell.z - low.z) / float(group_size.y))
+	var origin := Vector3i(low.x + group_x * group_size.x, cell.y, low.z + group_z * group_size.y)
+	return origin if _valid_group_origin(origin) else INVALID_SLOT
+
+
+func _group_item_id(origin: Vector3i) -> int:
+	if not _valid_group_origin(origin):
+		return MIXED_GROUP_ITEM
 	var kind: int = GridMap.INVALID_CELL_ITEM
-	for x in range(low.x, high.x + 1):
-		var item: int = grid_map.get_cell_item(Vector3i(x, row_y, row_z))
-		if item == GridMap.INVALID_CELL_ITEM:
-			continue
-		if kind != GridMap.INVALID_CELL_ITEM and kind != item:
-			return -2  # An old mixed row cannot accept more bottles.
-		kind = item
+	for z in range(origin.z, origin.z + group_size.y):
+		for x in range(origin.x, origin.x + group_size.x):
+			var item: int = grid_map.get_cell_item(Vector3i(x, origin.y, z))
+			if item == GridMap.INVALID_CELL_ITEM:
+				continue
+			if kind != GridMap.INVALID_CELL_ITEM and kind != item:
+				return MIXED_GROUP_ITEM
+			kind = item
 	return kind
 
 
@@ -58,68 +95,70 @@ func can_store(cell: Vector3i, item_id: int) -> bool:
 		return false
 	if grid_map.get_cell_item(cell) != GridMap.INVALID_CELL_ITEM:
 		return false
-	var kind: int = row_item_id(cell.y, cell.z)
+	var origin: Vector3i = get_group_origin(cell)
+	if not _valid_group_origin(origin):
+		return false
+	var kind: int = _group_item_id(origin)
 	return kind == GridMap.INVALID_CELL_ITEM or kind == item_id
+
+
+func _group_is_complete(origin: Vector3i, item_id: int) -> bool:
+	if not _valid_group_origin(origin):
+		return false
+	for z in range(origin.z, origin.z + group_size.y):
+		for x in range(origin.x, origin.x + group_size.x):
+			if grid_map.get_cell_item(Vector3i(x, origin.y, z)) != item_id:
+				return false
+	return true
 
 
 func store_bottle(cell: Vector3i, item_id: int) -> bool:
 	if not can_store(cell, item_id):
 		return false
 	grid_map.set_cell_item(cell, item_id)
-	var row_key := Vector2i(cell.y, cell.z)
-	if not _awarded_rows.has(row_key) and _row_is_complete(cell.y, cell.z, item_id):
-		_awarded_rows[row_key] = true
-		row_completed.emit(cell.y, cell.z, item_id)
+	var origin: Vector3i = get_group_origin(cell)
+	if not _awarded_groups.has(origin) and _group_is_complete(origin, item_id):
+		_awarded_groups[origin] = true
+		group_completed.emit(origin, item_id)
 	return true
 
 
-func _row_is_complete(y: int, z: int, item_id: int) -> bool:
-	var bounds: Array[Vector3i] = _ordered_bounds()
-	var low: Vector3i = bounds[0]
-	var high: Vector3i = bounds[1]
-	if high.x - low.x + 1 != bottles_per_row:
-		return false
-	for x in range(low.x, high.x + 1):
-		if grid_map.get_cell_item(Vector3i(x, y, z)) != item_id:
-			return false
-	return true
-
-
-func find_slot_in_row(item_id: int, row_y: int, row_z: int) -> Vector3i:
-	var bounds: Array[Vector3i] = _ordered_bounds()
-	var low: Vector3i = bounds[0]
-	var high: Vector3i = bounds[1]
-	if row_y < low.y or row_y > high.y or row_z < low.z or row_z > high.z:
-		return Vector3i(-9999, -9999, -9999)
-	for x in range(low.x, high.x + 1):
-		var cell := Vector3i(x, row_y, row_z)
-		if can_store(cell, item_id):
-			return cell
-	return Vector3i(-9999, -9999, -9999)
+func find_slot_in_group(item_id: int, aimed_cell: Vector3i) -> Vector3i:
+	# Only fill the group under the crosshair, including both Z rows on small shelves.
+	var origin: Vector3i = get_group_origin(aimed_cell)
+	if not _valid_group_origin(origin):
+		return INVALID_SLOT
+	for z in range(origin.z, origin.z + group_size.y):
+		for x in range(origin.x, origin.x + group_size.x):
+			var cell := Vector3i(x, origin.y, z)
+			if can_store(cell, item_id):
+				return cell
+	return INVALID_SLOT
 
 
 func find_suitable_slot(item_id: int) -> Vector3i:
-	# Prioritize partially filled rows of this exact potion type.
+	# Finish an existing matching group before starting an empty one.
+	if not _valid_group_size():
+		return INVALID_SLOT
 	var bounds: Array[Vector3i] = _ordered_bounds()
 	var low: Vector3i = bounds[0]
 	var high: Vector3i = bounds[1]
 	for matching_only in [true, false]:
 		for y in range(low.y, high.y + 1):
-			for z in range(low.z, high.z + 1):
-				var row_type: int = row_item_id(y, z)
-				if matching_only and row_type != item_id:
-					continue
-				if not matching_only and row_type != GridMap.INVALID_CELL_ITEM:
-					continue
-				var cell: Vector3i = find_slot_in_row(item_id, y, z)
-				if contains_cell(cell):
-					return cell
-	return Vector3i(-9999, -9999, -9999)
-
-
-
-func _enter_tree() -> void:
-	add_to_group("shelf_storage")
+			for z in range(low.z, high.z + 1, group_size.y):
+				for x in range(low.x, high.x + 1, group_size.x):
+					var origin := Vector3i(x, y, z)
+					if not _valid_group_origin(origin):
+						continue
+					var kind: int = _group_item_id(origin)
+					if matching_only and kind != item_id:
+						continue
+					if not matching_only and kind != GridMap.INVALID_CELL_ITEM:
+						continue
+					var slot: Vector3i = find_slot_in_group(item_id, origin)
+					if contains_cell(slot):
+						return slot
+	return INVALID_SLOT
 
 
 func raycast_cell(world_start: Vector3, world_end: Vector3) -> Dictionary:

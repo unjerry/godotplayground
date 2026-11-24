@@ -28,7 +28,7 @@ const BOTTLE_SCENE = preload("res://bottle.tscn")
 var inventory: Array[int] = []
 var selected_index: int = 0
 var bottles_shelved: int = 0
-var completed_rows: int = 0
+var completed_groups: int = 0
 var skill_levels: Dictionary = {}
 var skill_cooldowns: Dictionary = {}
 var skill_active_times: Dictionary = {}
@@ -95,7 +95,7 @@ func _ready() -> void:
 	for node in get_tree().get_nodes_in_group("shelf_storage"):
 		var shelf: ShelfStorage = node as ShelfStorage
 		if shelf != null:
-			shelf.row_completed.connect(_on_row_completed.bind(shelf))
+			shelf.group_completed.connect(_on_group_completed.bind(shelf))
 	skill_book.connect("skill_upgraded", Callable(self, "_on_skill_upgraded"))
 	for id in ["Sort", "ShelfGuide", "Insight", "AutoStore", "Summon", "Dash", "Jump", "Capacity2", "Capacity3"]:
 		skill_levels[id] = 0
@@ -308,14 +308,14 @@ func _place_selected() -> void:
 
 
 func _refresh_placement_progress() -> void:
-	progress_hud.call("set_progress", completed_rows, 12, bottles_shelved, total_potion_goal)
-	progress_hud.call("set_upgrade_message", "再完成1排（6瓶）即可升级")
+	progress_hud.call("set_progress", completed_groups, 12, bottles_shelved, total_potion_goal)
+	progress_hud.call("set_upgrade_message", "再完成1组（6瓶）即可升级")
 
 
-func _on_row_completed(_y: int, _z: int, _item_id: int, _shelf: ShelfStorage) -> void:
-	completed_rows += 1
+func _on_group_completed(_origin: Vector3i, _item_id: int, _shelf: ShelfStorage) -> void:
+	completed_groups += 1
 	_refresh_placement_progress()
-	var minor_point: int = 1 if completed_rows % 2 == 0 else 0
+	var minor_point: int = 1 if completed_groups % 2 == 0 else 0
 	skill_book.call("open_level_up", 1, minor_point)
 
 
@@ -501,10 +501,10 @@ func _auto_store_one() -> void:
 	if shelf == null:
 		return
 	var aimed_cell: Vector3i = target["cell"]
-	# Act only on the row that is currently under the crosshair.
+	# Act only on the group that is currently under the crosshair.
 	for index in range(inventory.size()):
 		var item_id: int = inventory[index]
-		var destination: Vector3i = shelf.find_slot_in_row(item_id, aimed_cell.y, aimed_cell.z)
+		var destination: Vector3i = shelf.find_slot_in_group(item_id, aimed_cell)
 		if shelf.contains_cell(destination) and shelf.store_bottle(destination, item_id):
 			inventory.remove_at(index)
 			selected_index = mini(selected_index, maxi(0, inventory.size() - 1))

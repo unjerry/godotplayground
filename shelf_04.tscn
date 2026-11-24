@@ -11,6 +11,7 @@ size = Vector3(0.4, 0.84873044, 0.25)
 script = ExtResource("99_storage")
 min_cell = Vector3i(0, 0, -2)
 max_cell = Vector3i(2, 3, -1)
+group_size = Vector2i(3, 2)
 
 [node name="GridMap" parent="." unique_id=1749387713 instance=ExtResource("1_03fkn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.108, 0.257, -0.086)
