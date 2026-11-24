@@ -1,5 +1,5 @@
 extends Control
-## Preview: count of books currently carried by the player.
+## Preview: count of potion bottles currently carried by the player.
 ## Connect to the actual inventory system later.
 
 @export_range(0, 9999, 1) var carried_count: int = 10

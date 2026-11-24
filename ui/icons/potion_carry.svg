@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 64 64">
+  <title>Carried potion bottles</title>
+  <!-- Three original potion silhouettes. Crisp at HUD scale, transparent background. -->
+  <g stroke="#fbf3dc" stroke-linecap="round" stroke-linejoin="round">
+    <g opacity="0.72" stroke-width="1.8">
+      <path d="M7 18h12v5H7z" fill="#e8dbc0"/>
+      <path d="M9 23v7l-4 6v16c0 2.5 2 4 4.5 4h9c2.5 0 4.5-1.5 4.5-4V36l-4-6v-7" fill="#536c63"/>
+      <path d="M7 41h14v11c0 1.2-1 2-2.5 2h-9C8 54 7 53.2 7 52z" fill="#7bc7af" stroke="none"/>
+      <path d="M48 18h11v5H48z" fill="#e8dbc0"/>
+      <path d="M50 23v7l-4 6v16c0 2.5 2 4 4.5 4h7c2.5 0 4.5-1.5 4.5-4V36l-4-6v-7" fill="#57626b"/>
+      <path d="M48 42h12v10c0 1.2-1 2-2.5 2h-7C49 54 48 53.2 48 52z" fill="#b1a3d6" stroke="none"/>
+    </g>
+    <g stroke-width="2.3">
+      <path d="M28 7h9v7h-9z" fill="#cfa776"/>
+      <path d="M29 14v9l-8 9c-1.5 1.6-2.5 3.8-2.5 6v13c0 4.3 2.7 7 7 7h14c4.3 0 7-2.7 7-7V38c0-2.2-1-4.4-2.5-6l-8-9v-9" fill="#37483f"/>
+      <path d="M21.7 40c5 1.1 8.2-2 12.3-1s6.1 2.1 10 1.1V51c0 3-1.6 4.6-4.5 4.6h-14c-2.9 0-4.5-1.6-4.5-4.6V40z" stroke="none" fill="#83cfb8"/>
+      <path d="M23 35.5l8-9" stroke-width="2" opacity="0.7" fill="none"/>
+      <path d="M27 47.5l3.4-4.3 3.4 4.3-3.4 4.2z" stroke-width="1.1" fill="#f8efd9"/>
+      <path d="M31 14h3" stroke-width="1.2" opacity="0.7" fill="none"/>
+    </g>
+  </g>
+</svg>
