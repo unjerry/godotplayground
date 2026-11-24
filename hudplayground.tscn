@@ -50,6 +50,12 @@ title = "sdfsdf"
 oversampling_override = 1.0
 title = "sdfsdf"
 
+[node name="InventoryPanel" parent="." index="1" unique_id=1340866984]
+visible = false
+
+[node name="InventoryText" parent="InventoryPanel" index="0" unique_id=245572238]
+visible = false
+
 [node name="Control" type="Control" parent="." index="4" unique_id=839250092]
 layout_mode = 3
 anchors_preset = 15
@@ -93,10 +99,10 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 206.0
-offset_top = -379.0
-offset_right = 246.0
-offset_bottom = -339.0
+offset_left = 147.0
+offset_top = -227.0
+offset_right = 247.0
+offset_bottom = -127.0
 grow_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="Control" index="4" unique_id=930687321]
@@ -148,11 +154,15 @@ grow_horizontal = 0
 
 [node name="TopLeftStatus" parent="Control" index="7" unique_id=1193780575 instance=ExtResource("7_top_left")]
 layout_mode = 0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 408.0
+offset_bottom = 136.0
 
 [node name="BottomRightCarry" parent="Control" index="8" unique_id=652780418 instance=ExtResource("8_carry")]
 layout_mode = 1
 
-[node name="BottomLeftSkills" parent="Control" index="9" instance=ExtResource("9_skills")]
+[node name="BottomLeftSkills" parent="Control" index="9" unique_id=1398050476 instance=ExtResource("9_skills")]
 layout_mode = 1
 
 [connection signal="close_requested" from="CanvasLayer/Window" to="CanvasLayer/Window" method="_on_close_requested"]
