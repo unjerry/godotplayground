@@ -59,8 +59,9 @@ func _ready() -> void:
 
 
 func _update_scale() -> void:
-    var factor: float = minf(1.0, minf(size.x / 1110.0, size.y / 650.0))
-    book.scale = Vector2.ONE * maxf(0.2, factor)
+    var factor: float = minf(size.x / 1280.0, size.y / 760.0)
+    # Keep the book approximately 80% of a 16:9 viewport, with room for the scene.
+    book.scale = Vector2.ONE * maxf(0.15, factor)
 
 
 func open_level_up(earned_primary: int = 1, earned_secondary: int = 0) -> void:
