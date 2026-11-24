@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://bgm7gr40chxwu" path="res://gameplay_player.gd" id="2_player"]
 [ext_resource type="Script" uid="uid://d1e2wtk7nhjeo" path="res://bottle_spawner.gd" id="3_spawn"]
 [ext_resource type="Environment" uid="uid://ctwx75g5xuj4f" path="res://new_environment.tres" id="4_env"]
+[ext_resource type="PackedScene" uid="uid://bat3setlu2yo6" path="res://hud.tscn" id="5_smepj"]
+[ext_resource type="PackedScene" uid="uid://d0ycqglv1i2lq" path="res://hudplayground.tscn" id="6_cbffv"]
 
 [sub_resource type="BoxShape3D" id="FloorCollision"]
 size = Vector3(12, 0.2, 9)
@@ -68,48 +70,7 @@ fov = 65.0
 [node name="InteractionRay" type="RayCast3D" parent="Player/Camera3D" unique_id=690654990]
 target_position = Vector3(0, 0, -4.5)
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1131469484]
+[node name="HUD" parent="." unique_id=971297985 instance=ExtResource("5_smepj")]
+visible = false
 
-[node name="InventoryPanel" type="PanelContainer" parent="HUD" unique_id=819359166]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 18.0
-offset_top = -295.0
-offset_right = 314.0
-offset_bottom = -18.0
-
-[node name="InventoryText" type="Label" parent="HUD/InventoryPanel" unique_id=367087856]
-custom_minimum_size = Vector2(275, 250)
-layout_mode = 2
-theme_override_font_sizes/font_size = 16
-text = "BOTTLES 0 / 8"
-
-[node name="Hint" type="Label" parent="HUD" unique_id=1422990743]
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -230.0
-offset_top = -106.0
-offset_right = 230.0
-offset_bottom = -62.0
-theme_override_font_sizes/font_size = 17
-text = "E: pick up | LMB: shelf / throw"
-horizontal_alignment = 1
-
-[node name="Crosshair" type="Label" parent="HUD" unique_id=677681833]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -13.0
-offset_top = -22.0
-offset_right = 13.0
-offset_bottom = 22.0
-theme_override_font_sizes/font_size = 28
-text = "+"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="HUD2" parent="." unique_id=754715997 instance=ExtResource("6_cbffv")]
