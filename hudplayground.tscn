@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://rfo5n1l0v0ji" path="res://assets/kenney_furniture-kit/Side/dryer.png" id="5_qvxhn"]
 [ext_resource type="PackedScene" uid="uid://bm3a3wd8ir55p" path="res://hud_top_left.tscn" id="7_top_left"]
 [ext_resource type="PackedScene" path="res://hud_bottom_right.tscn" id="8_carry"]
+[ext_resource type="PackedScene" path="res://hud_bottom_left.tscn" id="9_skills"]
 
 [node name="HUD" unique_id=971297985 instance=ExtResource("1_b52fu")]
 
@@ -149,6 +150,9 @@ grow_horizontal = 0
 layout_mode = 0
 
 [node name="BottomRightCarry" parent="Control" index="8" unique_id=652780418 instance=ExtResource("8_carry")]
+layout_mode = 1
+
+[node name="BottomLeftSkills" parent="Control" index="9" instance=ExtResource("9_skills")]
 layout_mode = 1
 
 [connection signal="close_requested" from="CanvasLayer/Window" to="CanvasLayer/Window" method="_on_close_requested"]

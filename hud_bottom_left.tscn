@@ -1,0 +1,487 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://hud_bottom_left.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_dash.svg" id="2_icon"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_jump.svg" id="3_icon"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_guide.svg" id="4_icon"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_insight.svg" id="5_icon"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_auto_store.svg" id="6_icon"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_summon.svg" id="7_icon"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_skill"]
+bg_color = Color(0.065, 0.052, 0.043, 0.78)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.84, 0.77, 0.63, 0.80)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+shadow_color = Color(0, 0, 0, 0.3)
+shadow_size = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_key"]
+bg_color = Color(0.055, 0.042, 0.034, 0.85)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.70, 0.63, 0.52, 0.72)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="BottomLeftSkills" type="Control"]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 22.0
+offset_top = -151.0
+offset_right = 206.0
+offset_bottom = -22.0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("1_script")
+
+[node name="Dash" type="Control" parent="."]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 42.0
+offset_bottom = 58.0
+mouse_filter = 2
+tooltip_text = "冲刺 · LShift"
+
+[node name="Frame" type="Panel" parent="Dash"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skill")
+
+[node name="Icon" type="TextureRect" parent="Dash/Frame"]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("2_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CooldownMask" type="ColorRect" parent="Dash/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+color = Color(0.03, 0.025, 0.02, 0.73)
+
+[node name="CooldownText" type="Label" parent="Dash/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.035, 0.025, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyFrame" type="Panel" parent="Dash"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 43.0
+offset_right = 41.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
+
+[node name="KeyLabel" type="Label" parent="Dash/KeyFrame"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 15.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.95, 0.90, 0.81, 1)
+theme_override_colors/font_outline_color = Color(0.07, 0.05, 0.035, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 8
+text = "LShift"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Jump" type="Control" parent="."]
+layout_mode = 1
+offset_left = 46.0
+offset_top = 0.0
+offset_right = 88.0
+offset_bottom = 58.0
+mouse_filter = 2
+tooltip_text = "跳跃 · Space"
+
+[node name="Frame" type="Panel" parent="Jump"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skill")
+
+[node name="Icon" type="TextureRect" parent="Jump/Frame"]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("3_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CooldownMask" type="ColorRect" parent="Jump/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+color = Color(0.03, 0.025, 0.02, 0.73)
+
+[node name="CooldownText" type="Label" parent="Jump/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.035, 0.025, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyFrame" type="Panel" parent="Jump"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 43.0
+offset_right = 41.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
+
+[node name="KeyLabel" type="Label" parent="Jump/KeyFrame"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 15.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.95, 0.90, 0.81, 1)
+theme_override_colors/font_outline_color = Color(0.07, 0.05, 0.035, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 8
+text = "Space"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShelfGuide" type="Control" parent="."]
+layout_mode = 1
+offset_left = 0.0
+offset_top = 65.0
+offset_right = 42.0
+offset_bottom = 123.0
+mouse_filter = 2
+tooltip_text = "货架指引 · 2"
+
+[node name="Frame" type="Panel" parent="ShelfGuide"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skill")
+
+[node name="Icon" type="TextureRect" parent="ShelfGuide/Frame"]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("4_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CooldownMask" type="ColorRect" parent="ShelfGuide/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+color = Color(0.03, 0.025, 0.02, 0.73)
+
+[node name="CooldownText" type="Label" parent="ShelfGuide/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.035, 0.025, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyFrame" type="Panel" parent="ShelfGuide"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 43.0
+offset_right = 41.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
+
+[node name="KeyLabel" type="Label" parent="ShelfGuide/KeyFrame"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 15.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.95, 0.90, 0.81, 1)
+theme_override_colors/font_outline_color = Color(0.07, 0.05, 0.035, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 10
+text = "2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Insight" type="Control" parent="."]
+layout_mode = 1
+offset_left = 46.0
+offset_top = 65.0
+offset_right = 88.0
+offset_bottom = 123.0
+mouse_filter = 2
+tooltip_text = "洞察之眼 · 3"
+
+[node name="Frame" type="Panel" parent="Insight"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skill")
+
+[node name="Icon" type="TextureRect" parent="Insight/Frame"]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("5_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CooldownMask" type="ColorRect" parent="Insight/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+color = Color(0.03, 0.025, 0.02, 0.73)
+
+[node name="CooldownText" type="Label" parent="Insight/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.035, 0.025, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyFrame" type="Panel" parent="Insight"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 43.0
+offset_right = 41.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
+
+[node name="KeyLabel" type="Label" parent="Insight/KeyFrame"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 15.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.95, 0.90, 0.81, 1)
+theme_override_colors/font_outline_color = Color(0.07, 0.05, 0.035, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 10
+text = "3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AutoStore" type="Control" parent="."]
+layout_mode = 1
+offset_left = 92.0
+offset_top = 65.0
+offset_right = 134.0
+offset_bottom = 123.0
+mouse_filter = 2
+tooltip_text = "自动上架 · 4"
+
+[node name="Frame" type="Panel" parent="AutoStore"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skill")
+
+[node name="Icon" type="TextureRect" parent="AutoStore/Frame"]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("6_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CooldownMask" type="ColorRect" parent="AutoStore/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+color = Color(0.03, 0.025, 0.02, 0.73)
+
+[node name="CooldownText" type="Label" parent="AutoStore/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.035, 0.025, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyFrame" type="Panel" parent="AutoStore"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 43.0
+offset_right = 41.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
+
+[node name="KeyLabel" type="Label" parent="AutoStore/KeyFrame"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 15.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.95, 0.90, 0.81, 1)
+theme_override_colors/font_outline_color = Color(0.07, 0.05, 0.035, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 10
+text = "4"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Summon" type="Control" parent="."]
+layout_mode = 1
+offset_left = 138.0
+offset_top = 65.0
+offset_right = 180.0
+offset_bottom = 123.0
+mouse_filter = 2
+tooltip_text = "手到擒来 · 5"
+
+[node name="Frame" type="Panel" parent="Summon"]
+layout_mode = 1
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_skill")
+
+[node name="Icon" type="TextureRect" parent="Summon/Frame"]
+layout_mode = 1
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 35.0
+offset_bottom = 35.0
+mouse_filter = 2
+texture = ExtResource("7_icon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CooldownMask" type="ColorRect" parent="Summon/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+color = Color(0.03, 0.025, 0.02, 0.73)
+
+[node name="CooldownText" type="Label" parent="Summon/Frame"]
+visible = false
+layout_mode = 1
+offset_right = 38.0
+offset_bottom = 38.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.8, 1)
+theme_override_colors/font_outline_color = Color(0.05, 0.035, 0.025, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 13
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="KeyFrame" type="Panel" parent="Summon"]
+layout_mode = 1
+offset_left = 1.0
+offset_top = 43.0
+offset_right = 41.0
+offset_bottom = 58.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
+
+[node name="KeyLabel" type="Label" parent="Summon/KeyFrame"]
+layout_mode = 1
+offset_right = 40.0
+offset_bottom = 15.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.95, 0.90, 0.81, 1)
+theme_override_colors/font_outline_color = Color(0.07, 0.05, 0.035, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 10
+text = "5"
+horizontal_alignment = 1
+vertical_alignment = 1
+
