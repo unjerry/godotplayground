@@ -6,6 +6,8 @@ const POTIONS = preload("res://new_mesh_library.tres")
 
 @export_range(0, 600, 1) var bottle_count: int = 20
 @export var random_seed: int = 20261123
+@export_range(1, 20, 1) var batch_size: int = 6
+@export_range(0, 255, 1) var first_type_index: int = 1
 
 
 func _ready() -> void:
@@ -17,14 +19,14 @@ func _ready() -> void:
 
 	for i in range(bottle_count):
 		var bottle: BottleItem = BOTTLE_SCENE.instantiate() as BottleItem
-		bottle.item_id = ids[i % ids.size()]
+		bottle.item_id = ids[(first_type_index + floori(float(i) / float(batch_size))) % ids.size()]
 		add_child(bottle)
 
 		# A few staggered rows fall into an untidy pile on the floor.
-		var row: int = floori(float(i) / 5.0)
-		var column: int = i % 5
+		var row: int = floori(float(i) / float(batch_size))
+		var column: int = i % batch_size
 		bottle.position = Vector3(
-			(float(column) - 2.0) * 0.22 + rng.randf_range(-0.04, 0.04),
+			(float(column) - float(batch_size - 1) * 0.5) * 0.22 + rng.randf_range(-0.04, 0.04),
 			0.7 + float(row) * 0.42,
 			rng.randf_range(-0.3, 0.3)
 		)
