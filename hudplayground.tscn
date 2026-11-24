@@ -181,8 +181,16 @@ offset_bottom = 191.0
 
 [node name="InteractionHint" parent="Control" index="11" unique_id=592518950 instance=ExtResource("11_interaction")]
 layout_mode = 1
+anchors_preset = 7
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -163.0
+offset_bottom = -121.0
+grow_vertical = 0
+pivot_offset = Vector2(270, 0)
 
-[node name="SkillBook" parent="Control" index="12" instance=ExtResource("12_skill_book")]
+[node name="SkillBook" parent="Control" index="12" unique_id=1306320432 instance=ExtResource("12_skill_book")]
+visible = false
 layout_mode = 1
 
 [connection signal="close_requested" from="CanvasLayer/Window" to="CanvasLayer/Window" method="_on_close_requested"]
