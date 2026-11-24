@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="620" viewBox="0 0 1080 620">
+<defs>
+ <linearGradient id="leather" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#6d3f21"/><stop offset=".4" stop-color="#372117"/><stop offset="1" stop-color="#1c1411"/></linearGradient>
+ <linearGradient id="paperL" x1="0" y1="0" x2="1" y2=".2"><stop stop-color="#b98049"/><stop offset=".08" stop-color="#e3bd85"/><stop offset=".24" stop-color="#f4daa8"/><stop offset=".76" stop-color="#f9e4bc"/><stop offset="1" stop-color="#d5a873"/></linearGradient>
+ <linearGradient id="paperR" x1="0" y1="0" x2="1" y2=".2"><stop stop-color="#c3945b"/><stop offset=".07" stop-color="#f0d2a2"/><stop offset=".65" stop-color="#f6dfb6"/><stop offset=".95" stop-color="#e5bf8c"/><stop offset="1" stop-color="#b98249"/></linearGradient>
+ <linearGradient id="crease" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#a2734a" stop-opacity=".06"/><stop offset=".38" stop-color="#684326" stop-opacity=".66"/><stop offset=".53" stop-color="#fff6d7" stop-opacity=".24"/><stop offset=".9" stop-color="#825936" stop-opacity=".32"/><stop offset="1" stop-color="#ba905f" stop-opacity=".08"/></linearGradient>
+ <linearGradient id="blue" x1="0" y1="0" x2="1" y2=".7"><stop stop-color="#244d72"/><stop offset=".45" stop-color="#315f91"/><stop offset="1" stop-color="#173852"/></linearGradient>
+</defs>
+<!-- Outer leather book, page edges, two sheets and central fold. All text and icons are actual Godot Controls. -->
+<path d="M34 50Q25 48 19 57L15 574Q15 592 35 595L527 608Q541 613 549 604Q558 613 572 608L1043 595Q1063 594 1064 577L1060 55Q1052 45 1035 48Q791 27 551 48Q310 27 34 50Z" fill="#15100e" opacity=".45"/>
+<path d="M25 49Q20 43 15 57L13 577Q17 594 36 598L525 605Q541 613 549 607Q564 614 580 606L1040 599Q1063 594 1067 578L1062 51Q1050 42 1039 50L553 43L533 43Z" fill="url(#leather)" stroke="#ae8048" stroke-width="3"/>
+<path d="M40 55Q245 40 518 54Q538 61 543 69L542 587Q533 593 520 590Q268 576 44 591Z" fill="#b88c52" stroke="#65452a" stroke-width="3"/>
+<path d="M559 68Q566 54 581 53Q819 38 1037 55L1040 588Q818 576 578 592Q563 592 554 587Z" fill="#bc9057" stroke="#65452a" stroke-width="3"/>
+<path d="M47 48Q275 26 511 53Q528 56 540 70L540 582Q524 583 509 580Q282 562 48 587Q37 568 43 65Z" fill="url(#paperL)" stroke="#95653c" stroke-width="2"/>
+<path d="M547 72Q563 55 578 53Q821 26 1034 49Q1046 54 1042 69L1040 584Q813 563 582 581Q563 583 546 589Z" fill="url(#paperR)" stroke="#95653c" stroke-width="2"/>
+<path d="M521 54Q543 62 547 78L550 589Q536 565 519 580L519 67Z" fill="url(#crease)" opacity=".95"/>
+<path d="M548 72Q558 57 572 54L573 580Q558 571 551 593Z" fill="url(#crease)"/>
+<!-- Page inner double rules -->
+<path d="M77 75Q280 54 495 76L509 92L509 558L490 566Q268 550 79 567L64 552L64 96Z" fill="none" stroke="#a17645" stroke-width="2.3" opacity=".88"/>
+<path d="M89 89Q274 71 482 87L495 100L495 544Q276 537 91 554L79 542L79 104Z" fill="none" stroke="#b9925b" stroke-width=".9" opacity=".72"/>
+<path d="M597 77Q813 52 1006 75L1024 97L1024 552L1007 565Q817 551 594 565L578 548L578 94Z" fill="none" stroke="#a17645" stroke-width="2.3" opacity=".88"/>
+<path d="M610 89Q813 73 992 88L1009 102L1009 542Q812 538 611 552L592 541L592 104Z" fill="none" stroke="#b9925b" stroke-width=".9" opacity=".72"/>
+<!-- Corners: hand-made stylized botanical / magical filigree -->
+<g stroke="#986333" fill="none" stroke-width="2" opacity=".77">
+<path d="M89 107l-13-27 30 12m-11-2 12 24m375-11 17-25-30 13m12-2-12 25"/>
+<path d="M89 535l-13 27 30-12m-11 2 12-24m375 11 17 25-30-13m12 2-12-25"/>
+<path d="M609 108l-16-25 30 12m-12-3 13 21m371-6 16-25-28 12m10-3-12 24"/>
+<path d="M609 530l-16 27 29-11m-12 3 14-22m371 4 16 27-28-11m10 1-12-21"/>
+</g>
+<g fill="#c39c67" opacity=".65">
+<path d="M88 88l22 3-16 16zM480 88l-22 3 16 16zM88 550l22-3-16-16zM480 550l-22-3 16-16z"/>
+<path d="M611 90l22 2-16 16zM993 89l-22 3 16 16zM611 550l22-3-16-16zM993 550l-22-3 16-16z"/>
+</g>
+<!-- A cloth bookmark for our potion guild -->
+<path d="M237 23Q278 18 318 23V138L278 114L237 138Z" fill="url(#blue)" stroke="#15344a" stroke-width="3"/>
+<path d="M243 27L311 27V125L278 105L243 125Z" fill="none" stroke="#9fc0d6" stroke-width="1.5" opacity=".6"/>
+<circle cx="278" cy="65" r="27" fill="none" stroke="#f5e8d1" stroke-width="2"/>
+<circle cx="278" cy="65" r="21" fill="none" stroke="#f5e8d1" stroke-width=".9" opacity=".75"/>
+<path d="M263 76H294M267 54h8v6l-3 4v10h-6V64l2-4zM282 50h8v6l-2 4v14h-6V60l2-4z" fill="#f7ead8" stroke="#f7ead8" stroke-width="1"/>
+<path d="M278 31l3 8-3 8-3-8zM249 65l7 3-7 3-7-3zM307 65l7 3-7 3-7-3z" fill="#f8eddf"/>
+<!-- Gem frame on right detail page -->
+<path d="M818 116l53-43 53 43 32 52-32 53-53 41-53-41-34-53z" fill="#aa783a" stroke="#513622" stroke-width="4"/>
+<path d="M824 123l47-40 47 40 28 45-28 46-47 37-47-37-29-46z" fill="#342c27" stroke="#edc477" stroke-width="2.5"/>
+<rect x="816" y="114" width="110" height="108" rx="1" fill="#282423" stroke="#edc477" stroke-width="3"/>
+<rect x="825" y="123" width="92" height="90" fill="none" stroke="#aa783a" stroke-width="1.5"/>
+<path d="M866 100l5-8 5 8-5 8zM866 233l5-8 5 8-5 8z" fill="#edc477"/>
+<!-- Gentle paper footer flourishes -->
+<g stroke="#ad834d" stroke-width="1.3" fill="none" opacity=".72">
+<path d="M151 578q65-9 126-2t124 2M696 578q76-11 137-3t118 2"/>
+<path d="M274 576l5-5 5 5-5 5zM828 576l5-5 5 5-5 5z"/>
+</g>
+</svg>

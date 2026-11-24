@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://hud_bottom_left.tscn" id="9_skills"]
 [ext_resource type="PackedScene" path="res://hud_top_right.tscn" id="10_tutorial"]
 [ext_resource type="PackedScene" path="res://hud_interaction.tscn" id="11_interaction"]
+[ext_resource type="PackedScene" path="res://hud_skill_book.tscn" id="12_skill_book"]
 
 [node name="HUD" unique_id=971297985 instance=ExtResource("1_b52fu")]
 
@@ -179,6 +180,9 @@ offset_right = 0.0
 offset_bottom = 191.0
 
 [node name="InteractionHint" parent="Control" index="11" unique_id=592518950 instance=ExtResource("11_interaction")]
+layout_mode = 1
+
+[node name="SkillBook" parent="Control" index="12" instance=ExtResource("12_skill_book")]
 layout_mode = 1
 
 [connection signal="close_requested" from="CanvasLayer/Window" to="CanvasLayer/Window" method="_on_close_requested"]

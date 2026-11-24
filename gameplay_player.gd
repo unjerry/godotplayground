@@ -10,16 +10,21 @@ const BOTTLE_SCENE = preload("res://bottle.tscn")
 @export_range(1, 20, 1) var inventory_capacity: int = 8
 @export var reach: float = 4.5
 @export var throw_speed: float = 4.0
+@export_range(1, 100, 1) var preview_placements_per_level: int = 10
 
 @onready var camera: Camera3D = $Camera3D
 @onready var ray: RayCast3D = $Camera3D/InteractionRay
 @onready var inventory_text: Label = $"../HUD/InventoryPanel/InventoryText"
 @onready var interaction_hint: Node = $"../HUD2/Control/InteractionHint"
 @onready var carry_hud: Node = $"../HUD2/Control/BottomRightCarry"
+@onready var skill_book: Control = $"../HUD2/Control/SkillBook"
+@onready var progress_hud: Control = $"../HUD2/Control/TopLeftStatus"
 @onready var loose_items: Node3D = $"../LooseItems"
 
 var inventory: Array[int] = []
 var selected_index: int = 0
+var bottles_shelved: int = 0
+var preview_levels_earned: int = 0
 var target: Dictionary = {}
 
 var ghost: MeshInstance3D
@@ -71,6 +76,7 @@ func _ready() -> void:
 	root.add_child.call_deferred(ghost)
 	root.add_child.call_deferred(slot_marker)
 	_refresh_inventory_text()
+	_refresh_placement_progress()
 
 
 func _input(event: InputEvent) -> void:
@@ -234,6 +240,8 @@ func _place_selected() -> void:
 		if grid.mesh_library == null or not grid.mesh_library.get_item_list().has(item_id):
 			return
 		grid.set_cell_item(cell, item_id)
+		bottles_shelved += 1
+		_refresh_placement_progress()
 	elif kind == "shelf_miss":
 		return
 	else:
@@ -245,6 +253,20 @@ func _place_selected() -> void:
 	else:
 		selected_index = mini(selected_index, inventory.size() - 1)
 	_refresh_inventory_text()
+
+
+
+func _refresh_placement_progress() -> void:
+	# Temporary level-up trigger until we implement series/row correctness.
+	# Only successful shelf placement counts; throwing never increases progress.
+	var next_level: int = floori(float(bottles_shelved) / float(preview_placements_per_level))
+	progress_hud.call("set_progress", next_level, 400, bottles_shelved, 3072)
+	var left: int = preview_placements_per_level - (bottles_shelved % preview_placements_per_level)
+	progress_hud.call("set_upgrade_message", "再上架%d瓶药剂可升级" % left)
+	if next_level > preview_levels_earned:
+		var earned: int = next_level - preview_levels_earned
+		preview_levels_earned = next_level
+		skill_book.call("open_level_up", earned, 0)
 
 
 func _throw_bottle(item_id: int) -> void:

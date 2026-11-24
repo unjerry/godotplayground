@@ -1,0 +1,721 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://hud_skill_book.gd" id="1_controller"]
+[ext_resource type="Texture2D" path="res://ui/upgrade_book.svg" id="2_book"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_sort.svg" id="3_sort"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_guide.svg" id="4_guide"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_insight.svg" id="5_insight"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_auto_store.svg" id="6_auto"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_summon.svg" id="7_summon"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_dash.svg" id="8_dash"]
+[ext_resource type="Texture2D" path="res://ui/icons/skill_jump.svg" id="9_jump"]
+[ext_resource type="Texture2D" path="res://ui/icons/potion_carry.svg" id="10_carry"]
+
+[sub_resource type="StyleBoxFlat" id="SkillTile"]
+bg_color = Color(0.13, 0.11, 0.095, 0.97)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.48, 0.36, 0.23, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="SkillTileHover"]
+bg_color = Color(0.25, 0.20, 0.14, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.87, 0.66, 0.35, 1)
+
+[sub_resource type="StyleBoxFlat" id="UpgradeTile"]
+bg_color = Color(0.20, 0.15, 0.105, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.71, 0.50, 0.28, 1)
+content_margin_left = 14.0
+content_margin_top = 8.0
+content_margin_right = 14.0
+content_margin_bottom = 8.0
+
+[node name="SkillBook" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+process_mode = 3
+script = ExtResource("1_controller")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 0
+color = Color(0.02, 0.015, 0.012, 0.76)
+
+[node name="Book" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -540.0
+offset_top = -310.0
+offset_right = 540.0
+offset_bottom = 310.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="BookIllustration" type="TextureRect" parent="Book"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+texture = ExtResource("2_book")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="BookTitle" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 180.0
+offset_top = 135.0
+offset_right = 392.0
+offset_bottom = 187.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 36
+text = "技能"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="BookSubtitle" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 179.0
+offset_top = 184.0
+offset_right = 393.0
+offset_bottom = 214.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 20
+text = "Level Up!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="BookTagline" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 136.0
+offset_top = 213.0
+offset_right = 448.0
+offset_bottom = 239.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "提升整理魔法等级以提高效率"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="PrimaryPoints" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 90.0
+offset_top = 258.0
+offset_right = 515.0
+offset_bottom = 290.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 20
+text = "主要魔法   ↑ 1 点数"
+horizontal_alignment = 0
+vertical_alignment = 1
+
+
+[node name="PrimaryLine" type="ColorRect" parent="Book"]
+layout_mode = 1
+offset_left = 90.0
+offset_top = 298.0
+offset_right = 504.0
+offset_bottom = 300.0
+mouse_filter = 2
+color = Color(0.56, 0.36, 0.21, 0.57)
+
+[node name="SecondaryPoints" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 90.0
+offset_top = 435.0
+offset_right = 515.0
+offset_bottom = 467.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 19
+text = "次要魔法   ↑ 1 点数"
+horizontal_alignment = 0
+vertical_alignment = 1
+
+
+[node name="SecondaryLine" type="ColorRect" parent="Book"]
+layout_mode = 1
+offset_left = 90.0
+offset_top = 472.0
+offset_right = 504.0
+offset_bottom = 474.0
+mouse_filter = 2
+color = Color(0.56, 0.36, 0.21, 0.57)
+
+[node name="SkillSort" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 90.0
+offset_top = 313.0
+offset_right = 164.0
+offset_bottom = 387.0
+mouse_filter = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "排列"
+
+[node name="Icon" type="TextureRect" parent="Book/SkillSort"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 66.0
+offset_bottom = 65.0
+mouse_filter = 2
+texture = ExtResource("3_sort")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.96, 0.88, 1)
+
+[node name="LevelSort" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 90.0
+offset_top = 390.0
+offset_right = 164.0
+offset_bottom = 412.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "Lv.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="SkillShelfGuide" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 175.0
+offset_top = 313.0
+offset_right = 249.0
+offset_bottom = 387.0
+mouse_filter = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "货架指引"
+
+[node name="Icon" type="TextureRect" parent="Book/SkillShelfGuide"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 66.0
+offset_bottom = 65.0
+mouse_filter = 2
+texture = ExtResource("4_guide")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.96, 0.88, 1)
+
+[node name="LevelShelfGuide" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 175.0
+offset_top = 390.0
+offset_right = 249.0
+offset_bottom = 412.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "Lv.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="SkillInsight" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 260.0
+offset_top = 313.0
+offset_right = 334.0
+offset_bottom = 387.0
+mouse_filter = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "洞察之眼"
+
+[node name="Icon" type="TextureRect" parent="Book/SkillInsight"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 66.0
+offset_bottom = 65.0
+mouse_filter = 2
+texture = ExtResource("5_insight")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.96, 0.88, 1)
+
+[node name="LevelInsight" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 260.0
+offset_top = 390.0
+offset_right = 334.0
+offset_bottom = 412.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "Lv.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="SkillAutoStore" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 345.0
+offset_top = 313.0
+offset_right = 419.0
+offset_bottom = 387.0
+mouse_filter = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "自动上架"
+
+[node name="Icon" type="TextureRect" parent="Book/SkillAutoStore"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 66.0
+offset_bottom = 65.0
+mouse_filter = 2
+texture = ExtResource("6_auto")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.96, 0.88, 1)
+
+[node name="LevelAutoStore" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 345.0
+offset_top = 390.0
+offset_right = 419.0
+offset_bottom = 412.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "Lv.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="SkillSummon" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 430.0
+offset_top = 313.0
+offset_right = 504.0
+offset_bottom = 387.0
+mouse_filter = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "手到擒来"
+
+[node name="Icon" type="TextureRect" parent="Book/SkillSummon"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 66.0
+offset_bottom = 65.0
+mouse_filter = 2
+texture = ExtResource("7_summon")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.96, 0.88, 1)
+
+[node name="LevelSummon" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 430.0
+offset_top = 390.0
+offset_right = 504.0
+offset_bottom = 412.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "Lv.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="SkillDash" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 94.0
+offset_top = 482.0
+offset_right = 159.0
+offset_bottom = 547.0
+mouse_filter = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "快速移动"
+
+[node name="Icon" type="TextureRect" parent="Book/SkillDash"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 57.0
+offset_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource("8_dash")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.96, 0.88, 1)
+
+[node name="LevelDash" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 94.0
+offset_top = 550.0
+offset_right = 159.0
+offset_bottom = 572.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "Lv.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="SkillJump" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 188.0
+offset_top = 482.0
+offset_right = 253.0
+offset_bottom = 547.0
+mouse_filter = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "跳跃强化"
+
+[node name="Icon" type="TextureRect" parent="Book/SkillJump"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 57.0
+offset_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource("9_jump")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.96, 0.88, 1)
+
+[node name="LevelJump" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 188.0
+offset_top = 550.0
+offset_right = 253.0
+offset_bottom = 572.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "Lv.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="SkillCapacity2" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 282.0
+offset_top = 482.0
+offset_right = 347.0
+offset_bottom = 547.0
+mouse_filter = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "携带容量 +2"
+
+[node name="Icon" type="TextureRect" parent="Book/SkillCapacity2"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 57.0
+offset_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource("10_carry")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.96, 0.88, 1)
+
+[node name="Number" type="Label" parent="Book/SkillCapacity2"]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 53.0
+offset_bottom = 47.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.06, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 24
+text = "+2"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelCapacity2" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 282.0
+offset_top = 550.0
+offset_right = 347.0
+offset_bottom = 572.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "Lv.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="SkillCapacity3" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 376.0
+offset_top = 482.0
+offset_right = 441.0
+offset_bottom = 547.0
+mouse_filter = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "携带容量 +3"
+
+[node name="Icon" type="TextureRect" parent="Book/SkillCapacity3"]
+layout_mode = 1
+offset_left = 8.0
+offset_top = 7.0
+offset_right = 57.0
+offset_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource("10_carry")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(1, 0.96, 0.88, 1)
+
+[node name="Number" type="Label" parent="Book/SkillCapacity3"]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 53.0
+offset_bottom = 47.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.78, 1)
+theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.06, 1)
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 24
+text = "+3"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LevelCapacity3" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 376.0
+offset_top = 550.0
+offset_right = 441.0
+offset_bottom = 572.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 14
+text = "Lv.0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="DetailIcon" type="TextureRect" parent="Book"]
+layout_mode = 1
+offset_left = 832.0
+offset_top = 130.0
+offset_right = 910.0
+offset_bottom = 208.0
+mouse_filter = 2
+texture = ExtResource("6_auto")
+expand_mode = 1
+stretch_mode = 5
+modulate = Color(0.96, 0.86, 0.70, 1)
+
+[node name="DetailTitle" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 640.0
+offset_top = 253.0
+offset_right = 1050.0
+offset_bottom = 296.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 30
+text = "自动上架"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="DetailLevel" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 656.0
+offset_top = 294.0
+offset_right = 1036.0
+offset_bottom = 323.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 20
+text = "✦  Lv.0  ✦"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
+[node name="DetailLine" type="ColorRect" parent="Book"]
+layout_mode = 1
+offset_left = 634.0
+offset_top = 327.0
+offset_right = 1037.0
+offset_bottom = 329.0
+mouse_filter = 2
+color = Color(0.57, 0.34, 0.17, 0.57)
+
+[node name="DetailDescription" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 638.0
+offset_top = 341.0
+offset_right = 1032.0
+offset_bottom = 453.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.29, 0.19, 0.12, 1)
+theme_override_font_sizes/font_size = 18
+text = "激活后，自动将手中匹配的药剂瓶\n放到准星所指的药架中。\n只对类型匹配且有空位的药架生效。"
+autowrap_mode = 3
+vertical_alignment = 1
+
+[node name="DetailCooldown" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 642.0
+offset_top = 458.0
+offset_right = 1030.0
+offset_bottom = 487.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 18
+text = "· 冷却时间：100 秒"
+horizontal_alignment = 0
+vertical_alignment = 1
+
+
+[node name="DetailDuration" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 642.0
+offset_top = 489.0
+offset_right = 1030.0
+offset_bottom = 518.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 18
+text = "· 持续时间：10 秒"
+horizontal_alignment = 0
+vertical_alignment = 1
+
+
+[node name="UpgradeButton" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 727.0
+offset_top = 534.0
+offset_right = 1017.0
+offset_bottom = 577.0
+mouse_filter = 0
+text = "消耗 1 点 · 升级"
+theme_override_font_sizes/font_size = 21
+theme_override_colors/font_color = Color(0.96, 0.87, 0.69, 1)
+theme_override_colors/font_disabled_color = Color(0.71, 0.63, 0.49, 1)
+theme_override_styles/normal = SubResource("UpgradeTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/disabled = SubResource("UpgradeTile")
+
+[node name="CloseButton" type="Button" parent="Book"]
+layout_mode = 1
+offset_left = 1004.0
+offset_top = 48.0
+offset_right = 1038.0
+offset_bottom = 80.0
+mouse_filter = 0
+text = "×"
+theme_override_font_sizes/font_size = 26
+theme_override_colors/font_color = Color(0.40, 0.24, 0.13, 1)
+theme_override_styles/normal = SubResource("UpgradeTile")
+theme_override_styles/hover = SubResource("SkillTileHover")
+focus_mode = 0
+tooltip_text = "关闭 (Esc)"
+
+[node name="FootHint" type="Label" parent="Book"]
+layout_mode = 1
+offset_left = 644.0
+offset_top = 583.0
+offset_right = 1013.0
+offset_bottom = 606.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
+theme_override_font_sizes/font_size = 13
+text = "U 预览升级   ·   Esc 关闭"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+
