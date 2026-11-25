@@ -83,7 +83,6 @@
 [ext_resource type="PackedScene" uid="uid://dtq05sou662lf" path="res://assets/kenney_factory-kit_3.0/Models/GLB format/lever-single.glb" id="81_olpsi"]
 [ext_resource type="PackedScene" uid="uid://c4pnvq605gqxs" path="res://assets/kenney_factory-kit_3.0/Models/GLB format/machine-bed.glb" id="82_fg2c5"]
 [ext_resource type="PackedScene" uid="uid://c3d4rwf3v31jm" path="res://assets/kenney_factory-kit_3.0/Models/GLB format/machine-connection-hole.glb" id="83_b8101"]
-[ext_resource type="PackedScene" uid="uid://ds3yy6tqntfyp" path="res://assets/kenney_factory-kit_3.0/Models/GLB format/machine-connection-pipe.glb" id="84_ii2wv"]
 [ext_resource type="PackedScene" uid="uid://df4j8emwi1kcd" path="res://assets/kenney_factory-kit_3.0/Models/GLB format/machine-fortified.glb" id="85_qelgn"]
 [ext_resource type="PackedScene" uid="uid://8wwr0mx3nm8m" path="res://assets/kenney_factory-kit_3.0/Models/GLB format/machine-window-bar.glb" id="86_rhrbh"]
 [ext_resource type="PackedScene" uid="uid://bh48c7vsv6vm6" path="res://assets/kenney_factory-kit_3.0/Models/GLB format/machine-window.glb" id="87_8t7j6"]
@@ -375,9 +374,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4, 0, -16.800001)
 
 [node name="machine-connection-hole2" parent="machine" unique_id=561385982 instance=ExtResource("83_b8101")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 0, -16.1)
-
-[node name="machine-connection-pipe2" parent="machine" unique_id=1775365820 instance=ExtResource("84_ii2wv")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 0, -16)
 
 [node name="machine-fortified2" parent="machine" unique_id=1476936895 instance=ExtResource("85_qelgn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.900001, 0, -16)
