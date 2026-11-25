@@ -62,7 +62,7 @@ script = ExtResource("2_tjt74")
 bottle_count = 66
 
 [node name="Player" parent="." unique_id=333179156 instance=ExtResource("3_eqbms")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.1, -2.8)
+transform = Transform3D(0.49999997, 0, 0.86602545, 0, 1, 0, -0.86602545, 0, 0.49999997, 5.4, 0.1, 9.6)
 mouse_sensitivity = 0.004
 
 [node name="HUD" parent="." unique_id=971297985 instance=ExtResource("4_xgy1x")]
