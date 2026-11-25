@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://ojhf0t6dx8wv"]
+
+[ext_resource type="PackedScene" uid="uid://unwgl8qvwsyy" path="res://assets/nashas_cozy_3d_haunted_library_v1.0/Nashas_Cozy_3D_Haunted_Library/Blender/Nashas_Cozy_Haunted_Library.blend" id="1_wr3y0"]
+
+[node name="Nashas_Cozy_Haunted_Library" unique_id=2084183452 instance=ExtResource("1_wr3y0")]

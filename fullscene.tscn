@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://dittwa8t1m7i3"]
+
+[ext_resource type="PackedScene" uid="uid://cy1aw0d7ulutl" path="res://assets/nashas_cozy_3d_haunted_library_v1.0/Nashas_Cozy_3D_Haunted_Library/Blender/nashas_cozy_haunted_library.tscn" id="1_euton"]
+[ext_resource type="PackedScene" uid="uid://c673gdmssw1vd" path="res://player.tscn" id="2_rgnfw"]
+
+[node name="Node3D" type="Node3D" unique_id=704365039]
+
+[node name="Nashas_Cozy_Haunted_Library" parent="." unique_id=931376252 instance=ExtResource("1_euton")]
+
+[node name="Player" parent="." unique_id=333179156 instance=ExtResource("2_rgnfw")]

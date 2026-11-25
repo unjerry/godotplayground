@@ -1,16 +1,21 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://7gt3r8eyhqnh"]
 
-[ext_resource type="Script" path="res://hud_skill_book.gd" id="1_controller"]
-[ext_resource type="Texture2D" path="res://ui/upgrade_book.svg" id="2_book"]
-[ext_resource type="Texture2D" path="res://ui/icons/skill_sort.svg" id="3_sort"]
-[ext_resource type="Texture2D" path="res://ui/icons/skill_guide.svg" id="4_guide"]
-[ext_resource type="Texture2D" path="res://ui/icons/skill_insight.svg" id="5_insight"]
-[ext_resource type="Texture2D" path="res://ui/icons/skill_auto_store.svg" id="6_auto"]
-[ext_resource type="Texture2D" path="res://ui/icons/skill_summon.svg" id="7_summon"]
-[ext_resource type="Texture2D" path="res://ui/icons/skill_dash.svg" id="8_dash"]
-[ext_resource type="Texture2D" path="res://ui/icons/skill_jump.svg" id="9_jump"]
-[ext_resource type="Texture2D" path="res://ui/icons/potion_carry.svg" id="10_carry"]
-[ext_resource type="Shader" path="res://ui/shaders/skill_book_blur.gdshader" id="11_blur"]
+[ext_resource type="Script" uid="uid://cexm2yein18vw" path="res://hud_skill_book.gd" id="1_controller"]
+[ext_resource type="Texture2D" uid="uid://cw7mljxl2rt0j" path="res://ui/upgrade_book.svg" id="2_book"]
+[ext_resource type="Texture2D" uid="uid://dnvk0gr6xm42n" path="res://ui/icons/skill_sort.svg" id="3_sort"]
+[ext_resource type="Texture2D" uid="uid://6u0osv5n4us3" path="res://ui/icons/skill_guide.svg" id="4_guide"]
+[ext_resource type="Texture2D" uid="uid://b07f4oa566w04" path="res://ui/icons/skill_insight.svg" id="5_insight"]
+[ext_resource type="Texture2D" uid="uid://m852u41hag14" path="res://ui/icons/skill_auto_store.svg" id="6_auto"]
+[ext_resource type="Texture2D" uid="uid://b2apbqaum58m2" path="res://ui/icons/skill_summon.svg" id="7_summon"]
+[ext_resource type="Texture2D" uid="uid://bi4wop3xenrer" path="res://ui/icons/skill_dash.svg" id="8_dash"]
+[ext_resource type="Texture2D" uid="uid://cj35eawlam0kv" path="res://ui/icons/skill_jump.svg" id="9_jump"]
+[ext_resource type="Texture2D" uid="uid://cre2m4u0g8y04" path="res://ui/icons/potion_carry.svg" id="10_carry"]
+[ext_resource type="Shader" uid="uid://c3xueej84nb0" path="res://ui/shaders/skill_book_blur.gdshader" id="11_blur"]
+
+[sub_resource type="ShaderMaterial" id="BlurMaterial"]
+shader = ExtResource("11_blur")
+shader_parameter/blur_lod = 2.4
+shader_parameter/warm_veil = Color(0.12, 0.073, 0.047, 0.35)
 
 [sub_resource type="StyleBoxFlat" id="SkillTile"]
 bg_color = Color(0.13, 0.11, 0.095, 0.97)
@@ -25,7 +30,7 @@ corner_radius_bottom_right = 2
 corner_radius_bottom_left = 2
 
 [sub_resource type="StyleBoxFlat" id="SkillTileHover"]
-bg_color = Color(0.25, 0.20, 0.14, 1)
+bg_color = Color(0.25, 0.2, 0.14, 1)
 border_width_left = 2
 border_width_top = 2
 border_width_right = 2
@@ -33,41 +38,37 @@ border_width_bottom = 2
 border_color = Color(0.87, 0.66, 0.35, 1)
 
 [sub_resource type="StyleBoxFlat" id="UpgradeTile"]
-bg_color = Color(0.20, 0.15, 0.105, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.71, 0.50, 0.28, 1)
 content_margin_left = 14.0
 content_margin_top = 8.0
 content_margin_right = 14.0
 content_margin_bottom = 8.0
+bg_color = Color(0.2, 0.15, 0.105, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.71, 0.5, 0.28, 1)
 
-[sub_resource type="ShaderMaterial" id="BlurMaterial"]
-shader = ExtResource("11_blur")
-
-[node name="SkillBook" type="Control"]
+[node name="SkillBook" type="Control" unique_id=840082000]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-mouse_filter = 0
-process_mode = 3
 script = ExtResource("1_controller")
 
-[node name="Dimmer" type="ColorRect" parent="."]
+[node name="Dimmer" type="ColorRect" parent="." unique_id=599049743]
+material = SubResource("BlurMaterial")
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-mouse_filter = 0
-material = SubResource("BlurMaterial")
-color = Color(1, 1, 1, 1)
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Book" type="Control" parent="."]
+[node name="Book" type="Control" parent="." unique_id=39240888]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -82,77 +83,70 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 
-[node name="BookIllustration" type="TextureRect" parent="Book"]
+[node name="BookIllustration" type="TextureRect" parent="Book" unique_id=1007507878]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 mouse_filter = 2
 texture = ExtResource("2_book")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="BookTitle" type="Label" parent="Book"]
+[node name="BookTitle" type="Label" parent="Book" unique_id=851497784]
 layout_mode = 1
 offset_left = 180.0
 offset_top = 135.0
 offset_right = 392.0
 offset_bottom = 187.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 36
 text = "技能"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="BookSubtitle" type="Label" parent="Book"]
+[node name="BookSubtitle" type="Label" parent="Book" unique_id=484333189]
 layout_mode = 1
 offset_left = 179.0
 offset_top = 184.0
 offset_right = 393.0
 offset_bottom = 214.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 20
 text = "Level Up!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="BookTagline" type="Label" parent="Book"]
+[node name="BookTagline" type="Label" parent="Book" unique_id=797266021]
 layout_mode = 1
 offset_left = 136.0
 offset_top = 213.0
 offset_right = 448.0
 offset_bottom = 239.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 13
 text = "提升整理魔法等级以提高效率"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="PrimaryPoints" type="Label" parent="Book"]
+[node name="PrimaryPoints" type="Label" parent="Book" unique_id=1875817308]
 layout_mode = 1
 offset_left = 90.0
 offset_top = 258.0
 offset_right = 515.0
 offset_bottom = 290.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 20
 text = "主要魔法   ↑ 1 点数"
-horizontal_alignment = 0
 vertical_alignment = 1
 
-
-[node name="PrimaryLine" type="ColorRect" parent="Book"]
+[node name="PrimaryLine" type="ColorRect" parent="Book" unique_id=1330743916]
 layout_mode = 1
 offset_left = 90.0
 offset_top = 298.0
@@ -161,22 +155,19 @@ offset_bottom = 300.0
 mouse_filter = 2
 color = Color(0.56, 0.36, 0.21, 0.57)
 
-[node name="SecondaryPoints" type="Label" parent="Book"]
+[node name="SecondaryPoints" type="Label" parent="Book" unique_id=1365469149]
 layout_mode = 1
 offset_left = 90.0
 offset_top = 435.0
 offset_right = 515.0
 offset_bottom = 467.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 19
 text = "次要魔法   ↑ 1 点数"
-horizontal_alignment = 0
 vertical_alignment = 1
 
-
-[node name="SecondaryLine" type="ColorRect" parent="Book"]
+[node name="SecondaryLine" type="ColorRect" parent="Book" unique_id=1364330986]
 layout_mode = 1
 offset_left = 90.0
 offset_top = 472.0
@@ -185,21 +176,21 @@ offset_bottom = 474.0
 mouse_filter = 2
 color = Color(0.56, 0.36, 0.21, 0.57)
 
-[node name="SkillSort" type="Button" parent="Book"]
+[node name="SkillSort" type="Button" parent="Book" unique_id=830324610]
 layout_mode = 1
 offset_left = 90.0
 offset_top = 313.0
 offset_right = 164.0
 offset_bottom = 387.0
-mouse_filter = 0
-theme_override_styles/normal = SubResource("SkillTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
-theme_override_styles/pressed = SubResource("SkillTileHover")
-theme_override_styles/focus = SubResource("SkillTileHover")
-focus_mode = 0
 tooltip_text = "排列"
+focus_mode = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
 
-[node name="Icon" type="TextureRect" parent="Book/SkillSort"]
+[node name="Icon" type="TextureRect" parent="Book/SkillSort" unique_id=652736934]
+modulate = Color(1, 0.96, 0.88, 1)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 7.0
@@ -209,38 +200,35 @@ mouse_filter = 2
 texture = ExtResource("3_sort")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(1, 0.96, 0.88, 1)
 
-[node name="LevelSort" type="Label" parent="Book"]
+[node name="LevelSort" type="Label" parent="Book" unique_id=1916617042]
 layout_mode = 1
 offset_left = 90.0
 offset_top = 390.0
 offset_right = 164.0
 offset_bottom = 412.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 14
 text = "Lv.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="SkillShelfGuide" type="Button" parent="Book"]
+[node name="SkillShelfGuide" type="Button" parent="Book" unique_id=1973190934]
 layout_mode = 1
 offset_left = 175.0
 offset_top = 313.0
 offset_right = 249.0
 offset_bottom = 387.0
-mouse_filter = 0
-theme_override_styles/normal = SubResource("SkillTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
-theme_override_styles/pressed = SubResource("SkillTileHover")
-theme_override_styles/focus = SubResource("SkillTileHover")
-focus_mode = 0
 tooltip_text = "货架指引"
+focus_mode = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
 
-[node name="Icon" type="TextureRect" parent="Book/SkillShelfGuide"]
+[node name="Icon" type="TextureRect" parent="Book/SkillShelfGuide" unique_id=133012224]
+modulate = Color(1, 0.96, 0.88, 1)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 7.0
@@ -250,38 +238,35 @@ mouse_filter = 2
 texture = ExtResource("4_guide")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(1, 0.96, 0.88, 1)
 
-[node name="LevelShelfGuide" type="Label" parent="Book"]
+[node name="LevelShelfGuide" type="Label" parent="Book" unique_id=1423145986]
 layout_mode = 1
 offset_left = 175.0
 offset_top = 390.0
 offset_right = 249.0
 offset_bottom = 412.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 14
 text = "Lv.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="SkillInsight" type="Button" parent="Book"]
+[node name="SkillInsight" type="Button" parent="Book" unique_id=1950760369]
 layout_mode = 1
 offset_left = 260.0
 offset_top = 313.0
 offset_right = 334.0
 offset_bottom = 387.0
-mouse_filter = 0
-theme_override_styles/normal = SubResource("SkillTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
-theme_override_styles/pressed = SubResource("SkillTileHover")
-theme_override_styles/focus = SubResource("SkillTileHover")
-focus_mode = 0
 tooltip_text = "洞察之眼"
+focus_mode = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
 
-[node name="Icon" type="TextureRect" parent="Book/SkillInsight"]
+[node name="Icon" type="TextureRect" parent="Book/SkillInsight" unique_id=1541433445]
+modulate = Color(1, 0.96, 0.88, 1)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 7.0
@@ -291,38 +276,35 @@ mouse_filter = 2
 texture = ExtResource("5_insight")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(1, 0.96, 0.88, 1)
 
-[node name="LevelInsight" type="Label" parent="Book"]
+[node name="LevelInsight" type="Label" parent="Book" unique_id=2146812894]
 layout_mode = 1
 offset_left = 260.0
 offset_top = 390.0
 offset_right = 334.0
 offset_bottom = 412.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 14
 text = "Lv.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="SkillAutoStore" type="Button" parent="Book"]
+[node name="SkillAutoStore" type="Button" parent="Book" unique_id=405949183]
 layout_mode = 1
 offset_left = 345.0
 offset_top = 313.0
 offset_right = 419.0
 offset_bottom = 387.0
-mouse_filter = 0
-theme_override_styles/normal = SubResource("SkillTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
-theme_override_styles/pressed = SubResource("SkillTileHover")
-theme_override_styles/focus = SubResource("SkillTileHover")
-focus_mode = 0
 tooltip_text = "自动上架"
+focus_mode = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
 
-[node name="Icon" type="TextureRect" parent="Book/SkillAutoStore"]
+[node name="Icon" type="TextureRect" parent="Book/SkillAutoStore" unique_id=1685587231]
+modulate = Color(1, 0.96, 0.88, 1)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 7.0
@@ -332,38 +314,35 @@ mouse_filter = 2
 texture = ExtResource("6_auto")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(1, 0.96, 0.88, 1)
 
-[node name="LevelAutoStore" type="Label" parent="Book"]
+[node name="LevelAutoStore" type="Label" parent="Book" unique_id=1092601461]
 layout_mode = 1
 offset_left = 345.0
 offset_top = 390.0
 offset_right = 419.0
 offset_bottom = 412.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 14
 text = "Lv.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="SkillSummon" type="Button" parent="Book"]
+[node name="SkillSummon" type="Button" parent="Book" unique_id=2119024251]
 layout_mode = 1
 offset_left = 430.0
 offset_top = 313.0
 offset_right = 504.0
 offset_bottom = 387.0
-mouse_filter = 0
-theme_override_styles/normal = SubResource("SkillTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
-theme_override_styles/pressed = SubResource("SkillTileHover")
-theme_override_styles/focus = SubResource("SkillTileHover")
-focus_mode = 0
 tooltip_text = "手到擒来"
+focus_mode = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
 
-[node name="Icon" type="TextureRect" parent="Book/SkillSummon"]
+[node name="Icon" type="TextureRect" parent="Book/SkillSummon" unique_id=914212171]
+modulate = Color(1, 0.96, 0.88, 1)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 7.0
@@ -373,38 +352,35 @@ mouse_filter = 2
 texture = ExtResource("7_summon")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(1, 0.96, 0.88, 1)
 
-[node name="LevelSummon" type="Label" parent="Book"]
+[node name="LevelSummon" type="Label" parent="Book" unique_id=405791391]
 layout_mode = 1
 offset_left = 430.0
 offset_top = 390.0
 offset_right = 504.0
 offset_bottom = 412.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 14
 text = "Lv.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="SkillDash" type="Button" parent="Book"]
+[node name="SkillDash" type="Button" parent="Book" unique_id=1284677250]
 layout_mode = 1
 offset_left = 108.0
 offset_top = 476.0
 offset_right = 165.0
 offset_bottom = 533.0
-mouse_filter = 0
-theme_override_styles/normal = SubResource("SkillTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
-theme_override_styles/pressed = SubResource("SkillTileHover")
-theme_override_styles/focus = SubResource("SkillTileHover")
-focus_mode = 0
 tooltip_text = "快速移动"
+focus_mode = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
 
-[node name="Icon" type="TextureRect" parent="Book/SkillDash"]
+[node name="Icon" type="TextureRect" parent="Book/SkillDash" unique_id=2108782784]
+modulate = Color(1, 0.96, 0.88, 1)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 7.0
@@ -414,38 +390,35 @@ mouse_filter = 2
 texture = ExtResource("8_dash")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(1, 0.96, 0.88, 1)
 
-[node name="LevelDash" type="Label" parent="Book"]
+[node name="LevelDash" type="Label" parent="Book" unique_id=26053004]
 layout_mode = 1
 offset_left = 108.0
 offset_top = 536.0
 offset_right = 165.0
 offset_bottom = 558.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 14
 text = "Lv.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="SkillJump" type="Button" parent="Book"]
+[node name="SkillJump" type="Button" parent="Book" unique_id=2110247883]
 layout_mode = 1
 offset_left = 200.0
 offset_top = 476.0
 offset_right = 257.0
 offset_bottom = 533.0
-mouse_filter = 0
-theme_override_styles/normal = SubResource("SkillTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
-theme_override_styles/pressed = SubResource("SkillTileHover")
-theme_override_styles/focus = SubResource("SkillTileHover")
-focus_mode = 0
 tooltip_text = "跳跃强化"
+focus_mode = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
 
-[node name="Icon" type="TextureRect" parent="Book/SkillJump"]
+[node name="Icon" type="TextureRect" parent="Book/SkillJump" unique_id=1436766258]
+modulate = Color(1, 0.96, 0.88, 1)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 7.0
@@ -455,38 +428,35 @@ mouse_filter = 2
 texture = ExtResource("9_jump")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(1, 0.96, 0.88, 1)
 
-[node name="LevelJump" type="Label" parent="Book"]
+[node name="LevelJump" type="Label" parent="Book" unique_id=1266119966]
 layout_mode = 1
 offset_left = 200.0
 offset_top = 536.0
 offset_right = 257.0
 offset_bottom = 558.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 14
 text = "Lv.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="SkillCapacity2" type="Button" parent="Book"]
+[node name="SkillCapacity2" type="Button" parent="Book" unique_id=103646895]
 layout_mode = 1
 offset_left = 292.0
 offset_top = 476.0
 offset_right = 349.0
 offset_bottom = 533.0
-mouse_filter = 0
-theme_override_styles/normal = SubResource("SkillTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
-theme_override_styles/pressed = SubResource("SkillTileHover")
-theme_override_styles/focus = SubResource("SkillTileHover")
-focus_mode = 0
 tooltip_text = "携带容量 +2"
+focus_mode = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
 
-[node name="Icon" type="TextureRect" parent="Book/SkillCapacity2"]
+[node name="Icon" type="TextureRect" parent="Book/SkillCapacity2" unique_id=1123864425]
+modulate = Color(1, 0.96, 0.88, 1)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 7.0
@@ -496,15 +466,13 @@ mouse_filter = 2
 texture = ExtResource("10_carry")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(1, 0.96, 0.88, 1)
 
-[node name="Number" type="Label" parent="Book/SkillCapacity2"]
+[node name="Number" type="Label" parent="Book/SkillCapacity2" unique_id=613241293]
 layout_mode = 1
 offset_left = 12.0
 offset_top = 16.0
 offset_right = 45.0
 offset_bottom = 42.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 0.94, 0.78, 1)
 theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.06, 1)
 theme_override_constants/outline_size = 3
@@ -513,36 +481,34 @@ text = "+2"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelCapacity2" type="Label" parent="Book"]
+[node name="LevelCapacity2" type="Label" parent="Book" unique_id=2138310903]
 layout_mode = 1
 offset_left = 292.0
 offset_top = 536.0
 offset_right = 349.0
 offset_bottom = 558.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 14
 text = "Lv.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="SkillCapacity3" type="Button" parent="Book"]
+[node name="SkillCapacity3" type="Button" parent="Book" unique_id=2106814835]
 layout_mode = 1
 offset_left = 384.0
 offset_top = 476.0
 offset_right = 441.0
 offset_bottom = 533.0
-mouse_filter = 0
-theme_override_styles/normal = SubResource("SkillTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
-theme_override_styles/pressed = SubResource("SkillTileHover")
-theme_override_styles/focus = SubResource("SkillTileHover")
-focus_mode = 0
 tooltip_text = "携带容量 +3"
+focus_mode = 0
+theme_override_styles/normal = SubResource("SkillTile")
+theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
+theme_override_styles/focus = SubResource("SkillTileHover")
 
-[node name="Icon" type="TextureRect" parent="Book/SkillCapacity3"]
+[node name="Icon" type="TextureRect" parent="Book/SkillCapacity3" unique_id=536300384]
+modulate = Color(1, 0.96, 0.88, 1)
 layout_mode = 1
 offset_left = 8.0
 offset_top = 7.0
@@ -552,15 +518,13 @@ mouse_filter = 2
 texture = ExtResource("10_carry")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(1, 0.96, 0.88, 1)
 
-[node name="Number" type="Label" parent="Book/SkillCapacity3"]
+[node name="Number" type="Label" parent="Book/SkillCapacity3" unique_id=1957558212]
 layout_mode = 1
 offset_left = 12.0
 offset_top = 16.0
 offset_right = 45.0
 offset_bottom = 42.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 0.94, 0.78, 1)
 theme_override_colors/font_outline_color = Color(0.12, 0.09, 0.06, 1)
 theme_override_constants/outline_size = 3
@@ -569,22 +533,21 @@ text = "+3"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="LevelCapacity3" type="Label" parent="Book"]
+[node name="LevelCapacity3" type="Label" parent="Book" unique_id=213378937]
 layout_mode = 1
 offset_left = 384.0
 offset_top = 536.0
 offset_right = 441.0
 offset_bottom = 558.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 14
 text = "Lv.0"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="DetailIcon" type="TextureRect" parent="Book"]
+[node name="DetailIcon" type="TextureRect" parent="Book" unique_id=720411999]
+modulate = Color(0.96, 0.86, 0.7, 1)
 layout_mode = 1
 offset_left = 832.0
 offset_top = 130.0
@@ -594,39 +557,34 @@ mouse_filter = 2
 texture = ExtResource("6_auto")
 expand_mode = 1
 stretch_mode = 5
-modulate = Color(0.96, 0.86, 0.70, 1)
 
-[node name="DetailTitle" type="Label" parent="Book"]
+[node name="DetailTitle" type="Label" parent="Book" unique_id=171486657]
 layout_mode = 1
 offset_left = 640.0
 offset_top = 253.0
 offset_right = 1050.0
 offset_bottom = 296.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 30
 text = "自动上架"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="DetailLevel" type="Label" parent="Book"]
+[node name="DetailLevel" type="Label" parent="Book" unique_id=1340983002]
 layout_mode = 1
 offset_left = 656.0
 offset_top = 294.0
 offset_right = 1036.0
 offset_bottom = 323.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 20
 text = "✦  Lv.0  ✦"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-
-[node name="DetailLine" type="ColorRect" parent="Book"]
+[node name="DetailLine" type="ColorRect" parent="Book" unique_id=858271657]
 layout_mode = 1
 offset_left = 634.0
 offset_top = 327.0
@@ -635,7 +593,7 @@ offset_bottom = 329.0
 mouse_filter = 2
 color = Color(0.57, 0.34, 0.17, 0.57)
 
-[node name="DetailDescription" type="Label" parent="Book"]
+[node name="DetailDescription" type="Label" parent="Book" unique_id=1032897996]
 custom_minimum_size = Vector2(394, 0)
 custom_maximum_size = Vector2(394, 0)
 layout_mode = 1
@@ -643,86 +601,76 @@ offset_left = 638.0
 offset_top = 341.0
 offset_right = 1032.0
 offset_bottom = 453.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.29, 0.19, 0.12, 1)
 theme_override_font_sizes/font_size = 17
-text = "激活后，自动将手中匹配的药剂瓶\n放到准星所指的药架中。\n只对类型匹配且有空位的药架生效。"
-autowrap_mode = 3
+text = "激活后，自动将手中匹配的药剂瓶
+放到准星所指的药架中。
+只对类型匹配且有空位的药架生效。"
 vertical_alignment = 1
+autowrap_mode = 3
 
-[node name="DetailCooldown" type="Label" parent="Book"]
+[node name="DetailCooldown" type="Label" parent="Book" unique_id=155109401]
 layout_mode = 1
 offset_left = 642.0
 offset_top = 458.0
 offset_right = 1030.0
 offset_bottom = 487.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 18
 text = "· 冷却时间：100 秒"
-horizontal_alignment = 0
 vertical_alignment = 1
 
-
-[node name="DetailDuration" type="Label" parent="Book"]
+[node name="DetailDuration" type="Label" parent="Book" unique_id=1053855887]
 layout_mode = 1
 offset_left = 642.0
 offset_top = 489.0
 offset_right = 1030.0
 offset_bottom = 518.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(0.25, 0.16, 0.10, 1)
+theme_override_colors/font_color = Color(0.25, 0.16, 0.1, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 18
 text = "· 持续时间：10 秒"
-horizontal_alignment = 0
 vertical_alignment = 1
 
-
-[node name="UpgradeButton" type="Button" parent="Book"]
+[node name="UpgradeButton" type="Button" parent="Book" unique_id=1527720169]
 layout_mode = 1
 offset_left = 785.0
 offset_top = 536.0
 offset_right = 1014.0
 offset_bottom = 571.0
-mouse_filter = 0
-text = "消耗 1 点 · 升级"
-theme_override_font_sizes/font_size = 17
 theme_override_colors/font_color = Color(0.96, 0.87, 0.69, 1)
 theme_override_colors/font_disabled_color = Color(0.71, 0.63, 0.49, 1)
+theme_override_font_sizes/font_size = 17
 theme_override_styles/normal = SubResource("UpgradeTile")
-theme_override_styles/hover = SubResource("SkillTileHover")
 theme_override_styles/pressed = SubResource("SkillTileHover")
+theme_override_styles/hover = SubResource("SkillTileHover")
 theme_override_styles/disabled = SubResource("UpgradeTile")
+text = "消耗 1 点 · 升级"
 
-[node name="CloseButton" type="Button" parent="Book"]
+[node name="CloseButton" type="Button" parent="Book" unique_id=1117182620]
 layout_mode = 1
 offset_left = 1004.0
 offset_top = 48.0
 offset_right = 1038.0
 offset_bottom = 80.0
-mouse_filter = 0
-text = "×"
+tooltip_text = "关闭 (Esc)"
+focus_mode = 0
+theme_override_colors/font_color = Color(0.4, 0.24, 0.13, 1)
 theme_override_font_sizes/font_size = 26
-theme_override_colors/font_color = Color(0.40, 0.24, 0.13, 1)
 theme_override_styles/normal = SubResource("UpgradeTile")
 theme_override_styles/hover = SubResource("SkillTileHover")
-focus_mode = 0
-tooltip_text = "关闭 (Esc)"
+text = "×"
 
-[node name="FootHint" type="Label" parent="Book"]
+[node name="FootHint" type="Label" parent="Book" unique_id=444421026]
 layout_mode = 1
 offset_left = 644.0
 offset_top = 583.0
 offset_right = 1013.0
 offset_bottom = 606.0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.96, 0.84, 0.63, 1)
 theme_override_colors/font_outline_color = Color(1, 0.91, 0.72, 0.25)
 theme_override_font_sizes/font_size = 13
 text = "U 预览升级   ·   Esc 关闭"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-
