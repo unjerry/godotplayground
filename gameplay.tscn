@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://c87phnf470rpk"]
 
-[ext_resource type="Environment" uid="uid://cx0ml4f57ymer" path="res://envagx.tres" id="1_fbudy"]
 [ext_resource type="PackedScene" uid="uid://cjbmsw1afcfkw" path="res://shelves.tscn" id="1_shelves"]
 [ext_resource type="Script" uid="uid://d1e2wtk7nhjeo" path="res://bottle_spawner.gd" id="3_spawn"]
 [ext_resource type="PackedScene" uid="uid://c673gdmssw1vd" path="res://player.tscn" id="4_cbffv"]
 [ext_resource type="PackedScene" uid="uid://bat3setlu2yo6" path="res://hud.tscn" id="5_smepj"]
 [ext_resource type="PackedScene" uid="uid://d0ycqglv1i2lq" path="res://hudplayground.tscn" id="6_cbffv"]
 [ext_resource type="PackedScene" uid="uid://cy1aw0d7ulutl" path="res://assets/nashas_cozy_3d_haunted_library_v1.0/Nashas_Cozy_3D_Haunted_Library/Blender/nashas_cozy_haunted_library.tscn" id="7_fbudy"]
+
+[sub_resource type="Environment" id="Environment_r4ggw"]
+tonemap_mode = 4
 
 [sub_resource type="BoxShape3D" id="FloorCollision"]
 size = Vector3(12, 0.2, 9)
@@ -21,7 +23,7 @@ roughness = 0.95
 [node name="Gameplay" type="Node3D" unique_id=1251493164]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=175591764]
-environment = ExtResource("1_fbudy")
+environment = SubResource("Environment_r4ggw")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2030970260]
 transform = Transform3D(0.8660254, -0.3213938, 0.3830222, 0, 0.76604444, 0.64278764, -0.5, -0.55667037, 0.66341394, 0, 2.5, 0)
