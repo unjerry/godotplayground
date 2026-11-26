@@ -51,10 +51,25 @@ surface_material_override/0 = SubResource("FloorMaterial")
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 
 [node name="Shelves2" parent="." unique_id=2074932246 instance=ExtResource("1_eorh2")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 2.6999998, 0, 12)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 5.2, 0, 12)
+
+[node name="Shelves6" parent="." unique_id=1609218792 instance=ExtResource("1_eorh2")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0.2999997, 0, 12)
+
+[node name="Shelves7" parent="." unique_id=508062321 instance=ExtResource("1_eorh2")]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -4.6000004, 0, 12)
+
+[node name="Shelves8" parent="." unique_id=607393143 instance=ExtResource("1_eorh2")]
+transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, -5.0000005, 0, 9.700001)
 
 [node name="Shelves3" parent="." unique_id=982897559 instance=ExtResource("1_eorh2")]
-transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 8.799999, 0, 12)
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 10.099999, 0, 12)
+
+[node name="Shelves4" parent="." unique_id=1904306754 instance=ExtResource("1_eorh2")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 11.7, 0, 8.1)
+
+[node name="Shelves5" parent="." unique_id=1015817867 instance=ExtResource("1_eorh2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.9, 0, 5.7000003)
 
 [node name="LooseItems" type="Node3D" parent="." unique_id=1698601185]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 8.549999)
