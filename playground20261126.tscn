@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://dg58ljlls20p3"]
+
+[ext_resource type="Script" uid="uid://b7fcpy0md6ng0" path="res://skeleton_3d.gd" id="1_dt002"]
+[ext_resource type="PackedScene" uid="uid://di2fp1bxi0v6q" path="res://assets/nashas_cozy_3d_haunted_library_v1.0/Nashas_Cozy_3D_Haunted_Library/Blender/bone.blend" id="2_t6bgc"]
+
+[node name="Node3D" type="Node3D" unique_id=1780273729]
+
+[node name="ImporterMeshInstance3D" type="ImporterMeshInstance3D" parent="." unique_id=210724672]
+
+[node name="Skeleton3D" type="Skeleton3D" parent="." unique_id=1592324246]
+script = ExtResource("1_dt002")
+
+[node name="bone" parent="." unique_id=1270211403 instance=ExtResource("2_t6bgc")]
